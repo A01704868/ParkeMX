@@ -1,3 +1,4 @@
+import React from 'react';
 import "../css/customStyles.css"
 import { Carousel} from 'react-bootstrap';
 import stock from '../assets/cimatario.jpg';

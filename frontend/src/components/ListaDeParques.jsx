@@ -1,12 +1,47 @@
 import React, {useState, useEffect} from 'react';
+import axios from "axios";
 import BarraNav from './BarraNav';
 import MainHeader from './MainHeader';
-import { Dropdown, Card, Row, Col, Image, Button } from 'react-bootstrap';
-import stock1 from "../assets/stock1.png";
+import { Dropdown, Card, Row, Col, Button } from 'react-bootstrap';
+
 
 function ListaDeParques(){
 
     const [parques, setParques] = useState([]);
+
+    useEffect(() => {
+        
+        const getData = async()=>{
+            await axios.get("http://localhost:4000/api/parques")
+            .then(response => {setParques(response.data)})
+            .catch(e=>console.log(e))
+        }
+
+        getData();
+        
+    }, []);
+
+    console.log(parques);
+
+    const renderCard = (card, index) => {
+        return(
+            <Col>
+                <Card style={{ width: '22rem' }} key={index}>
+                <Card.Body>
+                    <Card.Title>{card.title}</Card.Title>
+                    <Card.Img src={require("../assets/stock1.png")} className="cardImage"/>
+                    <Card.Text>
+                    {card.image}
+                    </Card.Text>
+                    <Card.Text>
+                    {card.direccion}
+                    </Card.Text>
+                    <Button variant="primary">Mas Informacion</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+        );
+    }
 
     return(
         <div>
@@ -28,23 +63,7 @@ function ListaDeParques(){
             </Dropdown>
 
             <Row className="g-4">
-            {Array.from({ length: 5 }).map((_, idx) => (
-                <Col>
-                <Card style={{ width: '22rem' }}>
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Image src={stock1} className="cardImage"/>
-                    <Card.Text>
-                    Horario: 8:00-18:00
-                    </Card.Text>
-                    <Card.Text>
-                    Direccion: Calle 5, Ejemplo
-                    </Card.Text>
-                    <Button variant="primary">Mas Informacion</Button>
-                </Card.Body>
-            </Card>
-                </Col>
-            ))}
+                {parques.map(renderCard)}
             </Row>
 
         </div>
