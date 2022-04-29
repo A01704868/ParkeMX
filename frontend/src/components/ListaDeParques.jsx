@@ -24,14 +24,15 @@ function ListaDeParques(){
     console.log(parques);
 
     const renderCard = (card, index) => {
+        const url = "http://localhost:4000/api/imgServe/"+card.key;
         return(
             <Col>
                 <Card style={{ width: '22rem' }} key={index}>
                 <Card.Body>
                     <Card.Title>{card.title}</Card.Title>
-                    <Card.Img src={require("../assets/stock1.png")} className="cardImage"/>
+                    <Card.Img src={url} className="cardImage"/>
                     <Card.Text>
-                    {card.image}
+                    {card.horario}
                     </Card.Text>
                     <Card.Text>
                     {card.direccion}
