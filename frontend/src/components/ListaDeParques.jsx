@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import BarraNav from './BarraNav';
-import MainHeader from './MainHeader';
-import { Dropdown, Card, Row, Col, Button } from 'react-bootstrap';
-
+import "../css/customStyles.css"
+import { Dropdown, Card, Row, Col, Button, Carousel } from 'react-bootstrap';
 
 function ListaDeParques(){
 
@@ -20,8 +19,6 @@ function ListaDeParques(){
         getData();
         
     }, []);
-
-    console.log(parques);
 
     const renderCard = (card, index) => {
         const url = "http://localhost:4000/api/imgServe/"+card.key;
@@ -44,10 +41,62 @@ function ListaDeParques(){
         );
     }
 
+    const renderCarousel = (card, index) => {
+        const url = "http://localhost:4000/api/imgServe/"+card.key;
+
+        return(
+            <Carousel.Item key={index}>
+                <img
+                className="d-block w-100 cardImage"
+                src={url}
+                alt="First slide"
+                />
+                <Carousel.Caption>
+                {card.title}
+                </Carousel.Caption>
+            </Carousel.Item>
+        );
+    }
+
+    //generate list of consecutive numbers the size of parques
+    let arr = [];
+    for (let i = 0; i <= parques.length; i++) {
+        arr.push(i);
+    }
+
+    //choose random numbers from list and then remove them so there are no repetitions
+    //store random numbers in new array
+    let llaves = [], i = arr.length, j = 0;
+    while(i--){
+        j = Math.floor(Math.random() * (i));
+        llaves.push(arr[j]);
+        arr.splice(j,1);
+    }
+
+    //put the first 3 random numbers chosen in a newarray
+    let aux = []
+    for(let i = 0; i < 3; i++){
+        aux.push(llaves[i]);
+    }
+
+    console.log(llaves);
+    //filter list of parks by whether the park is included in the list of 3 arrays
+    const cards = parques.filter(function(card, index){
+        // eslint-disable-next-line
+        if(aux.includes(index)){
+            return true;
+        }else{
+            return false;
+        }
+    });
+
     return(
         <div>
             <BarraNav />
-            <MainHeader />
+
+            <Carousel>
+                {cards.map(renderCarousel)}
+            </Carousel>
 
             <h1>Encuentra Parques filtrando por Actividad</h1>
 
