@@ -21,7 +21,7 @@ function ListaDeParques(){
     }, []);
 
     const renderCard = (card, index) => {
-        const url = "http://localhost:4000/api/imgServe/"+card.key;
+        const url = "http://localhost:4000/api/imgServe/"+card.id;
         return(
             <Col>
                 <Card style={{ width: '22rem' }} key={index}>
@@ -42,7 +42,7 @@ function ListaDeParques(){
     }
 
     const renderCarousel = (card, index) => {
-        const url = "http://localhost:4000/api/imgServe/"+card.key;
+        const url = "http://localhost:4000/api/imgServe/"+card.id;
 
         return(
             <Carousel.Item key={index}>
@@ -73,16 +73,15 @@ function ListaDeParques(){
         arr.splice(j,1);
     }
 
-    //put the first 3 random numbers chosen in a newarray
+    //put the first 3 random numbers chosen in a new array
+    //this is done for stability
     let aux = []
     for(let i = 0; i < 3; i++){
         aux.push(llaves[i]);
     }
 
-    console.log(llaves);
     //filter list of parks by whether the park is included in the list of 3 arrays
     const cards = parques.filter(function(card, index){
-        // eslint-disable-next-line
         if(aux.includes(index)){
             return true;
         }else{

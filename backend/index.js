@@ -2,25 +2,36 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const path = require('path');
+const mysql = require('mysql2');
 
 app.use(express.json());
 app.use(cors());
 
-const staticCards = [
-    {key: "0", title: "Parque1",  direccion: "AV 1, calle 6, ejemplo", horario: "Horario: 8:00-18:00", source:"stock1.jpg"},
-    {key: "1", title: "Parque2",  direccion: "AV 2, calle 7, ejemplo", horario: "Horario: 8:00-18:00", source:"stock1.png"},
-    {key: "2", title: "Parque3",  direccion: "AV 3, calle 8, ejemplo", horario: "Horario: 8:00-18:00", source:"stock2.jpg"},
-    {key: "3", title: "Parque4",  direccion: "AV 4, calle 9, ejemplo", horario: "Horario: 8:00-18:00", source:"stock1.jpg"},
-    {key: "4", title: "Parque5",  direccion: "AV 5, calle 10, ejemplo", horario: "Horario: 8:00-18:00", source:"stock1.png"},
-    
-];
+// create the connection to database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'parkemx'
+  });
+
+  let cards = []
+  // simple query
+  connection.query(
+    'SELECT * FROM parques ORDER BY parques.title',
+    function(err, results, fields) {
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
+    cards = results.slice();
+    }
+);
 
 app.get('/', (request, response) => {
     response.send('Hello World');
 });
 
+
 app.get('/api/parques', (request, response) => {
-    response.send(staticCards);
+    response.send(cards);
 });
 
 app.get('/api/imgServe/:id', (request, response) => {
@@ -31,9 +42,9 @@ app.get('/api/imgServe/:id', (request, response) => {
 
     let id = request.params.id;
 
-    for (let i in staticCards){
-        if(staticCards[i].key == id){
-            response.sendFile("/assets/"+staticCards[i].source, options);
+    for (let i in cards){
+        if(cards[i].id == id){
+            response.sendFile("/assets/"+cards[i].source, options);
         }
     }
 });
