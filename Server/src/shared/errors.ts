@@ -43,3 +43,11 @@ export class UnauthorizedError extends CustomError {
         super(UnauthorizedError.Msg, UnauthorizedError.HttpStatus);
     }
 }
+
+export class NotImplementedError extends Error {
+
+    public static readonly Msg = 'Member not implemented';
+    constructor() {
+        super(UnauthorizedError.Msg);
+    }
+}
