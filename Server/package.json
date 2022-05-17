@@ -79,6 +79,7 @@
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
+    "node-pre-gyp": "^0.17.0",
     "randomstring": "^1.2.2"
   },
   "devDependencies": {
