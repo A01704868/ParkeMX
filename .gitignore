@@ -1,3 +1,2 @@
-Server/.gitignore
-Server/node_modules
 Frontend/node_modules
+backend/node_modules
