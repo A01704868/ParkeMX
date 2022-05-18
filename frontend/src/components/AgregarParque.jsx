@@ -1,46 +1,97 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import TimePicker from "react-bootstrap-time-picker";
+import BarraNav from "./BarraNav";
+function AgregarParque() {
+  const [validated, setValidated] = useState(false);
 
-const AgregarParque = () => (
-  <div className="App m-0 row justify-content-center">
-    <div class="row-cols-lg-3">
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Nombre del parque</Form.Label>
-          <Form.Control type="string" placeholder="Nombre del parque" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Direccion</Form.Label>
-          <Form.Control type="string" placeholder="Direccion" />
-        </Form.Group>
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Horario</Form.Label>
-          <Form.Control type="string" placeholder="Horario" />
-        </Form.Group>
+    setValidated(true);
+  };
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Estacionamiento</Form.Label>
-          <Form.Control type="string" placeholder="Estacionamiento" />
-        </Form.Group>
-        <Form.Group className="mb-4" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Actividad 1" />
-          <Form.Check type="checkbox" label="Actividad 2" />
-          <Form.Check type="checkbox" label="Actividad 3" />
-          <Form.Check type="checkbox" label="Actividad 4" />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Imagen del parque</Form.Label>
-          <Form.Control type="file" />
-        </Form.Group>
+  return (
+    <div>
+      <BarraNav />
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <h1>Agregar Nuevo Parque</h1>
+        <Row className="row justify-content-between">
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>Nombre del Parque</Form.Label>
+            <Form.Control required type="text" placeholder="Parque" />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Registrar
-        </Button>
+          <Form.Group as={Col} md="4" controlId="validationCustom02">
+            <Form.Label>Horario Entrada</Form.Label>
+            <TimePicker start="10:00" end="21:00" step={30} />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="row justify-content-between">
+          <Form.Group as={Col} md="4" controlId="validationCustom02">
+            <Form.Label>Horario Salida</Form.Label>
+            <TimePicker start="10:00" end="21:00" step={30} />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="row justify-content-between">
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Ciudad</Form.Label>
+            <Form.Control type="text" placeholder="Ciudad" required />
+            <Form.Control.Feedback type="invalid">
+              Ingresa una ciudad valida.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustom04">
+            <Form.Label>Estado</Form.Label>
+            <Form.Control type="text" placeholder="Estado" required />
+            <Form.Control.Feedback type="invalid">
+              Ingresa un estado valido.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="row justify-content-between">
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Actividades</Form.Label>
+            <Form.Check required label="Senderismo" />
+            <Form.Check required label="Bicicleta" />
+            <Form.Check required label="Acampe" />
+            <Form.Check required label="Fotografia" />
+          </Form.Group>
+        </Row>
+        <Row className="row justify-content-between">
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Insertar imagen principal</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Ingresa una ciudad valida.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustom04">
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Flora</Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Ingresa un estado valido.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+
+        <Button type="submit">Agregar</Button>
       </Form>
     </div>
-  </div>
-);
+  );
+}
 
 export default AgregarParque;

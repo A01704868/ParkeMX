@@ -32,3 +32,16 @@ h1{
 .arrow:hover{
     background: #b3d9ff;
 }
+
+form{
+    margin-right: 20%;
+    margin-left: 20%;
+    font-family: 'Quattrocento Sans', sans-serif;
+  }
+  h1{
+    font-family: 'Bebas Neue', cursive;
+  }
+  .justify-content-between{
+  
+    margin-bottom: 5%
+  }
