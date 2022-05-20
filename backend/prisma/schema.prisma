@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Parque {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  ubicacion   Json
+  descripcion String
+  imagen      String
+
+  horario     Horario?
+  anuncios    Anuncio[]
+  actividades Actividad[]
+  flora       Flora[]
+  fauna       Fauna[]
+}
+
+model Anuncio {
+  id          Int    @id @default(autoincrement())
+  descripcion String
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+}
+
+model Flora {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  imagen      String
+  descripcion String
+  parques     Parque[]
+}
+
+model Fauna {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  imagen      String
+  descripcion String
+  parques     Parque[]
+}
+
+model Actividad {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  parques     Parque[]
+}
+
+model Horario {
+  id         Int    @id @default(autoincrement())
+  dias       String
+  horaAbrir  String
+  horaCerrar String
+  parque     Parque @relation(fields: [parqueId], references: [id])
+  parqueId   Int    @unique
+}
+
+model Usuario {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  email    String
+  password String
+  role     Role   @default(USER)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
