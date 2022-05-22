@@ -5,8 +5,6 @@ import userRouter from './user-router';
 import weatherRouter from './weather-router';
 import parquesRouter from './parques-router';
 
-
-
 // Init
 const apiRouter = Router();
 

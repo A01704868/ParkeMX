@@ -1,8 +1,8 @@
-const {PrismaClient} = require('@prisma/client');
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient();
 
-async function getParks(){
+export async function getParks(){
     const allParks = await prisma.parque.findMany();
     return allParks;
 }
@@ -14,3 +14,7 @@ getParks()
     .finally(async () => {
         await prisma.$disconnect
     })
+
+export default {
+    getParks
+} as const;

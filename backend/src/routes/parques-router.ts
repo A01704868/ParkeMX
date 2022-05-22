@@ -1,47 +1,50 @@
 import StatusCodes from 'http-status-codes';
 import { Router } from 'express';
-
-//const parkService = require('../services/park-service');
-const {PrismaClient} = require('@prisma/client');
-const path = require('path');
+import { getParks } from '@services/park-service';
+//import { Parque } from '@prisma/client';
+import { access } from 'fs/promises';
+import path from "path";
 
 // Constants
-const prisma = new PrismaClient();
-
 const router = Router();
-const { CREATED, OK } = StatusCodes;
+const { CREATED, OK, NOT_FOUND } = StatusCodes;
+
+const routesDir = __dirname.indexOf("routes");
+const assetsDir = __dirname.slice(0, routesDir) + "assets";
 
 router.get('/', async (req, res) => {
     const parks = await getParks();
-    return res.status(OK).json(parks);
+    res.status(OK).json(parks);
 });
 
-/*router.get('/imgServe/:id', async (req, res) => {
-    var options = {
-        root: path.join(__dirname)
-    };
+// /api/parques/imgServe/1 : ejemplo
+router.get('/img/:id', async (req, res) => {
+    let id = parseInt(req.params.id);
 
-    let id = req.params.id;
+    try {
+        const parks = await getParks();
+        const park = parks.find(park => park.id === id);
+        if (park) {
+            const imgPath = path.join(assetsDir, park.imagen);
 
-    for (let i in cards){
-        if(cards[i].id == id){
-            res.sendFile("/assets/"+cards[i].imagen, options);
+            // Checa si la imagen existe y tenemos acceso de escritura
+            await access(imgPath);
+            res.sendFile(imgPath);
+        } else {
+            res.status(NOT_FOUND).json(
+            {
+                error: "Image not found",
+                parkId: id
+            });
         }
+    } catch (err) {
+        res.status(NOT_FOUND).json(
+        {
+            error: "Image doesn't exist",
+            parkId: id
+        });
     }
-});*/
-
-async function getParks(){
-    const allParks = await prisma.parque.findMany();
-    return allParks;
-}
-
-getParks()
-    .catch( (e)=> {
-        throw e
-    })
-    .finally(async () => {
-        await prisma.$disconnect
-    })
+});
 
 // Export default
 export default router;

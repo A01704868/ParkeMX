@@ -8,17 +8,52 @@ datasource db {
 }
 
 model Parque {
-  id          Int    @id @default(autoincrement())
-  nombre      String
-  ubicacion   Json
-  descripcion String
-  imagen      String
+  id                  Int    @id @default(autoincrement())
+  nombre              String
+  descripcion         String
+  imagen              String
+  fechaDecreto        DateTime
+  superficieTerrestre Int
+  superficieMarina    Int
 
   horario     Horario?
   anuncios    Anuncio[]
   actividades Actividad[]
   flora       Flora[]
   fauna       Fauna[]
+  categoria   Categoria[]
+  ubicacion   Ubicacion[]
+}
+
+model Categoria {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+}
+
+model Ubicacion {
+  id          Int    @id @default(autoincrement())
+  direccion   String
+  longitud    Int
+  latitud     Int
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  estado      Estado[]
+  region      Region[]
+
+}
+
+model Estado {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  ubicacion   Ubicacion[]
+}
+
+model Region {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  ubicacion   Ubicacion[]
 }
 
 model Anuncio {
