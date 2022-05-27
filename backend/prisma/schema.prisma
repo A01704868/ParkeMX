@@ -6,61 +6,79 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+//tabla central
 model Parque {
   id                  Int    @id @default(autoincrement())
   nombre              String
   descripcion         String
   imagen              String
-  fechaDecreto        DateTime
-  superficieTerrestre Int
-  superficieMarina    Int
+  direccion           String
+  latitud             Float
+  longitud            Float
+  fechaDecreto        String
+  superficieTerrestre Float
+  superficieMarina    Float
 
-  horario     Horario?
   anuncios    Anuncio[]
-  actividades Actividad[]
-  flora       Flora[]
-  fauna       Fauna[]
-  categoria   Categoria[]
-  ubicacion   Ubicacion[]
+  horario     Horario[]
+  actividades ActividadParque[]
+  flora       FloraParque[]
+  fauna       FaunaParque[]
+  categoria   CategoriaParque[]
+  estado      EstadoParque[]
+  region      RegionParque[]
 }
 
-model Categoria {
-  id          Int    @id @default(autoincrement())
-  nombre      String
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-}
-
-model Ubicacion {
-  id          Int    @id @default(autoincrement())
-  direccion   String
-  longitud    Int
-  latitud     Int
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-  estado      Estado[]
-  region      Region[]
-
-}
-
+//tablas N:N
 model Estado {
   id          Int    @id @default(autoincrement())
   nombre      String
-  ubicacion   Ubicacion[]
+  parque      EstadoParque[]
+}
+
+model EstadoParque {
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  estado      Estado @relation(fields: [estadoId], references: [id])
+  estadoId    Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, estadoId])
 }
 
 model Region {
   id          Int    @id @default(autoincrement())
   nombre      String
-  ubicacion   Ubicacion[]
+  parque      RegionParque[]
 }
 
-model Anuncio {
-  id          Int    @id @default(autoincrement())
-  descripcion String
+model RegionParque {
   parque      Parque @relation(fields: [parqueId], references: [id])
   parqueId    Int
+  region   Region @relation(fields: [regionId], references: [id])
+  regionId Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, regionId])
+}
+
+model Categoria {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  parque       CategoriaParque[]
+}
+
+model CategoriaParque {
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, categoriaId])
 }
 
 model Flora {
@@ -68,7 +86,18 @@ model Flora {
   nombre      String
   imagen      String
   descripcion String
-  parques     Parque[]
+  parques     FloraParque[]
+}
+
+model FloraParque {
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  flora       Flora @relation(fields: [floraId], references: [id])
+  floraId     Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, floraId])
 }
 
 model Fauna {
@@ -76,15 +105,44 @@ model Fauna {
   nombre      String
   imagen      String
   descripcion String
-  parques     Parque[]
+  parques     FaunaParque[]
+}
+
+model FaunaParque {
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  fauna       Fauna @relation(fields: [faunaID], references: [id])
+  faunaID     Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, faunaID])
 }
 
 model Actividad {
   id          Int      @id @default(autoincrement())
   nombre      String
-  descripcion String
-  parques     Parque[]
+  parques     ActividadParque[]
 }
+
+model ActividadParque {
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+  actividad   Actividad @relation(fields: [actividadId], references: [id])
+  actividadId Int
+  assignedAt  DateTime @default(now())
+  assignedBy  String
+
+  @@id([parqueId, actividadId])
+}
+//Tablas N:1
+model Anuncio {
+  id          Int    @id @default(autoincrement())
+  descripcion String
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
+}
+
 
 model Horario {
   id         Int    @id @default(autoincrement())
@@ -92,7 +150,7 @@ model Horario {
   horaAbrir  String
   horaCerrar String
   parque     Parque @relation(fields: [parqueId], references: [id])
-  parqueId   Int    @unique
+  parqueId   Int
 }
 
 model Usuario {

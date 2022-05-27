@@ -7,7 +7,7 @@ import path from "path";
 
 // Constants
 const router = Router();
-const { CREATED, OK, NOT_FOUND } = StatusCodes;
+const { OK, NOT_FOUND } = StatusCodes;
 
 const routesDir = __dirname.indexOf("routes");
 const assetsDir = __dirname.slice(0, routesDir) + "assets";

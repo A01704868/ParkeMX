@@ -7,7 +7,8 @@
     "start": "node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
-    "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec"
+    "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec",
+    "seed": "ts-node prisma/seed.ts"
   },
   "nodemonConfig": {
     "watch": [

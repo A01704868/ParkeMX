@@ -21,18 +21,18 @@ const renderCard = (card, index) => {
     return(
         <Col key = {card.id}>
             <Card style={{ width: '22rem' }}>
-            <Card.Body>
-                <Card.Title>{card.title}</Card.Title>
-                <Card.Img src={url} className="cardImage"/>
-                <Card.Text>
-                {card.horario}
-                </Card.Text>
-                <Card.Text>
-                {card.direccion}
-                </Card.Text>
-                <Button variant="primary">Mas Informacion</Button>
-            </Card.Body>
-        </Card>
+                <Card.Body>
+                    <Card.Title>{card.nombre}</Card.Title>
+                    <Card.Img src={url} className="cardImage"/>
+                    <Card.Text>
+                    {card.descripcion}
+                    </Card.Text>
+                    <Card.Text>
+                    {card.ubicacion}
+                    </Card.Text>
+                    <Button variant="primary">Mas Informacion</Button>
+                </Card.Body>
+            </Card>
         </Col>
     );
 }

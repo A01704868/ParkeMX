@@ -69,7 +69,7 @@ export default class WeatherService {
         if (!city) {
             return <IWeatherError>{
                 debug: { city, state, country },
-                error: `Unable to retrieve forecast, missing city`
+                error: "Unable to retrieve forecast, missing city"
             }
         }
 
