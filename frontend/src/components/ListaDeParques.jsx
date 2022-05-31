@@ -66,7 +66,7 @@ let icon = "caret-down-outline";
 let toggle = 0;
 
 function ListaDeParques(){
-    
+
     const [parques, setParques] = useState([]);
     const [searchTerm, setSearch] = useState("");
     const [activityButton, setActivityButton] = useState([]);
@@ -76,14 +76,14 @@ function ListaDeParques(){
     //investigate reducer in react manual
 
     useEffect(() => {
-        
+
         const getData = () => {
             let promise1 = axios.get("http://localhost:4000/api/parques");
 
             let promise2 = axios.get("http://localhost:4000/api/parques/activity");
 
             let promise3 = axios.get("http://localhost:4000/api/parques/activityParque");
-            
+
             let promise4 = axios.get("http://localhost:4000/api/parques/horario");
 
             Promise.all([promise1, promise2, promise3, promise4])
@@ -92,7 +92,7 @@ function ListaDeParques(){
         }
 
         getData();
-        
+
     }, []);
 
     const cardOrder = () => {
@@ -135,7 +135,7 @@ function ListaDeParques(){
                     />
                     <InputGroup.Text id="basic-addon2"><ion-icon name="search-outline" size="large"></ion-icon></InputGroup.Text>
                 </InputGroup>
-                
+
                 </Col>
                 <Col>
                     <Dropdown className="drop" onSelect={(eventKey, event) => {setSearchActivity(eventKey);}}>
@@ -163,7 +163,7 @@ function ListaDeParques(){
             </Row>
 
         </div>
-    );  
+    );
 }
 
 export default ListaDeParques;

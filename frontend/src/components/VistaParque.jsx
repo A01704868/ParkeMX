@@ -36,8 +36,9 @@ function MyMapComponent({
 
 function VistaParque() {
 
-  const center = { lat: -34.397, lng: 150.644 };
-  const zoom = 4;
+  const center = { lat: 20.7346027, lng: -100.4574816 };
+  const zoom = 15;
+  const height = 600;
 
   return(
     <div>
@@ -63,8 +64,8 @@ function VistaParque() {
       <Container className="row-hero">
       <Card style={{ width: '100%' }}>
 
-      <Wrapper apiKey="AIzaSyA43ED2GOn-3qLT2c6tP1Wh2eYZ1R3ldcs" render={render}>
-        <MyMapComponent center={center} zoom={zoom} />
+      <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
+        <MyMapComponent center={center} zoom={zoom} height={height}/>
       </Wrapper>
         <Card.Body className="row-info-card">
         <div className="col-3">
