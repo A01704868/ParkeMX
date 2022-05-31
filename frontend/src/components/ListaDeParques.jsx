@@ -16,8 +16,8 @@ const reverse = (arr1) => {
     return aux;
 }
 
-const renderCard = (card, index) => {
-    const url = "http://localhost:4000/api/imgServe/"+card.id;
+const renderCard = (card) => {
+    const url = "http://localhost:4000/api/parques/img/"+card.id;
     return(
         <Col key = {card.id}>
             <Card style={{ width: '22rem' }}>
@@ -28,7 +28,7 @@ const renderCard = (card, index) => {
                     {card.descripcion}
                     </Card.Text>
                     <Card.Text>
-                    {card.ubicacion}
+                    {card.direccion}
                     </Card.Text>
                     <Button variant="primary">Mas Informacion</Button>
                 </Card.Body>
@@ -37,20 +37,27 @@ const renderCard = (card, index) => {
     );
 }
 
-const renderCarousel = (card, index) => {
-    const url = "http://localhost:4000/api/imgServe/"+card.id;
+const renderCarousel = (card) => {
+    const url = "http://localhost:4000/api/parques/img/"+card.id;
 
     return(
-        <Carousel.Item key={index}>
+        <Carousel.Item key={card.id}>
             <img
             className="d-block w-100 cardImage"
             src={url}
             alt="First slide"
             />
             <Carousel.Caption>
-            {card.title}
+            {card.nombre}
             </Carousel.Caption>
         </Carousel.Item>
+    );
+}
+
+const renderDropdown = (activity) => {
+
+    return(
+        <Dropdown.Item eventKey={activity.id} key={activity.id} href="#/action-1">{activity.nombre}</Dropdown.Item>
     );
 }
 
@@ -61,13 +68,26 @@ let toggle = 0;
 function ListaDeParques(){
     
     const [parques, setParques] = useState([]);
-    const [searchTerm, setSearch] = useState([""]);
+    const [searchTerm, setSearch] = useState("");
+    const [activityButton, setActivityButton] = useState([]);
+    const [horario, setHorario] = useState();
+    const [parqueActividad, setParqueActividad] = useState();
+    const [searchActivity, setSearchActivity] = useState();
+    //investigate reducer in react manual
 
     useEffect(() => {
         
-        const getData = async()=>{
-            await axios.get("http://localhost:4000/api/parques")
-            .then(response => {setParques(response.data)})
+        const getData = () => {
+            let promise1 = axios.get("http://localhost:4000/api/parques");
+
+            let promise2 = axios.get("http://localhost:4000/api/parques/activity");
+
+            let promise3 = axios.get("http://localhost:4000/api/parques/activityParque");
+            
+            let promise4 = axios.get("http://localhost:4000/api/parques/horario");
+
+            Promise.all([promise1, promise2, promise3, promise4])
+            .then(values => {setParques(values[0].data); setActivityButton(values[1].data); setHorario(values[2].data); setParqueActividad(values[3].data);})
             .catch(e=>console.log(e))
         }
 
@@ -85,7 +105,6 @@ function ListaDeParques(){
         }
         setParques(reverse(parques));
     }
-
 
     return(
         <div>
@@ -119,16 +138,14 @@ function ListaDeParques(){
                 
                 </Col>
                 <Col>
-                    <Dropdown className="drop">
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        Selecciona
-                    </Dropdown.Toggle>
+                    <Dropdown className="drop" onSelect={(eventKey, event) => {setSearchActivity(eventKey);}}>
+                        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                            Actividades
+                        </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Bicicleta</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Hiking</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Camping</Dropdown.Item>
-                    </Dropdown.Menu>
+                        <Dropdown.Menu>
+                            {activityButton.map(renderDropdown)}
+                        </Dropdown.Menu>
                     </Dropdown>
                 </Col>
             </Row>
@@ -139,7 +156,7 @@ function ListaDeParques(){
                 parques.filter((val) => {
                     if(searchTerm === ""){
                         return val;
-                    }else if(val.title.toLowerCase().includes(searchTerm.toString().toLowerCase())){
+                    }else if(val.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())){
                         return val;
                     }
                 }).map(renderCard)}
