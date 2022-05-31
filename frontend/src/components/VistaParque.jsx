@@ -2,8 +2,43 @@ import React from 'react';
 import Navbar from './BarraNav';
 import "../css/styles.css"
 import { Card, Button, Carousel, Container} from 'react-bootstrap';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { useEffect, useRef, ReactElement } from "react";
+
+const render = (status: Status): ReactElement => {
+  if (status === Status.LOADING) return <h3>{status} ..</h3>;
+  if (status === Status.FAILURE) return <h3>{status} ...</h3>;
+  return null;
+};
+
+function MyMapComponent({
+  center,
+  zoom,
+  width,
+  height,
+}: {
+  center: google.maps.LatLngLiteral;
+  zoom: number;
+  width: 100;
+  height: 100;
+}) {
+  const ref = useRef();
+
+  useEffect(() => {
+    new window.google.maps.Map(ref.current, {
+      center,
+      zoom,
+    });
+  });
+
+  return <div ref={ref} id="map" />;
+}
 
 function VistaParque() {
+
+  const center = { lat: -34.397, lng: 150.644 };
+  const zoom = 4;
+
   return(
     <div>
       <Navbar />
@@ -27,7 +62,10 @@ function VistaParque() {
 
       <Container className="row-hero">
       <Card style={{ width: '100%' }}>
-        <Card.Img variant="top" src={require('../assets/map-placeholder.jpg')} className="map-section"/>
+
+      <Wrapper apiKey="AIzaSyA43ED2GOn-3qLT2c6tP1Wh2eYZ1R3ldcs" render={render}>
+        <MyMapComponent center={center} zoom={zoom} />
+      </Wrapper>
         <Card.Body className="row-info-card">
         <div className="col-3">
           <Card.Title>HORARIO</Card.Title>

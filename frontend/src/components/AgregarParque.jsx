@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import TimePicker from "react-bootstrap-time-picker";
 import BarraNav from "./BarraNav";
+
 function AgregarParque() {
   const [validated, setValidated] = useState(false);
 
@@ -21,7 +22,7 @@ function AgregarParque() {
     <div>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <h1>Agregar Nuevo Parque</h1>
+        <h1 class="h1-form">Agregar Nuevo Parque</h1>
         <Row className="row justify-content-between">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>Nombre del Parque</Form.Label>
