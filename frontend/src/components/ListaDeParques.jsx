@@ -71,8 +71,8 @@ function ListaDeParques(){
     const [searchTerm, setSearch] = useState("");
     const [activityButton, setActivityButton] = useState([]);
     const [horario, setHorario] = useState();
-    const [parqueActividad, setParqueActividad] = useState();
-    const [searchActivity, setSearchActivity] = useState();
+    const [parqueActividad, setParqueActividad] = useState(null);
+    const [searchActivity, setSearchActivity] = useState(0);
     //investigate reducer in react manual
 
     useEffect(() => {
@@ -144,6 +144,7 @@ function ListaDeParques(){
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
+                        <Dropdown.Item eventKey="0" href="#/action-1">Todos</Dropdown.Item>
                             {activityButton.map(renderDropdown)}
                         </Dropdown.Menu>
                     </Dropdown>
@@ -153,12 +154,27 @@ function ListaDeParques(){
 
             <Row className="g-4">
                 {// eslint-disable-next-line
-                parques.filter((val) => {
-                    if(searchTerm === ""){
-                        return val;
-                    }else if(val.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())){
-                        return val;
+                parques.filter((parque) => {
+
+                    console.log("Search Term",searchTerm);
+                    console.log("Activity", searchActivity);
+                    let result = true;
+
+                    if(searchTerm !== ""){
+                        result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
+
                     }
+                    
+                    if(searchActivity != 0){
+                        let index = parque.actividades.findIndex((activity) => {
+                            return (activity.actividadId == searchActivity);
+                        });
+
+                        result = result && (index !== -1);
+                    }
+
+                    return result;
+
                 }).map(renderCard)}
             </Row>
 

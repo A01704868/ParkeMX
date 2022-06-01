@@ -3,7 +3,13 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
 export async function getParks(){
-    const allParks = await prisma.parque.findMany();
+    const allParks = await prisma.parque.findMany({
+        include: {
+            // Here you can keep including data from other models
+            horario: true,
+            actividades: true
+        },
+    });
     return allParks;
 }
 
