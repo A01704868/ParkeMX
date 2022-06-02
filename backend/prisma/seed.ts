@@ -173,11 +173,13 @@ async function main() {
 
     const horarioSeeder = db.horario.createMany({
         data: [
-            { id: 1, dias: "J, V, S, D", horaAbrir: "7:00", horaCerrar: "10:00", parqueId: 6 },
-            { id: 2, dias: "Lunes a Jueves", horaAbrir: "9:00", horaCerrar: "18:00", parqueId: 3 },
-            { id: 3, dias: "Lunes a Sabado", horaAbrir: "8:00", horaCerrar: "19:00", parqueId: 2 },
-            { id: 4, dias: "L, M, M, J, S, D", horaAbrir: "00:00", horaCerrar: "23:59", parqueId: 1 },
-            { id: 5, dias: "J, V, S, D", horaAbrir: "10:30", horaCerrar: "13:30", parqueId: 6 },
+            { id: 1, dias: "Ju, Vi, Sa, Do", horaAbrir: "7:00", horaCerrar: "10:00", parqueId: 6 },
+            { id: 2, dias: "Jue, Vie, Sab, Dom", horaAbrir: "13:00", horaCerrar: "16:00", parqueId: 5 },
+            { id: 3, dias: "J, V, S, D", horaAbrir: "11:00", horaCerrar: "14:00", parqueId: 4 },
+            { id: 4, dias: "Lunes a Jueves", horaAbrir: "9:00", horaCerrar: "18:00", parqueId: 3 },
+            { id: 5, dias: "Lunes a Sabado", horaAbrir: "8:00", horaCerrar: "19:00", parqueId: 2 },
+            { id: 6, dias: "Lun, Mar, Mie, Jue, Sab, Dom", horaAbrir: "00:00", horaCerrar: "23:59", parqueId: 1 },
+            { id: 7, dias: "J, V, S, D", horaAbrir: "10:30", horaCerrar: "13:30", parqueId: 6 },
         ]
     });
 
