@@ -2,18 +2,18 @@ import React from 'react';
 import "../css/customStyles.css"
 import { Carousel } from 'react-bootstrap';
 
-const carousel = (card) => {
-    const url = "http://localhost:4000/api/parques/img/"+card.id;
+const carousel = (show) => {
+    const url = "http://localhost:4000/api/parques/img/"+show.id;
 
     return(
-        <Carousel.Item key={card.id}>
+        <Carousel.Item key={show.id}>
             <img
             className="d-block w-100 cardImage"
             src={url}
             alt="First slide"
             />
             <Carousel.Caption>
-            {card.nombre}
+            {show.nombre}
             </Carousel.Caption>
         </Carousel.Item>
     );

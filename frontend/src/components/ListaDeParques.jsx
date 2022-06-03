@@ -19,11 +19,11 @@ const reverse = (arr1) => {
 
 const renderAbrir = (horario) => {
     return (
-        <>
-        <Card.Text>
-        {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
-        </Card.Text>
-        </>
+        <Container key = {horario.id}>
+            <Card.Text>
+            {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
+            </Card.Text>
+        </Container>
     );
 }
 
@@ -103,7 +103,16 @@ function ListaDeParques(){
             <BarraNav />
 
             <Carousel>
-                {parques.map(carousel)}
+                {parques.sort((a, b)=>{
+                    if(a.clicks > b.clicks){
+                        return -1;
+                    }
+                    if(a.clicks < b.clicks){
+                        return 1;
+                    }
+
+                    return 0;
+                }).slice(0,3).map(carousel)}
             </Carousel>
 
             <h1>Encuentra Parques filtrando por Actividad</h1>
@@ -152,7 +161,6 @@ function ListaDeParques(){
 
                     if(searchTerm !== ""){
                         result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
-
                     }
 
                     if(searchActivity != 0){

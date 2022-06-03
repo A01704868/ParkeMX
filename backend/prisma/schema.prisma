@@ -18,6 +18,7 @@ model Parque {
   fechaDecreto        String
   superficieTerrestre Float
   superficieMarina    Float
+  clicks              Int
 
   anuncios    Anuncio[]
   horario     Horario[]
