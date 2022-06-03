@@ -46,7 +46,7 @@ const renderCard = (card) => {
                     Horarios
                     {card.horario.map(renderAbrir)}
                 </Card.Body>
-                <Button className="link"variant="primary">Mas Informacion</Button>
+                <Button className="link" variant="primary">Mas Informacion</Button>
             </Card>
         </Col>
     );
