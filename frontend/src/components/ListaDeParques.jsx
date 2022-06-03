@@ -144,7 +144,7 @@ function ListaDeParques(){
             </Row>
             </Container>
 
-            <Row className="g-4">
+            <Row className="m-5 g-4">
                 {// eslint-disable-next-line
                 parques.filter((parque) => {
 
@@ -154,7 +154,7 @@ function ListaDeParques(){
                         result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
 
                     }
-                    
+
                     if(searchActivity != 0){
                         let index = parque.actividades.findIndex((activity) => {
                             return (activity.actividadId == searchActivity);
