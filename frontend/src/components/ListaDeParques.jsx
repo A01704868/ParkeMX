@@ -32,7 +32,7 @@ const renderCard = (card) => {
 
     return(
         <Col key = {card.id}>
-            <Card style={{ width: '22rem' }}>
+            <Card style={{ width: '22rem', height: '100%'}}>
                 <Card.Body>
                     <Card.Title>{card.nombre}</Card.Title>
                     <Card.Img src={url} className="cardImage"/>
@@ -45,8 +45,8 @@ const renderCard = (card) => {
                     </Card.Text>
                     Horarios
                     {card.horario.map(renderAbrir)}
-                    <Button variant="primary">Mas Informacion</Button>
                 </Card.Body>
+                <Button className="link"variant="primary">Mas Informacion</Button>
             </Card>
         </Col>
     );

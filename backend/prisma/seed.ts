@@ -143,10 +143,10 @@ async function main() {
 
     const actividadSeeder = db.actividad.createMany({
         data: [
-            { id: 1, nombre: "Hiking"},
-            { id: 2, nombre: "Cyclying"},
-            { id: 3, nombre: "Swimming"},
-            { id: 4, nombre: "Jogging"},
+            { id: 1, nombre: "Senderismo"},
+            { id: 2, nombre: "Ciclismo"},
+            { id: 3, nombre: "Natación"},
+            { id: 4, nombre: "Trotar"},
         ]
     });
 

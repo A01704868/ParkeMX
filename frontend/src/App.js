@@ -14,7 +14,7 @@ function App() {
       <Route path="/agregar" element={<AgregarParque />} />
       <Route path="/parque" element={<VistaParque />} />
     </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
     </div>
   );
 }

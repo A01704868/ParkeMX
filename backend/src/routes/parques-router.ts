@@ -2,8 +2,6 @@ import StatusCodes from 'http-status-codes';
 import { Router } from 'express';
 import { getParks } from '@services/park-service';
 import { getActivities } from '@services/activity-service';
-import { getHorario } from '@services/horario-service';
-import { getActivityParque } from '@services/activityPark-service';
 import { access } from 'fs/promises';
 import path from "path";
 
@@ -51,16 +49,6 @@ router.get('/img/:id', async (req, res) => {
 router.get('/activity', async (req, res) => {
     const activities = await getActivities();
     res.status(OK).json(activities);
-});
-
-router.get('/horario', async (req, res) => {
-    const horarios = await getHorario();
-    res.status(OK).json(horarios);
-});
-
-router.get('/activityParque', async (req, res) => {
-    const activityPark = await getActivityParque();
-    res.status(OK).json(activityPark);
 });
 
 
