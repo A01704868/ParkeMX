@@ -1,9 +1,11 @@
 import React from 'react';
 import Navbar from './BarraNav';
 import "../css/styles.css"
+import { useParams } from 'react-router-dom';
 import { Card, Button, Carousel, Container} from 'react-bootstrap';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import { useEffect, useRef, ReactElement } from "react";
+import { useEffect, useRef, ReactElement, useState } from "react";
+import axios from "axios";
 
 const render = (status: Status): ReactElement => {
   if (status === Status.LOADING) return <h3>{status} ..</h3>;
@@ -36,7 +38,29 @@ function MyMapComponent({
 
 function VistaParque() {
 
-  const center = { lat: 20.7346027, lng: -100.4574816 };
+  const {id} = useParams();
+
+  const [parque, setParque] = useState([]);
+  const [flora, setFlora] = useState([]);
+  const [fauna, setFauna] = useState([]);
+
+  useEffect(() => {
+
+    const getData = () => {
+        let promise1 = axios.get("http://localhost:4000/api/parques/parque/"+id);
+
+        let promise2 = axios.get("http://localhost:4000/api/parques/activity");
+
+        Promise.all([promise1, promise2])
+        .then(values => {setParque(values[0].data);})
+        .catch(e=>console.log(e))
+    }
+
+    getData();
+
+}, []);
+
+  const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
 
@@ -49,14 +73,14 @@ function VistaParque() {
           <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
         />
         <Carousel.Caption className="caption">
-          <h3>Park Name 1</h3>
+          <h3>{parque.nombre}</h3>
         </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className="carousel-hero">
           <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
         />
         <Carousel.Caption className="caption">
-          <h3>Park Name 1</h3>
+          <h3>{parque.nombre}</h3>
         </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

@@ -3,11 +3,13 @@ import { Router } from 'express';
 import { getParks } from '@services/park-service';
 import { getActivities } from '@services/activity-service';
 import { access } from 'fs/promises';
+import { PrismaClient } from '@prisma/client'
 import path from "path";
 
 // Constants
 const router = Router();
 const { OK, NOT_FOUND } = StatusCodes;
+const prisma = new PrismaClient();
 
 const routesDir = __dirname.indexOf("routes");
 const assetsDir = __dirname.slice(0, routesDir) + "assets";
@@ -46,11 +48,41 @@ router.get('/img/:id', async (req, res) => {
     }
 });
 
+async function getPark(id){
+    const allParks = await prisma.parque.findUnique({
+        where: {
+            id: id,
+          },
+    });
+    return allParks;
+}
+
+async function popular(id){
+    const click = await prisma.parque.update({
+        where: {
+            id: id,
+        },
+        data: {
+            clicks: {
+                increment: 1,
+            },
+        }
+    });
+    return click;
+}
+
+//route for retrieving single park by id
+router.get('/parque/:id', async (req, res) => {
+    const aux = await popular(parseInt(req.params.id));
+    const park = await getPark(parseInt(req.params.id));
+    res.status(OK).json(park);
+});
+
+//route for activity filter button
 router.get('/activity', async (req, res) => {
     const activities = await getActivities();
     res.status(OK).json(activities);
 });
-
 
 // Export default
 export default router;
