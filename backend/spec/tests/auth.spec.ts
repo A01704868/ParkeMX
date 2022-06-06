@@ -43,7 +43,7 @@ describe('auth-router', () => {
                 email: 'jsmith@gmail.com',
                 password: 'Password@1',
             };
-            const role = UserRoles.Standard;
+            const role = UserRoles.User;
             const pwdHash = hashPwd(creds.password);
             const loginUser = User.new('john smith', creds.email, role, pwdHash);
             spyOn(userRepo, 'getOne').and.returnValue(Promise.resolve(loginUser));
@@ -84,7 +84,7 @@ describe('auth-router', () => {
                 email: 'jsmith@gmail.com',
                 password: 'someBadPassword',
             };
-            const role = UserRoles.Standard;
+            const role = UserRoles.User;
             const pwdHash = hashPwd('Password@1');
             const loginUser = User.new('john smith', creds.email, role, pwdHash);
             spyOn(userRepo, 'getOne').and.returnValue(Promise.resolve(loginUser));

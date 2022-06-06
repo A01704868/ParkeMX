@@ -2,34 +2,35 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Register</title>
         <link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
     </head>
     <body>
 
         <div class="login-block">
-            <div class="login-header">Login</div>
+            <div class="login-header">Register</div>
+
+            <div class="login-input">
+                Name:<br/>
+                <input id="name-input" type="text"/>
+            </div>
 
             <div class="login-input">
                 Email:<br/>
                 <input id="email-input" type="email"/>
             </div>
-            
+
             <div class="login-input">
                 Password:<br/>
                 <input id="pwd-input" type="password"/>
             </div>
 
             <div>
-                <button id="login-btn">Login</button>
-            </div>
-
-            <div class="default-login-user">
-                //  email: sofia-soto@gmail.com, nombre: "Sofia Soto", password: Sofia1999.
+                <button id="reg-btn">Register</button>
             </div>
         </div>
 
     </body>
     <script src="scripts/http.js"></script>
-    <script src="scripts/login.js"></script>
+    <script src="scripts/register.js"></script>
 </html>

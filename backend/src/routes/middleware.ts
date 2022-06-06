@@ -9,6 +9,7 @@ import jwtUtil from '@util/jwt-util';
 // Constants
 const { UNAUTHORIZED } = StatusCodes;
 const jwtNotPresentErr = 'JWT not present in signed cookie.';
+const userIsNotAdminErr = 'User does not have admin rights';
 
 
 /**
@@ -28,11 +29,12 @@ export async function adminMw(req: Request, res: Response, next: NextFunction) {
         }
         // Make sure user role is an admin
         const clientData = await jwtUtil.decode(jwt);
+        console.log(clientData)
         if (typeof clientData === 'object' && clientData.role === UserRoles.Admin) {
             res.locals.sessionUser = clientData;
             next();
         } else {
-            throw Error(jwtNotPresentErr);
+            throw Error(userIsNotAdminErr);
         }
     } catch (err) {
         return res.status(UNAUTHORIZED).json({

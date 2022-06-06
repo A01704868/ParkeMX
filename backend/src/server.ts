@@ -73,6 +73,11 @@ app.get('/', (_: Request, res: Response) => {
     res.sendFile('login.html', {root: viewsDir});
 });
 
+// Nav to register page
+app.get('/signon', (_: Request, res: Response) => {
+    res.sendFile('signon.html', {root: viewsDir});
+});
+
 // Redirect to login if not logged in.
 app.get('/users', (req: Request, res: Response) => {
     const jwt = req.signedCookies[cookieProps.key];

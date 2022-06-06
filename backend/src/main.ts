@@ -1,13 +1,14 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Role } from '@prisma/client'
 import WeatherService from '../src/services/weather-service';
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient()
 
-// async function GetAllUsers () {
-//     return await prisma.usuario.findMany({
-//         select: { password: false, nombre: true, email: true, role: true }
-//     });
-// }
+async function GetAllUsers () {
+    return await prisma.usuario.findMany({
+        select: { password: true, nombre: true, email: true, role: true }
+    });
+}
 
 // async function DeleteAllUsers () {
 //     return await prisma.usuario.deleteMany();
@@ -16,15 +17,19 @@ const prisma = new PrismaClient()
 async function AddTestUsers () {
     return await prisma.usuario.createMany({
         data: [
-            { email: "eduardo-larios@outlook.com", nombre: "Eduardo Larios", password: "hunter2" },
-            { email: "sofia-soto@gmail.com", nombre: "Sofia Soto", password: "Sofia1999." }
+            { email: "eduardo-larios@outlook.com", nombre: "Eduardo Larios", password: bcrypt.hashSync("hunter2", 10) },
+            { email: "sofia-soto@gmail.com", nombre: "Sofia Soto", password: bcrypt.hashSync("Sofia1999.", 10) }
         ]
     })
 }
 
 (async () => {
-    const forecast = await WeatherService.getWeatherByCity("León", "Guanajuato", "MX");
+    const result = await prisma.usuario.updateMany({
+        data: {
+            role: Role.ADMIN
+        }
+    })
 
-    console.debug(forecast);
+    console.log(result)
 
 })().then(() => console.log("Finished executing")).catch(e => console.error(e))
