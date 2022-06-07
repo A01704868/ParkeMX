@@ -1,52 +1,10 @@
 import { NotImplementedError } from "@shared/errors";
+import { IWeatherError, IWeatherSummary, IWeatherForecast  } from "@models/weather-model";
 import axios from "axios";
 
 // Retrieve the Api Key from OS env
 const apiKey = process.env.OPEN_WEATHER_KEY ?? "100b0c6b01aa6013056da0f7e9ca023c"
 
-export interface IWeatherError {
-    error: string
-    debug: any
-}
-
-/**
- * Interface to describe the weather response from OpenWeatherMap's API
- */
-interface IWeatherSummary {
-    coord: { lon: number, lat: number },
-    weather: [
-      { id: number, main: string, description: string, icon: string }
-    ],
-    base: number,
-    main: {
-      temp: number,
-      feels_like: number,
-      temp_min: number,
-      temp_max: number,
-      pressure: number,
-      humidity: number,
-      sea_level: number,
-      grnd_level: number
-    },
-    visibility: number,
-    wind: { speed: number, deg: number, gust: number },
-    clouds: { all: number },
-    dt: number,
-    sys: { country: string, sunrise: number, sunset: number },
-    timezone: number,
-    id: number,
-    name: string,
-    cod: number
-}
-
-export interface IWeatherForecast {
-    temp: number
-    humidity: number
-    pressure: number
-    description: string
-    weathercode: number
-    rain: string
-}
 
 export default class WeatherService {
 
