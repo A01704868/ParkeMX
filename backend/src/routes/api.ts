@@ -5,6 +5,8 @@ import userRouter from './user-router';
 import weatherRouter from './weather-router';
 import parquesRouter from './parques-router';
 import addparquesRouter from './addparques-router';
+import deleteparquesRouter from './deleteparques-router';
+import editparquesRouter from './editparque-router';
 
 
 // Init
@@ -15,8 +17,10 @@ apiRouter.use('/auth', authRouter);
 apiRouter.use('/users', adminMw, userRouter);
 apiRouter.use('/weather', weatherRouter);
 apiRouter.use('/parques', parquesRouter);
-apiRouter.use('/addparques', addparquesRouter);
-apiRouter.use('/deleteparques',addparquesRouter)
+apiRouter.use('/', addparquesRouter);
+apiRouter.use('/', deleteparquesRouter);
+apiRouter.use('/', editparquesRouter);
+
 
 // Export default
 export default apiRouter;

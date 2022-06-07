@@ -40,37 +40,10 @@ export async function postParks(parque: Parque): Promise<Parque> {
 }
 
 
-
-
-/*postParks()
-    .catch( (e)=> {
-        throw e
-    })
-    .finally(async () => {
-        await prisma.$disconnect
-    })*/
-
-    //Eliminar
-
-    export async function deleteParks(parque: Parque): Promise<Parque> {
-        //Eliminar parque
-        const deletePark = await prisma.parque.delete({
-            where: {
-               id: parque.id,
-            
-            }
-        });
-        //res.json(deletePark)
-        console.log(deletePark)
-        
-        return deletePark;
-        
-        
-    }
     
 
 
 export default {
-    postParks,
-    deleteParks
+    postParks
+    
 } as const;
