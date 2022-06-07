@@ -41,7 +41,8 @@ function VistaParque() {
 
   const {id} = useParams();
 
-  const [parque, setParque] = useState([]);
+  const [parque, setParque] = useState({});
+  const [anuncios, setAnuncios] = useState([]);
 
   useEffect(() => {
 
@@ -49,13 +50,17 @@ function VistaParque() {
         let promise1 = axios.get("http://localhost:4000/api/parques/parque/"+id);
 
         Promise.all([promise1])
-        .then(values => {setParque(values[0].data);})
+        .then(values => {
+          setParque(values[0].data);
+          setAnuncios(values[0].data.anuncios)
+        })
         .catch(e=>console.log(e))
     }
 
     getData();
 
 }, []);
+const url = "http://localhost:4000/api/parques/img/"+parque.id;
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
@@ -67,7 +72,7 @@ function VistaParque() {
 
       <Carousel>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
+          <img className="d-block w-100" src={url} alt="First slide"
         />
         <Carousel.Caption className="caption">
           <h3>{parque.nombre}</h3>
@@ -114,6 +119,10 @@ function VistaParque() {
         </Card.Body>
       </Card>
       </Container>
+
+      {
+       anuncios.map(e=> <Anuncio descripcion={e.descripcion} />)
+      }
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>

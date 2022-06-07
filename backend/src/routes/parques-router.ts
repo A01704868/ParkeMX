@@ -65,6 +65,10 @@ async function getPark(id){
           },
         include: {
             anuncios: true,
+            horario: true,
+            flora: true,
+            fauna:true,
+            actividades: true
         }
     });
     return park;

@@ -9,7 +9,7 @@ function BarraNav(){
     return(
         <Navbar className="color-nav" variante="light" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                 <img
                     src={logotipo}
                     width="80"

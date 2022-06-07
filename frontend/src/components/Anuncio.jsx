@@ -7,9 +7,9 @@ function Anuncio(props){
   if (show) {
     return (
       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Alerta</Alert.Heading>
+        <Alert.Heading>Alerta!</Alert.Heading>
         <p>
-          props.descripcion
+          {props.descripcion}
         </p>
       </Alert>
     );
