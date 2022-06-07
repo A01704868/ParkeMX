@@ -96,16 +96,15 @@ function ListaDeParques(){
             toggle = 0;
         }
         setParques(reverse(parques));
-    }
 
-    console.log("parques:", parques);
+    }
 
     return(
         <div>
             <BarraNav />
 
             <Carousel>
-                {parques.sort((a, b)=>{
+                {[...parques].sort((a, b)=>{//crean un nuevo arreglo y los 3 puntos copian los datos de parques al nuevo arreglo spread operator. tambien se puede copiar un arreglo
                     if(a.clicks > b.clicks){
                         return -1;
                     }

@@ -4,6 +4,11 @@ const prisma = new PrismaClient();
 
 export async function getParks(){
     const allParks = await prisma.parque.findMany({
+        orderBy: [
+            {
+              id: 'asc',
+            },
+          ],
         include: {
             // Here you can keep including data from other models
             horario: true,
