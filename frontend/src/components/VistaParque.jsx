@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './BarraNav';
+import Anuncio from './Anuncio';
 import "../css/styles.css"
 import { useParams } from 'react-router-dom';
 import { Card, Button, Carousel, Container} from 'react-bootstrap';
@@ -41,17 +42,13 @@ function VistaParque() {
   const {id} = useParams();
 
   const [parque, setParque] = useState([]);
-  const [flora, setFlora] = useState([]);
-  const [fauna, setFauna] = useState([]);
 
   useEffect(() => {
 
     const getData = () => {
         let promise1 = axios.get("http://localhost:4000/api/parques/parque/"+id);
 
-        let promise2 = axios.get("http://localhost:4000/api/parques/activity");
-
-        Promise.all([promise1, promise2])
+        Promise.all([promise1])
         .then(values => {setParque(values[0].data);})
         .catch(e=>console.log(e))
     }
@@ -107,7 +104,7 @@ function VistaParque() {
         <div className="col-3">
           <Card.Title>ESTACIONAMIENTO</Card.Title>
           <Card.Text>
-            Éste parque si cuenta con estacionamiento
+            {parque.clicks}
           </Card.Text>
         </div>
         </Card.Body>

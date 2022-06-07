@@ -162,9 +162,10 @@ function ListaDeParques(){
                     if(searchTerm !== ""){
                         result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
                     }
-
+                    // eslint-disable-next-line
                     if(searchActivity != 0){
                         let index = parque.actividades.findIndex((activity) => {
+                            // eslint-disable-next-line
                             return (activity.actividadId == searchActivity);
                         });
 

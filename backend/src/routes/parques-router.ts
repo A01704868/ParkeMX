@@ -49,15 +49,6 @@ router.get('/img/:id', async (req, res) => {
 });
 
 async function getPark(id){
-    const allParks = await prisma.parque.findUnique({
-        where: {
-            id: id,
-          },
-    });
-    return allParks;
-}
-
-async function popular(id){
     const click = await prisma.parque.update({
         where: {
             id: id,
@@ -68,12 +59,19 @@ async function popular(id){
             },
         }
     });
-    return click;
+    const park = await prisma.parque.findUnique({
+        where: {
+            id: id,
+          },
+        include: {
+            anuncios: true,
+        }
+    });
+    return park;
 }
 
 //route for retrieving single park by id
 router.get('/parque/:id', async (req, res) => {
-    const aux = await popular(parseInt(req.params.id));
     const park = await getPark(parseInt(req.params.id));
     res.status(OK).json(park);
 });
