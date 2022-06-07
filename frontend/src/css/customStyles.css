@@ -17,6 +17,13 @@ h1{
     padding-bottom: 30px;
 }
 
+.link {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
 .cardImage{
     height: 300px;
     width: 100%;
