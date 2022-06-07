@@ -65,9 +65,9 @@ let toggle = 0;
 
 function ListaDeParques(){
 
-    const [parques, setParques] = useState({});
+    const [parques, setParques] = useState([]);
     const [searchTerm, setSearch] = useState("");
-    const [activityButton, setActivityButton] = useState({});
+    const [activityButton, setActivityButton] = useState([]);
     const [searchActivity, setSearchActivity] = useState(0);
     //investigate reducer in react manual
 
@@ -97,6 +97,8 @@ function ListaDeParques(){
         }
         setParques(reverse(parques));
     }
+
+    console.log("parques:", parques);
 
     return(
         <div>
