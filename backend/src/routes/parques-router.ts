@@ -82,7 +82,6 @@ router.get('/activity', async (req, res) => {
     res.status(OK).json(activities);
 });
 
-<<<<<<< HEAD
 router.get('/horario', async (req, res) => {
     const horarios = await getHorario();
     res.status(OK).json(horarios);
@@ -97,7 +96,5 @@ router.get('/activityParque', async (req, res) => {
 
 
 
-=======
->>>>>>> 243c1a843b4470c1f526e0dbe3464a1129c33dfe
 // Export default
 export default router;
