@@ -43,6 +43,8 @@ function VistaParque() {
 
   const [parque, setParque] = useState({});
   const [anuncios, setAnuncios] = useState([]);
+  const [abrir, setAbrir] = useState("");
+  const [cerrar, setCerrar] = useState("");
 
   useEffect(() => {
 
@@ -52,7 +54,9 @@ function VistaParque() {
         Promise.all([promise1])
         .then(values => {
           setParque(values[0].data);
-          setAnuncios(values[0].data.anuncios)
+          setAnuncios(values[0].data.anuncios);
+          setAbrir(values[0].data.horario[0].horaAbrir);
+          setCerrar(values[0].data.horario[0].horaCerrar);
         })
         .catch(e=>console.log(e))
     }
@@ -79,7 +83,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
+          <img className="d-block w-100" src={url} alt="First slide"
         />
         <Carousel.Caption className="caption">
           <h3>{parque.nombre}</h3>
@@ -97,19 +101,14 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         <div className="col-3">
           <Card.Title>HORARIO</Card.Title>
           <Card.Text>
-            Lunes a Domingo: 9:00 a 18:00
+          {abrir} - {cerrar}
+
           </Card.Text>
         </div>
         <div className="col-3">
           <Card.Title>UBICACIÓN</Card.Title>
           <Card.Text>
-            Calle Ejemplo 123, Ejemplo, Ej
-          </Card.Text>
-        </div>
-        <div className="col-3">
-          <Card.Title>ESTACIONAMIENTO</Card.Title>
-          <Card.Text>
-            {parque.clicks}
+            {parque.direccion}
           </Card.Text>
         </div>
         </Card.Body>

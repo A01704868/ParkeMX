@@ -51,7 +51,7 @@
   .row-info-card {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .row-activities {
