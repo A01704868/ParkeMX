@@ -16,7 +16,43 @@ export default class WeatherService {
     private static readonly WEATHER_LANG = "es";
 
     public static async getWeatherByCoordinates(latitude: number, longitude: number) {
-        throw new NotImplementedError();
+        if (!latitude || !longitude) {
+            return <IWeatherError> {
+                debug: { latitude, longitude },
+                error: "Unable to retrieve forecast, missing parameters"
+            };
+        }
+
+        try {
+            const response = await axios.request({
+                baseURL: this.BASE_URL,
+                url: this.WEATHER_ENDPOINT,
+                method: 'get',
+                params: {
+                    lang: this.WEATHER_LANG,
+                    units: this.WEATHER_UNITS,
+                    appid: apiKey,
+                    lat: latitude,
+                    lon: longitude
+                }
+            })
+
+            const summary: IWeatherSummary = await response.data;
+            return <IWeatherForecast> {
+                temp: summary.main.temp,
+                description: summary.weather[0].description,
+                humidity: summary.main.humidity,
+                pressure: summary.main.pressure,
+                name: summary.name,
+                wind: summary.wind
+            };
+
+        } catch (error) {
+            return <IWeatherError>{
+                debug: error.message,
+                error: `Unable to retrieve forecast for coordinates: lat: ${latitude} - lon: ${longitude}`
+            }
+        }
     }
 
     /**

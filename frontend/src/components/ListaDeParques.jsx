@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import BarraNav from './BarraNav';
+import carousel from './Carousel';
 import "../css/customStyles.css"
-import { Dropdown, Card, Row, Col, Button, Carousel, Container, InputGroup, FormControl } from 'react-bootstrap';
+import { Dropdown, Card, Row, Col, Carousel, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
 
 
 const reverse = (arr1) => {
@@ -16,41 +17,38 @@ const reverse = (arr1) => {
     return aux;
 }
 
+const renderAbrir = (horario) => {
+    return (
+        <Container key = {horario.id}>
+            <Card.Text>
+            {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
+            </Card.Text>
+        </Container>
+    );
+}
+
 const renderCard = (card) => {
     const url = "http://localhost:4000/api/parques/img/"+card.id;
+
     return(
         <Col key = {card.id}>
-            <Card style={{ width: '22rem' }}>
+            <Card style={{ width: '22rem', height: '100%'}}>
                 <Card.Body>
                     <Card.Title>{card.nombre}</Card.Title>
                     <Card.Img src={url} className="cardImage"/>
                     <Card.Text>
                     {card.descripcion}
                     </Card.Text>
+                    Direccion
                     <Card.Text>
                     {card.direccion}
                     </Card.Text>
-                    <Button variant="primary">Mas Informacion</Button>
+                    Horarios
+                    {card.horario.map(renderAbrir)}
                 </Card.Body>
+                <Button className="link" variant="primary" href={"/parque/"+card.id}>Mas Informacion</Button>
             </Card>
         </Col>
-    );
-}
-
-const renderCarousel = (card) => {
-    const url = "http://localhost:4000/api/parques/img/"+card.id;
-
-    return(
-        <Carousel.Item key={card.id}>
-            <img
-            className="d-block w-100 cardImage"
-            src={url}
-            alt="First slide"
-            />
-            <Carousel.Caption>
-            {card.nombre}
-            </Carousel.Caption>
-        </Carousel.Item>
     );
 }
 
@@ -70,8 +68,6 @@ function ListaDeParques(){
     const [parques, setParques] = useState([]);
     const [searchTerm, setSearch] = useState("");
     const [activityButton, setActivityButton] = useState([]);
-    const [horario, setHorario] = useState();
-    const [parqueActividad, setParqueActividad] = useState(null);
     const [searchActivity, setSearchActivity] = useState(0);
     //investigate reducer in react manual
 
@@ -82,12 +78,8 @@ function ListaDeParques(){
 
             let promise2 = axios.get("http://localhost:4000/api/parques/activity");
 
-            let promise3 = axios.get("http://localhost:4000/api/parques/activityParque");
-
-            let promise4 = axios.get("http://localhost:4000/api/parques/horario");
-
-            Promise.all([promise1, promise2, promise3, promise4])
-            .then(values => {setParques(values[0].data); setActivityButton(values[1].data); setHorario(values[2].data); setParqueActividad(values[3].data);})
+            Promise.all([promise1, promise2])
+            .then(values => {setParques(values[0].data); setActivityButton(values[1].data);})
             .catch(e=>console.log(e))
         }
 
@@ -111,7 +103,16 @@ function ListaDeParques(){
             <BarraNav />
 
             <Carousel>
-                {parques.map(renderCarousel)}
+                {parques.sort((a, b)=>{
+                    if(a.clicks > b.clicks){
+                        return -1;
+                    }
+                    if(a.clicks < b.clicks){
+                        return 1;
+                    }
+
+                    return 0;
+                }).slice(0,3).map(carousel)}
             </Carousel>
 
             <h1>Encuentra Parques filtrando por Actividad</h1>
@@ -152,21 +153,19 @@ function ListaDeParques(){
             </Row>
             </Container>
 
-            <Row className="g-4">
+            <Row className="m-5 g-4">
                 {// eslint-disable-next-line
                 parques.filter((parque) => {
 
-                    console.log("Search Term",searchTerm);
-                    console.log("Activity", searchActivity);
                     let result = true;
 
                     if(searchTerm !== ""){
                         result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
-
                     }
-                    
+                    // eslint-disable-next-line
                     if(searchActivity != 0){
                         let index = parque.actividades.findIndex((activity) => {
+                            // eslint-disable-next-line
                             return (activity.actividadId == searchActivity);
                         });
 

@@ -12,9 +12,9 @@ function App() {
      <Routes>
       <Route path="/" element={<ListaDeParques />} />
       <Route path="/agregar" element={<AgregarParque />} />
-      <Route path="/parque" element={<VistaParque />} />
+      <Route path="/parque/:id" element={<VistaParque />} />
     </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
     </div>
   );
 }

@@ -38,6 +38,6 @@ export interface IWeatherForecast {
     humidity: number
     pressure: number
     description: string
-    weathercode: number
-    rain: string
+    name: string
+    wind: { speed: number, deg: number, gust: number }
 }

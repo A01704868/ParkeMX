@@ -1,5 +1,5 @@
 import { PrismaClient, Role } from '@prisma/client'
-import WeatherService from '../src/services/weather-service';
+import WeatherService from '@services/weather-service';
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient()

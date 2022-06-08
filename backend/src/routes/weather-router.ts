@@ -8,7 +8,7 @@ import WeatherService from '@services/weather-service';
 
 // Constants
 const router = Router();
-const { CREATED, OK } = StatusCodes;
+const { CREATED, OK, BAD_REQUEST, NOT_FOUND } = StatusCodes;
 
 // Paths
 export const p = {
@@ -27,6 +27,39 @@ router.get(p.get, async (req: Request, res: Response) => {
     const forecast = await WeatherService.getWeatherByCity(city, state, country);
 
     return res.status(OK).json({forecast});
+});
+
+router.post("/coordinates", async (req: Request, res: Response) => {
+    const { latitude, longitude } = req.body;
+    console.log(req.body);
+    if (!latitude || !longitude) {
+        res.status(BAD_REQUEST).json({
+            error: "Missing coordinates",
+            debug: { latitude, longitude }
+        });
+
+        return;
+    }
+
+    try {
+        const weatherForecast = await WeatherService.getWeatherByCoordinates(latitude, longitude);
+        if (!weatherForecast) {
+            res.status(NOT_FOUND).json({
+                error: "Couldn't retrieve weather data",
+                debug: { latitude, longitude }
+            });
+
+            return;
+        }
+
+        res.status(OK).json(weatherForecast);
+        
+    } catch (error) {
+        res.status(NOT_FOUND).json({
+            error: "Couldn't retrieve weather data",
+            debug: error
+        });
+    }
 });
 
 // Export default
