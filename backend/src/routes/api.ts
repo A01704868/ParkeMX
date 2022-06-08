@@ -7,6 +7,9 @@ import parquesRouter from './parques-router';
 import addparquesRouter from './addparques-router';
 import deleteparquesRouter from './deleteparques-router';
 import editparquesRouter from './editparque-router';
+import addcartasrutasRouter from './addcardroutes-router';
+import deletecartasrutasRouter from './deletecardroutes-router';
+import editcartasrutasRouter from './editcardroute-router';
 
 
 // Init
@@ -20,6 +23,9 @@ apiRouter.use('/parques', parquesRouter);
 apiRouter.use('/', addparquesRouter);
 apiRouter.use('/', deleteparquesRouter);
 apiRouter.use('/', editparquesRouter);
+apiRouter.use('/', addcartasrutasRouter);
+apiRouter.use('/', deletecartasrutasRouter);
+apiRouter.use('/', editcartasrutasRouter);
 
 
 // Export default

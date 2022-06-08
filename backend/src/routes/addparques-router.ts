@@ -8,11 +8,9 @@ const router = Router();
 const { OK } = StatusCodes;
 
 router.post('/addparques', async (req: Request, res: Response) => {
-    console.log(req);
     const { parque } = req.body ?? {};
+
     const parques = await postParks(parque);
-    console.log(parque);
-    console.log(parques);
     res.status(OK).json(parques);
 
 

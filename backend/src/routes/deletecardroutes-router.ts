@@ -1,16 +1,13 @@
 import StatusCodes, { CREATED } from 'http-status-codes';
 import { Router, Request, Response } from 'express';
 
-import { deleteParks }  from '@services/deletepark-service';
+import { deleteCarts }  from '@services/deletecardrouter-service';
 import { ParamMissingError } from '@shared/errors';
 
 const router = Router();
 const { OK } = StatusCodes;
 
-
-
-
-router.delete('/deleteparque/:id',async (req:Request, res:Response) => {
+router.delete('/deletecartaruta/:id',async (req:Request, res:Response) => {
     
     let id = parseInt(req.params.id);
 
@@ -20,8 +17,8 @@ router.delete('/deleteparque/:id',async (req:Request, res:Response) => {
     console.log(req);
     
 
-    const deleteParque = await deleteParks (id);
-    return res.status(OK).json(deleteParque);
+    const deletecartaruta = await deleteCarts (id);
+    return res.status(OK).json(deletecartaruta);
     
 });
 

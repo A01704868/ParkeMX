@@ -18,13 +18,15 @@ export async function postParks(parque: Parque): Promise<Parque> {
         longitud, 
         fechaDecreto,
         superficieTerrestre,
-        superficieMarina 
+        superficieMarina,
+        
+         
     } = parque;
 
     const newParque: Parque =
      await prisma.parque.create({
         data: {
-            id: id,
+            id: 108,
             nombre:  nombre,
             descripcion: descripcion,
             imagen: imagen,
@@ -34,6 +36,8 @@ export async function postParks(parque: Parque): Promise<Parque> {
             fechaDecreto: fechaDecreto,
             superficieTerrestre: superficieTerrestre,
             superficieMarina: superficieMarina,
+            clicks: 0,
+            
         },
     });
     return newParque;
@@ -45,5 +49,4 @@ export async function postParks(parque: Parque): Promise<Parque> {
 
 export default {
     postParks
-    
 } as const;

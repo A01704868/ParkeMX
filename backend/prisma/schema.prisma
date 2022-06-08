@@ -6,6 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 //tabla central
 model Parque {
   id                  Int    @id @default(autoincrement())
@@ -28,62 +29,63 @@ model Parque {
   categoria   CategoriaParque[]
   estado      EstadoParque[]
   region      RegionParque[]
+  CartaRuta   CartaRuta[]
 }
 
 //tablas N:N
 model Estado {
-  id          Int    @id @default(autoincrement())
-  nombre      String
-  parque      EstadoParque[]
+  id     Int            @id @default(autoincrement())
+  nombre String
+  parque EstadoParque[]
 }
 
 model EstadoParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-  estado      Estado @relation(fields: [estadoId], references: [id])
-  estadoId    Int
-  assignedAt  DateTime @default(now())
-  assignedBy  String
+  parque     Parque   @relation(fields: [parqueId], references: [id])
+  parqueId   Int
+  estado     Estado   @relation(fields: [estadoId], references: [id])
+  estadoId   Int
+  assignedAt DateTime @default(now())
+  assignedBy String
 
   @@id([parqueId, estadoId])
 }
 
 model Region {
-  id          Int    @id @default(autoincrement())
-  nombre      String
-  parque      RegionParque[]
+  id     Int            @id @default(autoincrement())
+  nombre String
+  parque RegionParque[]
 }
 
 model RegionParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-  region   Region @relation(fields: [regionId], references: [id])
-  regionId Int
-  assignedAt  DateTime @default(now())
-  assignedBy  String
+  parque     Parque   @relation(fields: [parqueId], references: [id])
+  parqueId   Int
+  region     Region   @relation(fields: [regionId], references: [id])
+  regionId   Int
+  assignedAt DateTime @default(now())
+  assignedBy String
 
   @@id([parqueId, regionId])
 }
 
 model Categoria {
-  id          Int    @id @default(autoincrement())
-  nombre      String
-  parque       CategoriaParque[]
+  id     Int               @id @default(autoincrement())
+  nombre String
+  parque CategoriaParque[]
 }
 
 model CategoriaParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
+  parque      Parque    @relation(fields: [parqueId], references: [id])
   parqueId    Int
   categoria   Categoria @relation(fields: [categoriaId], references: [id])
   categoriaId Int
-  assignedAt  DateTime @default(now())
+  assignedAt  DateTime  @default(now())
   assignedBy  String
 
   @@id([parqueId, categoriaId])
 }
 
 model Flora {
-  id          Int      @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   nombre      String
   imagen      String
   descripcion String
@@ -91,18 +93,18 @@ model Flora {
 }
 
 model FloraParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-  flora       Flora @relation(fields: [floraId], references: [id])
-  floraId     Int
-  assignedAt  DateTime @default(now())
-  assignedBy  String
+  parque     Parque   @relation(fields: [parqueId], references: [id])
+  parqueId   Int
+  flora      Flora    @relation(fields: [floraId], references: [id])
+  floraId    Int
+  assignedAt DateTime @default(now())
+  assignedBy String
 
   @@id([parqueId, floraId])
 }
 
 model Fauna {
-  id          Int      @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   nombre      String
   imagen      String
   descripcion String
@@ -110,32 +112,33 @@ model Fauna {
 }
 
 model FaunaParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
-  parqueId    Int
-  fauna       Fauna @relation(fields: [faunaID], references: [id])
-  faunaID     Int
-  assignedAt  DateTime @default(now())
-  assignedBy  String
+  parque     Parque   @relation(fields: [parqueId], references: [id])
+  parqueId   Int
+  fauna      Fauna    @relation(fields: [faunaID], references: [id])
+  faunaID    Int
+  assignedAt DateTime @default(now())
+  assignedBy String
 
   @@id([parqueId, faunaID])
 }
 
 model Actividad {
-  id          Int      @id @default(autoincrement())
-  nombre      String
-  parques     ActividadParque[]
+  id      Int               @id @default(autoincrement())
+  nombre  String
+  parques ActividadParque[]
 }
 
 model ActividadParque {
-  parque      Parque @relation(fields: [parqueId], references: [id])
+  parque      Parque    @relation(fields: [parqueId], references: [id])
   parqueId    Int
   actividad   Actividad @relation(fields: [actividadId], references: [id])
   actividadId Int
-  assignedAt  DateTime @default(now())
+  assignedAt  DateTime  @default(now())
   assignedBy  String
 
   @@id([parqueId, actividadId])
 }
+
 //Tablas N:1
 model Anuncio {
   id          Int    @id @default(autoincrement())
@@ -144,7 +147,6 @@ model Anuncio {
   parqueId    Int
 }
 
-
 model Horario {
   id         Int    @id @default(autoincrement())
   dias       String
@@ -152,6 +154,14 @@ model Horario {
   horaCerrar String
   parque     Parque @relation(fields: [parqueId], references: [id])
   parqueId   Int
+}
+
+model CartaRuta {
+  id          Int    @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  parque      Parque @relation(fields: [parqueId], references: [id])
+  parqueId    Int
 }
 
 model Usuario {
