@@ -35,15 +35,12 @@ const renderCard = (card) => {
             <Card style={{ width: '22rem', height: '100%'}}>
                 <Card.Body>
                     <Card.Title>{card.nombre}</Card.Title>
-                    <Card.Img src={url} className="cardImage"/>
-                    <Card.Text>
-                    {card.descripcion}
-                    </Card.Text>
-                    Direccion
+                    <Card.Img src={url} className="cardImage mb-3" style={{ height: '25rem'}}/>
+                    <Card.Text className="w-bold">Direccion</Card.Text>
                     <Card.Text>
                     {card.direccion}
                     </Card.Text>
-                    Horarios
+                    <Card.Text className="w-bold">Horarios</Card.Text>
                     {card.horario.map(renderAbrir)}
                 </Card.Body>
                 <Button className="link" variant="primary" href={"/parque/"+card.id}>Mas Informacion</Button>
@@ -78,7 +75,7 @@ function ListaDeParques(){
 
         function getPosition(position){
             //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
-    
+
             setLatitud(position.coords.latitude);
             setLongitud(position.coords.longitude);
         }
@@ -121,10 +118,10 @@ function ListaDeParques(){
     function distance(lat1, lon1, lat2, lon2) {
         var p = 0.017453292519943295;    // Math.PI / 180
         var c = Math.cos;
-        var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-                c(lat1 * p) * c(lat2 * p) * 
+        var a = 0.5 - c((lat2 - lat1) * p)/2 +
+                c(lat1 * p) * c(lat2 * p) *
                 (1 - c((lon2 - lon1) * p))/2;
-      
+
         return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
       }
 
@@ -211,7 +208,7 @@ function ListaDeParques(){
                             if(parque1.superficieMarina < parque2.superficieMarina){
                                 return -1;
                             }
-                
+
                             return 0;
                         });
                     }
