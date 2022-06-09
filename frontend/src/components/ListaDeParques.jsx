@@ -127,7 +127,7 @@ function ListaDeParques(){
       
         return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
       }
-      
+
     function toggleDistance(){
         if(calcDistance === true){
             setCalcDistance(false);
@@ -165,7 +165,7 @@ function ListaDeParques(){
                 </button>
                 </Col>
                 <Col>
-                <Button variant="primary" onClick={toggleDistance}>Sortear por el mas cerca a mi</Button>
+                <Button variant="primary" onClick={toggleDistance}>Palanca: Sortear por distancia a mi</Button>
                 </Col>
                 <Col>
 
