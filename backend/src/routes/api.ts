@@ -10,6 +10,8 @@ import editparquesRouter from './editparque-router';
 import addcartasrutasRouter from './addcardroutes-router';
 import deletecartasrutasRouter from './deletecardroutes-router';
 import editcartasrutasRouter from './editcardroute-router';
+import addhorarioRouter from './addhorario-router';
+import deletehorarioRouter from './deletehorario-router';
 
 
 // Init
@@ -26,6 +28,8 @@ apiRouter.use('/', editparquesRouter);
 apiRouter.use('/', addcartasrutasRouter);
 apiRouter.use('/', deletecartasrutasRouter);
 apiRouter.use('/', editcartasrutasRouter);
+apiRouter.use('/', addhorarioRouter);
+apiRouter.use('/', deletehorarioRouter);
 
 
 // Export default

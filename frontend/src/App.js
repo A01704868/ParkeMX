@@ -6,6 +6,7 @@ import AgregarParque from "./components/AgregarParque";
 import VistaParque from "./components/VistaParque";
 import AgregarCartaRuta from "./components/AgregarCartaRuta";
 import EditarParque from "./components/EditarParque";
+import AgregarHorario from "./components/AgregarHorario";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/agregartarjetaderuta" element={<AgregarCartaRuta />} />
           <Route path="/parque/:id" element={<VistaParque />} />
           <Route path="/editarparque" element={<EditarParque />} />
+          <Route path="/agregarhorario" element={<AgregarHorario />} />
         </Routes>
       </BrowserRouter>
     </div>

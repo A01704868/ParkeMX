@@ -115,3 +115,56 @@ export async function updatePark(parkId) {
     console.log(event);
   }
 }
+
+export async function saveHorario(horario) {
+  console.log("ORE: ", horario);
+  try {
+    const formData = new FormData();
+    console.log(horario.parqueid);
+
+    formData.append("dias", horario.dias);
+    formData.append("horaAbrir", horario.horaAbrir);
+    formData.append("horaCerrar", horario.horaCerrar);
+    formData.append("parqueId", horario.parqueId);
+
+    let response = axios
+      .post("http://localhost:4000/api/addhorario/", {
+        horario: horario,
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    //const response = await axios({
+    //url: `${baseUrl}"/addparques/`,
+    //method: "POST",
+    //data: parkData,
+    //});
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
+export async function deleteHorario(horarioId) {
+  try {
+    console.log("ID: ", horarioId);
+    let response = axios
+      .delete(`${baseUrl}/deletehorario/${horarioId}`, {
+        id: horarioId,
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}

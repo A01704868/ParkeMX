@@ -16,6 +16,7 @@ import {
 } from "react-bootstrap";
 
 import { deletePark } from "../services/index";
+import { deleteHorario } from "../services/index";
 import { updatePark } from "../services/index";
 
 const reverse = (arr1) => {
@@ -34,6 +35,13 @@ const renderAbrir = (horario) => {
       <Card.Text>
         {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
       </Card.Text>
+      <Button
+        className="link"
+        variant="primary"
+        onClick={() => deletehHandler(horario.id)}
+      >
+        Eliminar
+      </Button>
     </Container>
   );
 };
@@ -63,6 +71,10 @@ const renderCard = (card) => {
         >
           Eliminar
         </Button>
+        <Button type="submit" href={"/agregarhorario"}>
+          Agregar Horario
+        </Button>
+
         <Button
           onClick={() => updateHandler(card.id)}
           className="link"
@@ -81,6 +93,9 @@ function updateHandler(id) {
 }
 function deleteHandler(id) {
   deletePark(id);
+}
+function deletehHandler(id) {
+  deleteHorario(id);
 }
 
 const renderDropdown = (activity) => {
