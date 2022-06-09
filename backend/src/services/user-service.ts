@@ -99,7 +99,7 @@ export async function updateOne(user: IUser): Promise<void> {
  * @returns
  */
 export async function deleteOne(userId: number): Promise<void> {
-  const user = await db.usuario.findFirst({ where: { id: userId } });
+  const user = await db.usuario.delete({ where: { id: userId } });
 
   if (!user) {
     throw new UserNotFoundError();
