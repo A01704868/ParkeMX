@@ -15,6 +15,10 @@ const Weather = ({ longitude, latitude }) => {
 
   useEffect(() => {
     const getWeatherForecast = () => {
+      if (!latitude || !longitude) {
+        return;
+      }
+
       const weatherUrl = "http://localhost:4000/api/weather/coordinates/";
       const response = axios.post(weatherUrl, { latitude, longitude });
 

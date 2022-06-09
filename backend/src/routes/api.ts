@@ -4,6 +4,7 @@ import authRouter from './auth-router';
 import userRouter from './user-router';
 import weatherRouter from './weather-router';
 import parquesRouter from './parques-router';
+import contactoRouter from './contacto-router';
 
 // Init
 const apiRouter = Router();
@@ -13,6 +14,7 @@ apiRouter.use('/auth', authRouter);
 apiRouter.use('/users', adminMw, userRouter);
 apiRouter.use('/weather', weatherRouter);
 apiRouter.use('/parques', parquesRouter);
+apiRouter.use('/encargado', contactoRouter);
 
 // Export default
 export default apiRouter;

@@ -1,9 +1,11 @@
 import StatusCodes from 'http-status-codes';
 import { Router } from 'express';
 import { getParks } from '@services/park-service';
-import { getActivities } from '@services/activity-service';
 import { access } from 'fs/promises';
+import { getActivities } from '@services/activity-service';
+import { getEncargado, createEncargado, deleteEncargado } from '@services/contact-service';
 import { PrismaClient } from '@prisma/client'
+import { ParamMissingError } from '@shared/errors';
 import path from "path";
 
 // Constants
@@ -81,6 +83,7 @@ router.get('/activity', async (req, res) => {
     const activities = await getActivities();
     res.status(OK).json(activities);
 });
+
 
 // Export default
 export default router;

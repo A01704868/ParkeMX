@@ -31,7 +31,7 @@ router.get(p.get, async (req: Request, res: Response) => {
 
 router.post("/coordinates", async (req: Request, res: Response) => {
     const { latitude, longitude } = req.body;
-    console.log(req.body);
+
     if (!latitude || !longitude) {
         res.status(BAD_REQUEST).json({
             error: "Missing coordinates",
