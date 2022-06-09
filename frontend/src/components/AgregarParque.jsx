@@ -12,7 +12,7 @@ function AgregarParque() {
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
-    imagen: "cozumel-reef-parks.jpg",
+    imagen: "Bah_a_de_Loreto.jpg",
     direccion: "",
     latitud: 0.0,
     longitud: 0.0,
@@ -68,7 +68,7 @@ function AgregarParque() {
             <Form.Control
               required
               type="string"
-              placeholder="Ubicado en ..."
+              placeholder="notas"
               name="descripcion"
               value={formValues.descripcion}
               onChange={handleChange}

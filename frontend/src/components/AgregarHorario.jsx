@@ -77,15 +77,29 @@ function AgregarHorario() {
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>id parque</Form.Label>
-            <Form.Control
+            <Form.Label>Parque</Form.Label>
+            <Form.Select
+              aria-label="Default select example"
               required
               type="number"
-              placeholder="Esta ruta esta compuesta por..."
+              placeholder="Id del parque"
               name="parqueId"
               value={formValues.parqueId}
               onChange={handleChange}
-            />
+            >
+              <option>Parques</option>
+              <option value="1">Arrecifes de Cozumel</option>
+              <option value="2">
+                Alto Golfo de California y Delta del Río Colorado
+              </option>
+              <option value="3">Arrecife de Puerto Morelos</option>
+              <option value="4">Arrecife Alacranes</option>
+              <option value="5">El Cimatario</option>
+              <option value="6">Arrecifes de Sian Ka'an</option>
+              <option value="19">Cañon del Sumidero</option>
+              <option value="21">Cabo Pulmo</option>
+              <option value="22">Bahia de Loreto</option>
+            </Form.Select>
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
         </Row>
