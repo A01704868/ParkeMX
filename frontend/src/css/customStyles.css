@@ -17,6 +17,11 @@ h1{
     padding-bottom: 30px;
 }
 
+.w-bold {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .link {
   width: 70%;
   margin-left: auto;
