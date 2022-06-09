@@ -168,3 +168,105 @@ export async function deleteHorario(horarioId) {
     console.log(event);
   }
 }
+
+export async function saveFauna(fauna) {
+  console.log("ORE: ", fauna);
+  try {
+    const formData = new FormData();
+    console.log(fauna);
+
+    formData.append("nombre", fauna.nombre);
+    formData.append("descripcion", fauna.descripcion);
+    formData.append("imagen", fauna.image.name);
+    console.log("Buscando: ", fauna);
+    /*let response = await axios.post("http://localhost:4000/api/addparques", {
+      parkData,
+    });*/
+
+    let response = axios
+      .post("http://localhost:4000/api/addfauna", {
+        fauna: fauna,
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    /*const response = await axios({
+      url: `${baseUrl}"/addparques/`,
+      method: "POST",
+      data: parkData,
+    });*/
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
+export async function saveFlora(flora) {
+  console.log("ORE: ", flora);
+  try {
+    const formData = new FormData();
+    console.log(flora);
+
+    formData.append("nombre", flora.nombre);
+    formData.append("descripcion", flora.descripcion);
+    formData.append("imagen", flora.image.name);
+    console.log("Buscando: ", flora);
+    /*let response = await axios.post("http://localhost:4000/api/addparques", {
+      parkData,
+    });*/
+
+    let response = axios
+      .post("http://localhost:4000/api/addflora", {
+        flora: flora,
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    /*const response = await axios({
+      url: `${baseUrl}"/addparques/`,
+      method: "POST",
+      data: parkData,
+    });*/
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+export async function saveAnuncio(anuncio) {
+  console.log("ORE: ", anuncio);
+  try {
+    const formData = new FormData();
+    console.log(anuncio.parqueid);
+
+    formData.append("descripcion", anuncio.descripcion);
+    formData.append("parqueId", anuncio.parqueId);
+
+    let response = axios
+      .post("http://localhost:4000/api/addanuncio/", {
+        anuncio: anuncio,
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    //const response = await axios({
+    //url: `${baseUrl}"/addparques/`,
+    //method: "POST",
+    //data: parkData,
+    //});
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}

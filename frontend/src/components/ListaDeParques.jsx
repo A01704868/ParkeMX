@@ -71,18 +71,6 @@ const renderCard = (card) => {
         >
           Eliminar
         </Button>
-        <Button type="submit" href={"/agregarhorario"}>
-          Agregar Horario
-        </Button>
-
-        <Button
-          onClick={() => updateHandler(card.id)}
-          className="link"
-          variant="primary"
-          //href={"/editarparque"}
-        >
-          Editar
-        </Button>
       </Card>
     </Col>
   );

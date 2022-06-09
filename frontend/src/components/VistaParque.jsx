@@ -3,7 +3,7 @@ import Navbar from "./BarraNav";
 //import Anuncio from "./Anuncio";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
-import { Card, Button, Carousel, Container } from "react-bootstrap";
+import { Card, Button, Carousel, Container, Dropdown } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, ReactElement, useState } from "react";
 import axios from "axios";
@@ -111,13 +111,19 @@ function VistaParque() {
               <Card.Text>{parque.clicks}</Card.Text>
             </div>
           </Card.Body>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Agregar
+            </Dropdown.Toggle>
 
-          <Card.Body>
-            <Button className="mt-5" href={"/agregartarjetaderuta"}>
-              ¿Agregar Tarjeta de Ruta?
-            </Button>
-            <Button className="mt-5">¿CÓMO LLEGAR?</Button>
-          </Card.Body>
+            <Dropdown.Menu>
+              <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>
+              <Dropdown.Item href={"/agregarflora"}>Flora</Dropdown.Item>
+              <Dropdown.Item href={"/agregartarjetaderuta"}>
+                Tarjeta de Ruta
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Card>
       </Container>
 

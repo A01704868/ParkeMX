@@ -12,6 +12,9 @@ import deletecartasrutasRouter from './deletecardroutes-router';
 import editcartasrutasRouter from './editcardroute-router';
 import addhorarioRouter from './addhorario-router';
 import deletehorarioRouter from './deletehorario-router';
+import addfloraRouter from './addflora-router';
+import addfaunaRouter from './addfauna-router';
+import addanuncioRouter from './addanuncio-router';
 
 
 // Init
@@ -30,6 +33,9 @@ apiRouter.use('/', deletecartasrutasRouter);
 apiRouter.use('/', editcartasrutasRouter);
 apiRouter.use('/', addhorarioRouter);
 apiRouter.use('/', deletehorarioRouter);
+apiRouter.use('/', addfloraRouter);
+apiRouter.use('/', addfaunaRouter);
+apiRouter.use('/', addanuncioRouter);
 
 
 // Export default

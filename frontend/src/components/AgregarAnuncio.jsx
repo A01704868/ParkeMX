@@ -4,19 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 //import TimePicker from "react-bootstrap-time-picker";
 import BarraNav from "./BarraNav";
-import { saveHorario } from "../services/index";
+import { saveAnuncio } from "../services/index";
 
-function AgregarHorario() {
+function AgregarAnuncio() {
   const [validated, setValidated] = useState(false);
   const [formValues, setFormValues] = useState({
-    dias: "",
-    horaAbrir: "",
-    horaCerrar: "",
+    descripcion: "",
     parqueId: "",
   });
 
   const handleSubmit = (event) => {
-    saveHorario({ ...formValues });
+    saveAnuncio({ ...formValues });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -35,53 +33,26 @@ function AgregarHorario() {
     <div>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <h1 class="h1-form">Agregar Horario</h1>
+        <h1 class="h1-form">Agregar Anuncio</h1>
         <Row className="row justify-content-between">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Dias</Form.Label>
+            <Form.Label>Descripcion</Form.Label>
             <Form.Control
               required
               type="string"
-              placeholder="Lunes a Domingo"
-              name="dias"
-              value={formValues.dias}
+              placeholder="Esta ruta esta compuesta por..."
+              name="descripcion"
+              value={formValues.descripcion}
               onChange={handleChange}
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Hora de abrir</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="10:05"
-              name="horaAbrir"
-              value={formValues.horaAbrir}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-        <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Hora de Cerrar</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="20:00"
-              name="horaCerrar"
-              value={formValues.horaCerrar}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-
           <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>id parque</Form.Label>
             <Form.Control
               required
               type="number"
-              placeholder="Esta ruta esta compuesta por..."
+              placeholder="Id del parque"
               name="parqueId"
               value={formValues.parqueId}
               onChange={handleChange}
@@ -96,4 +67,4 @@ function AgregarHorario() {
   );
 }
 
-export default AgregarHorario;
+export default AgregarAnuncio;

@@ -7,6 +7,9 @@ import VistaParque from "./components/VistaParque";
 import AgregarCartaRuta from "./components/AgregarCartaRuta";
 import EditarParque from "./components/EditarParque";
 import AgregarHorario from "./components/AgregarHorario";
+import AgregarFauna from "./components/AgregarFauna";
+import AgregarFlora from "./components/AgregarFlora";
+import AgregarAnuncio from "./components/AgregarAnuncio";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="/parque/:id" element={<VistaParque />} />
           <Route path="/editarparque" element={<EditarParque />} />
           <Route path="/agregarhorario" element={<AgregarHorario />} />
+          <Route path="/agregarfauna" element={<AgregarFauna />} />
+          <Route path="/agregarflora" element={<AgregarFlora />} />
+          <Route path="/agregaranuncio" element={<AgregarAnuncio />} />
         </Routes>
       </BrowserRouter>
     </div>

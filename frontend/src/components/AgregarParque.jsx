@@ -12,7 +12,7 @@ function AgregarParque() {
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
-    imagen: "",
+    imagen: "cozumel-reef-parks.jpg",
     direccion: "",
     latitud: 0.0,
     longitud: 0.0,
