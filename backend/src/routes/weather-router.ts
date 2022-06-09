@@ -33,23 +33,19 @@ router.post("/coordinates", async (req: Request, res: Response) => {
     const { latitude, longitude } = req.body;
 
     if (!latitude || !longitude) {
-        res.status(BAD_REQUEST).json({
+        return res.status(BAD_REQUEST).json({
             error: "Missing coordinates",
             debug: { latitude, longitude }
         });
-
-        return;
     }
 
     try {
         const weatherForecast = await WeatherService.getWeatherByCoordinates(latitude, longitude);
         if (!weatherForecast) {
-            res.status(NOT_FOUND).json({
+            return res.status(NOT_FOUND).json({
                 error: "Couldn't retrieve weather data",
                 debug: { latitude, longitude }
             });
-
-            return;
         }
 
         res.status(OK).json(weatherForecast);
