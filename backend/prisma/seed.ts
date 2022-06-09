@@ -67,6 +67,8 @@ async function main() {
         ]
     });
 
+    
+
     const estadoParqueSeeder = db.estadoParque.createMany({
         data: [
             {parqueId: 1, estadoId: 25, assignedBy: "Seeder"},

@@ -5,14 +5,14 @@ import { useState, useRef } from "react";
 import BarraNav from "./BarraNav";
 import { savePark } from "../services/index";
 
-function AgregarParque() {
+function EditarParque() {
   //Validar
   const [validated, setValidated] = useState(false);
   //Axios
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
-    imagen: "cozumel-reef-parks.jpg",
+    imagen: "",
     direccion: "",
     latitud: 0.0,
     longitud: 0.0,
@@ -49,7 +49,7 @@ function AgregarParque() {
     <div>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <h1 class="h1-form">Agregar Nuevo Parque</h1>
+        <h1 class="h1-form">Editar Parque</h1>
         <Row className="row justify-content-between">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>Nombre del Parque</Form.Label>
@@ -172,4 +172,4 @@ function AgregarParque() {
   );
 }
 
-export default AgregarParque;
+export default EditarParque;

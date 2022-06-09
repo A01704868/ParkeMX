@@ -84,6 +84,22 @@ router.get('/activity', async (req, res) => {
     res.status(OK).json(activities);
 });
 
+/*router.get('/horario', async (req, res) => {
+    const horarios = await getHorario();
+    res.status(OK).json(horarios);
+});
+*/
+
+/*
+router.get('/activityParque', async (req, res) => {
+    const activityPark = await getActivityParque();
+    res.status(OK).json(activityPark);
+});
+*/
+
+
+
+
 
 // Export default
 export default router;
