@@ -69,9 +69,25 @@ function ListaDeParques(){
     const [searchTerm, setSearch] = useState("");
     const [activityButton, setActivityButton] = useState([]);
     const [searchActivity, setSearchActivity] = useState(0);
+    const [calcDistance, setCalcDistance] = useState(false);
+    const [latitud, setLatitud] = useState(0);
+    const [longitud, setLongitud] = useState(0);
     //investigate reducer in react manual
 
     useEffect(() => {
+
+        function getPosition(position){
+            //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
+    
+            setLatitud(position.coords.latitude);
+            setLongitud(position.coords.longitude);
+        }
+
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(getPosition)
+        }else{
+            console.log("geolocation not available");
+        }
 
         const getData = () => {
             let promise1 = axios.get("http://localhost:4000/api/parques");
@@ -85,6 +101,8 @@ function ListaDeParques(){
 
         getData();
 
+        parques.forEach(parque => parque.superficieMarina = distance(latitud, longitud, parque.latitud, parque.longitud));
+
     }, []);
 
     const cardOrder = () => {
@@ -97,6 +115,25 @@ function ListaDeParques(){
         }
         setParques(reverse(parques));
 
+    }
+
+    //Haversine algorithm
+    function distance(lat1, lon1, lat2, lon2) {
+        var p = 0.017453292519943295;    // Math.PI / 180
+        var c = Math.cos;
+        var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+                c(lat1 * p) * c(lat2 * p) * 
+                (1 - c((lon2 - lon1) * p))/2;
+      
+        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+      }
+      
+    function toggleDistance(){
+        if(calcDistance === true){
+            setCalcDistance(false);
+        }else {
+            setCalcDistance(true);
+        }
     }
 
     return(
@@ -126,6 +163,9 @@ function ListaDeParques(){
                         <ion-icon name={icon}></ion-icon>
                     </span>
                 </button>
+                </Col>
+                <Col>
+                <Button variant="primary" onClick={toggleDistance}>Sortear por el mas cerca a mi</Button>
                 </Col>
                 <Col>
 
@@ -162,6 +202,18 @@ function ListaDeParques(){
 
                     if(searchTerm !== ""){
                         result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
+                    }
+                    if(calcDistance !== false){
+                        parques.sort((parque1, parque2)=>{
+                            if(parque1.superficieMarina > parque2.superficieMarina){
+                                return 1;
+                            }
+                            if(parque1.superficieMarina < parque2.superficieMarina){
+                                return -1;
+                            }
+                
+                            return 0;
+                        });
                     }
                     // eslint-disable-next-line
                     if(searchActivity != 0){

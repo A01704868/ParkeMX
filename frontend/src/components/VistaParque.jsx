@@ -72,7 +72,8 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
 
   return(
     <div>
-      <Navbar />
+
+      <Navbar/>
 
       <Carousel>
         <Carousel.Item className="carousel-hero">
@@ -120,7 +121,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
       </Container>
 
       {
-       anuncios.map(e=> <Anuncio descripcion={e.descripcion} />)
+       anuncios.map(e=> <Anuncio descripcion={e.descripcion} titulo={e.titulo} variante={e.variante} />)
       }
 
       <div className="activities container-wide">

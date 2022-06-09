@@ -164,10 +164,10 @@ async function main() {
 
     const anuncioSeeder = db.anuncio.createMany({
         data: [
-            { id: 1, descripcion: "Tormenta se aproxima", parqueId: 6},
-            { id: 2, descripcion: "Temporada de Huracanes empieza en una semana", parqueId: 3},
-            { id: 3, descripcion: "Lluvias pesadas este fin de semana", parqueId: 2},
-            { id: 4, descripcion: "Hola soy un anuncio!!", parqueId: 6},
+            { id: 1, titulo: "Alerta: El parque esta cerrado por lluvias pesadas", descripcion: "Gracias a una tormenta que se aproxima por el mar Pacifico, con designacion Mariana, El parque no se va a abrir por los siguientes 3 dias", variante: "danger", parqueId: 6},
+            { id: 2, titulo: "Advertensia: Temporada de Huracanes empieza en una semana", descripcion: "Resta una semana para visitar el parque hasta que se cierre indefinidamente", variante:"warning", parqueId: 3},
+            { id: 3, titulo: "Annuncio: Inauguración de instalación esta semana", descripcion: "la inauguración de la nueva instalación de alquiler de bicicletas será esta semana. Si quieres ir su inauguracion sera este jueves a las 15:00 horas", variante: "success", parqueId: 2},
+            { id: 4, titulo: "Advertencia: Hay una infestación de chinches", descripcion: "A principios de la temporada se encontraron chinches en la zona sur del parque. Quien sea que visite el sitio por favor tenga en cuenta esta informacion", variante: "warning", parqueId: 6},
         ]
     });
 
