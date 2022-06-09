@@ -26,18 +26,16 @@ export async function createEncargado(encargado: encargadoParque) {
 }
 
 export async function updateEncargado(encargado: encargadoParque) {
-  const { id, nombre, telefono, parqueId } = encargado;
+  const { id, nombre, telefono } = encargado;
 
   const updateEncargado: encargadoParque = await prisma.encargadoParque.update({
-    where: {
-      id: id,
-    },
+    where: { id: id },
     data: {
       nombre: nombre,
-      telefono: telefono,
-      parqueId: parqueId,
+      telefono: telefono
     },
   });
+
   return updateEncargado;
 }
 

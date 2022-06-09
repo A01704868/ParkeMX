@@ -78,6 +78,11 @@ app.get('/signon', (_: Request, res: Response) => {
     res.sendFile('signon.html', {root: viewsDir});
 });
 
+const assetsDir = path.join(__dirname, 'assets');
+app.get('/banner.jpg', (_: Request, res: Response) => {
+    res.sendFile('login.jpg', {root: assetsDir});
+});
+
 // Redirect to login if not logged in.
 app.get('/users', (req: Request, res: Response) => {
     const jwt = req.signedCookies[cookieProps.key];

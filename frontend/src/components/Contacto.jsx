@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Alert, Table, Modal, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
+import ContactoEditar from "./ContactoEditar";
 
-// const props = { id, nombre, telefono }
-// const { id, nombre, telefono } = props;
 const contactoUrl = "http://localhost:4000/api/encargado";
 
 const Contacto = ({ id }) => {
@@ -17,6 +16,8 @@ const Contacto = ({ id }) => {
   });
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editIsOpen, setEditIsOpen] = useState(false);
+  const [contactoWasUpdated, setContactoWasUpdated] = useState(false);
 
   useEffect(() => {
     const getContacto = () => {
@@ -35,13 +36,11 @@ const Contacto = ({ id }) => {
     };
 
     getContacto();
-  }, [id]);
+  }, [id, contactoWasUpdated]);
 
   if (id === null || id === undefined) {
     return <Alert variant="danger">No hay información disponible</Alert>;
   }
-
-  console.log(id);
 
   const onDelete = () => {
     setIsDialogOpen(false);
@@ -53,6 +52,11 @@ const Contacto = ({ id }) => {
     });
   };
 
+  const onFormClose = () => {
+    setEditIsOpen(false);
+    setContactoWasUpdated(!contactoWasUpdated);
+  };
+
   return (
     <>
       <h2>Contacto</h2>
@@ -62,6 +66,7 @@ const Contacto = ({ id }) => {
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Borrar</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -76,6 +81,13 @@ const Contacto = ({ id }) => {
                 onClick={() => setIsDialogOpen(true)}
               />
             </td>
+            <td>
+              <Icon.PencilFill
+                title="Editar Contacto"
+                style={{ cursor: "pointer" }}
+                onClick={() => setEditIsOpen(true)}
+              />
+            </td>
           </tr>
         </tbody>
       </Table>
@@ -84,6 +96,11 @@ const Contacto = ({ id }) => {
         isOpen={isDialogOpen}
         onCancel={() => setIsDialogOpen(false)}
         onDelete={onDelete}
+      />
+      <ContactoEditar
+        idContacto={contactoData.id}
+        mostrarForma={editIsOpen}
+        onClose={onFormClose}
       />
     </>
   );

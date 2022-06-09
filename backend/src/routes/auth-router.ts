@@ -56,7 +56,6 @@ router.post(p.login, async (req: Request, res: Response) => {
 router.post(p.signon, async (req: Request, res: Response) => {
     // Check user data present
     const { name, email, password, role } = req.body;
-
     if (!name || !email || !password || !role) {
         throw new ParamMissingError();
     }

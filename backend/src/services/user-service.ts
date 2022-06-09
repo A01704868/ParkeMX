@@ -77,13 +77,11 @@ export async function addOne(user: IUser): Promise<IUser | null> {
 export async function updateOne(user: IUser): Promise<void> {
   const dbUser = await db.usuario.findFirst({ where: { id: user.id } });
   if (dbUser) {
-    const encryptedPwd = await bcrypt.hash(user.password, 10);
     await db.usuario.update({
       where: { id: user.id },
       data: {
         nombre: user.name,
         email: user.email,
-        password: encryptedPwd,
         role: user.role === UserRoles.Admin ? Role.ADMIN : Role.USER,
       },
     });

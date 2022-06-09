@@ -1,13 +1,11 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response, Router } from 'express';
 import { getEncargado, createEncargado, deleteEncargado, updateEncargado } from '@services/contact-service';
-import { PrismaClient } from '@prisma/client'
 import { ParamMissingError } from '@shared/errors';
 
 // Constants
 const router = Router();
-const prisma = new PrismaClient();
-const { CREATED, OK, BAD_REQUEST, NOT_FOUND } = StatusCodes;
+const { OK, NOT_FOUND } = StatusCodes;
 
 // Paths
 export const p = {
@@ -44,14 +42,17 @@ router.post(p.add, async (req: Request, res: Response) => {
 router.put(p.update, async (req: Request, res: Response) => {
 
     const { encargado } = req.body ?? {};
-
+    console.log(encargado)
     if(!encargado) {
         throw new ParamMissingError();
     }
 
     const editEncargado = await updateEncargado(encargado);
+    if (!editEncargado) {
+        return res.status(NOT_FOUND).json({ error: `No hay un encargado con id: ${encargado.id}` })
+    }
+
     return res.status(OK).json(editEncargado);
-    
 });
 
 
