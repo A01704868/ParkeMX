@@ -8,9 +8,11 @@ const router = Router();
 const { OK } = StatusCodes;
 
 router.post('/addcartaruta',async (req:Request, res: Response) => {
-    const { cartaRuta } = req.body ?? {};
+    console.log('VALOR:',req.body);
+    const { cartaruta } = req.body ?? {};
+    console.log('NEXT:',cartaruta);
     
-    const cartarutas = await postCarts(cartaRuta);
+    const cartarutas = await postCarts(cartaruta);
     res.status(OK).json(cartarutas);
     
 });

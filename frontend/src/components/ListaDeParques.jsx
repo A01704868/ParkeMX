@@ -15,6 +15,9 @@ import {
   FormControl,
 } from "react-bootstrap";
 
+import { deletePark } from "../services/index";
+import { updatePark } from "../services/index";
+
 const reverse = (arr1) => {
   const aux = [];
 
@@ -53,10 +56,32 @@ const renderCard = (card) => {
         <Button className="link" variant="primary" href={"/parque/" + card.id}>
           Mas Informacion
         </Button>
+        <Button
+          className="link"
+          variant="primary"
+          onClick={() => deleteHandler(card.id)}
+        >
+          Eliminar
+        </Button>
+        <Button
+          onClick={() => updateHandler(card.id)}
+          className="link"
+          variant="primary"
+          //href={"/editarparque"}
+        >
+          Editar
+        </Button>
       </Card>
     </Col>
   );
 };
+
+function updateHandler(id) {
+  updatePark(id);
+}
+function deleteHandler(id) {
+  deletePark(id);
+}
 
 const renderDropdown = (activity) => {
   return (

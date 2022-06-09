@@ -1,9 +1,9 @@
-import React from 'react';
-import Navbar from './BarraNav';
-import Anuncio from './Anuncio';
-import "../css/styles.css"
-import { useParams } from 'react-router-dom';
-import { Card, Button, Carousel, Container} from 'react-bootstrap';
+import React from "react";
+import Navbar from "./BarraNav";
+//import Anuncio from "./Anuncio";
+import "../css/styles.css";
+import { useParams } from "react-router-dom";
+import { Card, Button, Carousel, Container } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, ReactElement, useState } from "react";
 import axios from "axios";
@@ -20,10 +20,10 @@ function MyMapComponent({
   width,
   height,
 }: {
-  center: google.maps.LatLngLiteral;
-  zoom: number;
-  width: 100;
-  height: 100;
+  center: google.maps.LatLngLiteral,
+  zoom: number,
+  width: 100,
+  height: 100,
 }) {
   const ref = useRef();
 
@@ -38,81 +38,87 @@ function MyMapComponent({
 }
 
 function VistaParque() {
-
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [parque, setParque] = useState([]);
 
   useEffect(() => {
-
     const getData = () => {
-        let promise1 = axios.get("http://localhost:4000/api/parques/parque/"+id);
+      let promise1 = axios.get(
+        "http://localhost:4000/api/parques/parque/" + id
+      );
 
-        Promise.all([promise1])
-        .then(values => {setParque(values[0].data);})
-        .catch(e=>console.log(e))
-    }
+      Promise.all([promise1])
+        .then((values) => {
+          setParque(values[0].data);
+        })
+        .catch((e) => console.log(e));
+    };
 
     getData();
-
-}, []);
+  }, []);
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
 
-  return(
+  return (
     <div>
       <Navbar />
 
       <Carousel>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          <img
+            className="d-block w-100"
+            src={require("../assets/header-placeholder.jpeg")}
+            alt="First slide"
+          />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          <img
+            className="d-block w-100"
+            src={require("../assets/header-placeholder.jpeg")}
+            alt="First slide"
+          />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
 
       <Container className="row-hero">
-      <Card style={{ width: '100%' }}>
+        <Card style={{ width: "100%" }}>
+          <Wrapper
+            apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA"
+            render={render}
+          >
+            <MyMapComponent center={center} zoom={zoom} height={height} />
+          </Wrapper>
+          <Card.Body className="row-info-card">
+            <div className="col-3">
+              <Card.Title>HORARIO</Card.Title>
+              <Card.Text>Lunes a Domingo: 9:00 a 18:00</Card.Text>
+            </div>
+            <div className="col-3">
+              <Card.Title>UBICACIÓN</Card.Title>
+              <Card.Text>Calle Ejemplo 123, Ejemplo, Ej</Card.Text>
+            </div>
+            <div className="col-3">
+              <Card.Title>ESTACIONAMIENTO</Card.Title>
+              <Card.Text>{parque.clicks}</Card.Text>
+            </div>
+          </Card.Body>
 
-      <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
-        <MyMapComponent center={center} zoom={zoom} height={height}/>
-      </Wrapper>
-        <Card.Body className="row-info-card">
-        <div className="col-3">
-          <Card.Title>HORARIO</Card.Title>
-          <Card.Text>
-            Lunes a Domingo: 9:00 a 18:00
-          </Card.Text>
-        </div>
-        <div className="col-3">
-          <Card.Title>UBICACIÓN</Card.Title>
-          <Card.Text>
-            Calle Ejemplo 123, Ejemplo, Ej
-          </Card.Text>
-        </div>
-        <div className="col-3">
-          <Card.Title>ESTACIONAMIENTO</Card.Title>
-          <Card.Text>
-            {parque.clicks}
-          </Card.Text>
-        </div>
-        </Card.Body>
-
-        <Card.Body>
-          <Button className="mt-5">¿CÓMO LLEGAR?</Button>
-        </Card.Body>
-      </Card>
+          <Card.Body>
+            <Button className="mt-5" href={"/agregartarjetaderuta"}>
+              ¿Agregar Tarjeta de Ruta?
+            </Button>
+            <Button className="mt-5">¿CÓMO LLEGAR?</Button>
+          </Card.Body>
+        </Card>
       </Container>
 
       <div className="activities container-wide">
@@ -125,7 +131,10 @@ function VistaParque() {
             <p>Bicicleta</p>
           </div>
           <div className="col-6 pt-5">
-            <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="Imagen no disponible"
+            <img
+              className="d-block w-100"
+              src={require("../assets/header-placeholder.jpeg")}
+              alt="Imagen no disponible"
             />
           </div>
         </div>
@@ -135,17 +144,23 @@ function VistaParque() {
         <h1 className="mb-3"> FLORA Y FAUNA </h1>
         <Carousel className="car-center">
           <Carousel.Item className="carousel-img">
-            <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
-          />
+            <img
+              className="d-block w-100"
+              src={require("../assets/header-placeholder.jpeg")}
+              alt="First slide"
+            />
           </Carousel.Item>
           <Carousel.Item className="carousel-img">
-            <img className="d-block w-100" src={require('../assets/header-placeholder.jpeg')} alt="First slide"
-          />
+            <img
+              className="d-block w-100"
+              src={require("../assets/header-placeholder.jpeg")}
+              alt="First slide"
+            />
           </Carousel.Item>
         </Carousel>
       </div>
     </div>
-  )
-};
+  );
+}
 
 export default VistaParque;

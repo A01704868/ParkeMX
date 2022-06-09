@@ -7,9 +7,8 @@ const prisma = new PrismaClient();
 
 export async function postParks(parque: Parque): Promise<Parque> {
     //Crear un registro
-
+    console.log('EX: ',parque);
     const { 
-        id,
         nombre,
         descripcion,
         imagen,
@@ -26,20 +25,21 @@ export async function postParks(parque: Parque): Promise<Parque> {
     const newParque: Parque =
      await prisma.parque.create({
         data: {
-            id: 108,
-            nombre:  nombre,
-            descripcion: descripcion,
-            imagen: imagen,
-            direccion: direccion,
-            latitud: latitud,
-            longitud: longitud,
-            fechaDecreto: fechaDecreto,
-            superficieTerrestre: superficieTerrestre,
-            superficieMarina: superficieMarina,
+            nombre:  parque.nombre,
+            descripcion: parque.descripcion,
+            imagen: parque.imagen,
+            direccion: parque.direccion,
+            latitud: +parque.latitud,
+            longitud: +parque.longitud,
+            fechaDecreto: parque.fechaDecreto,
+            superficieTerrestre: +parque.superficieTerrestre,
+            superficieMarina: +parque.superficieMarina,
             clicks: 0,
             
         },
     });
+
+    console.log('PRISMA: ', newParque);
     return newParque;
 }
 

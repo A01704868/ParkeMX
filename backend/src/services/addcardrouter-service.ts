@@ -3,23 +3,26 @@ import { CartaRuta } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function postCarts(cartaruta: CartaRuta): Promise<CartaRuta> {
-
+export async function postCarts(cartaRuta: CartaRuta): Promise<CartaRuta> {
+    console.log('EX: ',cartaRuta);
     const{
-        id,
+        
         nombre,
         descripcion,
         parqueId,
-    } = cartaruta;
+    } = cartaRuta;
 
 const newCarta: CartaRuta = 
 await prisma.cartaRuta.create({
 
     data: {
-        id: 2,
-        nombre: nombre,
-        descripcion: descripcion,
-        parqueId: parqueId,
+        nombre: cartaRuta.nombre,
+        descripcion: cartaRuta.descripcion,
+        parque: {
+            connect: {
+                id: +cartaRuta.parqueId,
+            }
+        },
     },
 
 });

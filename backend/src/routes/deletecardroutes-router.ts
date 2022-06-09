@@ -9,12 +9,13 @@ const { OK } = StatusCodes;
 
 router.delete('/deletecartaruta/:id',async (req:Request, res:Response) => {
     
-    let id = parseInt(req.params.id);
+    console.log("REQ: ",req);
+    let id = parseInt(req.body.id);
 
     if (!id) {
         throw new ParamMissingError();
     }
-    console.log(req);
+    
     
 
     const deletecartaruta = await deleteCarts (id);
