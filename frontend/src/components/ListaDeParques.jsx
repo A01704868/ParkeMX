@@ -202,31 +202,33 @@ function ListaDeParques() {
       </Container>
 
       <Row className="m-5 g-4">
-        {// eslint-disable-next-line
-        parques
-          .filter((parque) => {
-            let result = true;
+        {
+          // eslint-disable-next-line
+          parques
+            .filter((parque) => {
+              let result = true;
 
-            if (searchTerm !== "") {
-              result =
-                result &&
-                parque.nombre
-                  .toLowerCase()
-                  .includes(searchTerm.toString().toLowerCase());
-            }
-            // eslint-disable-next-line
-            if (searchActivity != 0) {
-              let index = parque.actividades.findIndex((activity) => {
-                // eslint-disable-next-line
-                return activity.actividadId == searchActivity;
-              });
+              if (searchTerm !== "") {
+                result =
+                  result &&
+                  parque.nombre
+                    .toLowerCase()
+                    .includes(searchTerm.toString().toLowerCase());
+              }
+              // eslint-disable-next-line
+              if (searchActivity != 0) {
+                let index = parque.actividades.findIndex((activity) => {
+                  // eslint-disable-next-line
+                  return activity.actividadId == searchActivity;
+                });
 
-              result = result && index !== -1;
-            }
+                result = result && index !== -1;
+              }
 
-            return result;
-          })
-          .map(renderCard)}
+              return result;
+            })
+            .map(renderCard)
+        }
       </Row>
       <Button type="submit" href={"/agregar"}>
         Agregar
