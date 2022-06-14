@@ -3,8 +3,8 @@ import Navbar from "./BarraNav";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
 import "../css/styles.css";
-import { useParams } from "react-router-dom";
-import { Card, Button, Carousel, Container } from "react-bootstrap";
+//import { useParams } from "react-router-dom";
+//import { Card, Button, Carousel, Container } from "react-bootstrap";
 //import Anuncio from "./Anuncio";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
@@ -122,8 +122,12 @@ function VistaParque() {
         </Card>
       </Container>
 
-      <Weather style={{padding: "1rem"}} latitude={parque.latitud} longitude={parque.longitud} />
-      <Contacto style={{padding: "1rem"}} id={1} />
+      <Weather
+        style={{ padding: "1rem" }}
+        latitude={parque.latitud}
+        longitude={parque.longitud}
+      />
+      <Contacto style={{ padding: "1rem" }} id={1} />
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>
