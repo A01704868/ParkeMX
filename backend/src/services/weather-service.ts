@@ -1,52 +1,10 @@
 import { NotImplementedError } from "@shared/errors";
+import { IWeatherError, IWeatherSummary, IWeatherForecast  } from "@models/weather-model";
 import axios from "axios";
 
 // Retrieve the Api Key from OS env
 const apiKey = process.env.OPEN_WEATHER_KEY ?? "100b0c6b01aa6013056da0f7e9ca023c"
 
-export interface IWeatherError {
-    error: string
-    debug: any
-}
-
-/**
- * Interface to describe the weather response from OpenWeatherMap's API
- */
-interface IWeatherSummary {
-    coord: { lon: number, lat: number },
-    weather: [
-      { id: number, main: string, description: string, icon: string }
-    ],
-    base: number,
-    main: {
-      temp: number,
-      feels_like: number,
-      temp_min: number,
-      temp_max: number,
-      pressure: number,
-      humidity: number,
-      sea_level: number,
-      grnd_level: number
-    },
-    visibility: number,
-    wind: { speed: number, deg: number, gust: number },
-    clouds: { all: number },
-    dt: number,
-    sys: { country: string, sunrise: number, sunset: number },
-    timezone: number,
-    id: number,
-    name: string,
-    cod: number
-}
-
-export interface IWeatherForecast {
-    temp: number
-    humidity: number
-    pressure: number
-    description: string
-    weathercode: number
-    rain: string
-}
 
 export default class WeatherService {
 
@@ -58,7 +16,43 @@ export default class WeatherService {
     private static readonly WEATHER_LANG = "es";
 
     public static async getWeatherByCoordinates(latitude: number, longitude: number) {
-        throw new NotImplementedError();
+        if (!latitude || !longitude) {
+            return <IWeatherError> {
+                debug: { latitude, longitude },
+                error: "Unable to retrieve forecast, missing parameters"
+            };
+        }
+
+        try {
+            const response = await axios.request({
+                baseURL: this.BASE_URL,
+                url: this.WEATHER_ENDPOINT,
+                method: 'get',
+                params: {
+                    lang: this.WEATHER_LANG,
+                    units: this.WEATHER_UNITS,
+                    appid: apiKey,
+                    lat: latitude,
+                    lon: longitude
+                }
+            })
+
+            const summary: IWeatherSummary = await response.data;
+            return <IWeatherForecast> {
+                temp: summary.main.temp,
+                description: summary.weather[0].description,
+                humidity: summary.main.humidity,
+                pressure: summary.main.pressure,
+                name: summary.name,
+                wind: summary.wind
+            };
+
+        } catch (error) {
+            return <IWeatherError>{
+                debug: error.message,
+                error: `Unable to retrieve forecast for coordinates: lat: ${latitude} - lon: ${longitude}`
+            }
+        }
     }
 
     /**

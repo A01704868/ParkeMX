@@ -1,17 +1,20 @@
 import authService from '@services/auth-service';
+import userService from "@services/user-service";
 import { ParamMissingError } from '@shared/errors';
 import { Request, Response, Router } from 'express';
 import StatusCodes from 'http-status-codes';
+import { IUser, UserRoles } from "@models/user-model";
 
 
 // Constants
 const router = Router();
-const { OK } = StatusCodes;
+const { OK, CREATED } = StatusCodes;
 
 // Paths
 export const p = {
     login: '/login',
     logout: '/logout',
+    signon: '/signon'
 } as const;
 
 // Cookie Properties
@@ -45,6 +48,33 @@ router.post(p.login, async (req: Request, res: Response) => {
     res.cookie(key, jwt, options);
     // Return
     return res.status(OK).end();
+});
+
+/**
+ * Create a new user account
+ */
+router.post(p.signon, async (req: Request, res: Response) => {
+    // Check user data present
+    const { name, email, password, role } = req.body;
+    if (!name || !email || !password || !role) {
+        throw new ParamMissingError();
+    }
+    const user: IUser = {
+        name: name,
+        email: email,
+        password: password,
+        role: role === 1 ? UserRoles.Admin : UserRoles.User
+    };
+
+    await userService.addOne(user);
+
+    // Get jwt
+    const jwt = await authService.login(user.email, user.password);
+    // Add jwt to cookie
+    const { key, options } = cookieProps;
+    res.cookie(key, jwt, options);
+    // Return
+    return res.status(CREATED).end();
 });
 
 

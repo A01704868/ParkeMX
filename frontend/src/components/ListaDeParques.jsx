@@ -1,63 +1,101 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BarraNav from './BarraNav';
-import carousel from './Carousel';
-import "../css/customStyles.css"
-import { Dropdown, Card, Row, Col, Carousel, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
+import BarraNav from "./BarraNav";
+import carousel from "./Carousel";
+import "../css/customStyles.css";
+import {
+  Dropdown,
+  Card,
+  Row,
+  Col,
+  Carousel,
+  Button,
+  Container,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
+import { deletePark } from "../services/index";
+import { deleteHorario } from "../services/index";
+// import { updatePark } from "../services/index";
 
 const reverse = (arr1) => {
+  const aux = [];
 
-    const aux = [];
+  for (let i = 0; i < arr1.length; i++) {
+    aux.unshift(arr1[i]);
+  }
 
-    for(let i = 0; i<arr1.length;i++){
-        aux.unshift(arr1[i]);
-    }
-
-    return aux;
-}
+  return aux;
+};
 
 const renderAbrir = (horario) => {
-    return (
-        <Container key = {horario.id}>
-            <Card.Text>
-            {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
-            </Card.Text>
-        </Container>
-    );
-}
+  return (
+    <Container key={horario.id}>
+      <Card.Text>
+        {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
+      </Card.Text>
+      <Button
+        className="link"
+        variant="warning"
+        onClick={() => deletehHandler(horario.id)}
+      >
+        Eliminar
+      </Button>
+    </Container>
+  );
+};
 
 const renderCard = (card) => {
-    const url = "http://localhost:4000/api/parques/img/"+card.id;
+  const url = "http://localhost:4000/api/parques/img/" + card.id;
 
-    return(
-        <Col key = {card.id}>
-            <Card style={{ width: '22rem', height: '100%'}}>
-                <Card.Body>
-                    <Card.Title>{card.nombre}</Card.Title>
-                    <Card.Img src={url} className="cardImage mb-3" style={{ height: '25rem'}}/>
-                    <Card.Text className="w-bold">Direccion</Card.Text>
-                    <Card.Text>
-                    {card.direccion}
-                    </Card.Text>
-                    <Card.Text className="w-bold">Horarios</Card.Text>
-                    {card.horario.map(renderAbrir)}
-                </Card.Body>
-                <Button className="link" variant="primary" href={"/parque/"+card.id}>Mas Informacion</Button>
-            </Card>
-        </Col>
-    );
+  return (
+    <Col key={card.id}>
+      <Card style={{ width: "22rem", height: "100%" }}>
+        <Card.Body>
+          <Card.Title>{card.nombre}</Card.Title>
+          <Card.Img src={url} className="cardImage" />
+          <Card.Text>{card.descripcion}</Card.Text>
+          Direccion
+          <Card.Text>{card.direccion}</Card.Text>
+          Horarios
+          {card.horario.map(renderAbrir)}
+        </Card.Body>
+        <Button className="link" variant="primary" href={"/parque/" + card.id}>
+          Mas Informacion
+        </Button>
+        <Button
+          className="link"
+          variant="danger"
+          onClick={() => deleteHandler(card.id)}
+        >
+          Eliminar
+        </Button>
+      </Card>
+    </Col>
+  );
+};
+
+// function updateHandler(id) {
+//   updatePark(id);
+// }
+function deleteHandler(id) {
+  deletePark(id);
+}
+function deletehHandler(id) {
+  deleteHorario(id);
 }
 
 const renderDropdown = (activity) => {
+  return (
+    <Dropdown.Item eventKey={activity.id} key={activity.id} href="#/action-1">
+      {activity.nombre}
+    </Dropdown.Item>
+  );
+};
 
-    return(
-        <Dropdown.Item eventKey={activity.id} key={activity.id} href="#/action-1">{activity.nombre}</Dropdown.Item>
-    );
-}
-
+let color = 'info';
 let icon = "caret-down-outline";
-
 let toggle = 0;
 
 function ListaDeParques(){
@@ -99,7 +137,7 @@ function ListaDeParques(){
         getData();
 
         parques.forEach(parque => parque.superficieMarina = distance(latitud, longitud, parque.latitud, parque.longitud));
-
+// eslint-disable-next-line
     }, []);
 
     const cardOrder = () => {
@@ -128,8 +166,10 @@ function ListaDeParques(){
     function toggleDistance(){
         if(calcDistance === true){
             setCalcDistance(false);
+            color = 'info';
         }else {
             setCalcDistance(true);
+            color = 'secondary';
         }
     }
 
@@ -162,7 +202,7 @@ function ListaDeParques(){
                 </button>
                 </Col>
                 <Col>
-                <Button variant="primary" onClick={toggleDistance}>Palanca: Sortear por distancia a mi</Button>
+                <Button variant={color} onClick={toggleDistance}>Palanca: Sortear por distancia a mi</Button>
                 </Col>
                 <Col>
 
@@ -226,7 +266,9 @@ function ListaDeParques(){
 
                 }).map(renderCard)}
             </Row>
-
+            <Button type="submit" variant="success" href={"/agregar"}>
+              Agregar
+            </Button>
         </div>
     );
 }

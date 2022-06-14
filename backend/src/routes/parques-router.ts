@@ -1,9 +1,11 @@
 import StatusCodes from 'http-status-codes';
 import { Router } from 'express';
 import { getParks } from '@services/park-service';
-import { getActivities } from '@services/activity-service';
 import { access } from 'fs/promises';
+import { getActivities } from '@services/activity-service';
+import { getEncargado, createEncargado, deleteEncargado } from '@services/contact-service';
 import { PrismaClient } from '@prisma/client'
+import { ParamMissingError } from '@shared/errors';
 import path from "path";
 
 // Constants
@@ -104,6 +106,22 @@ router.post('/anuncio', async (req,res) => {
     const result = await postAnuncio(titulo, descripcion, variante, parseInt(parqueId));
     res.status(OK).json(result);
 });
+/*router.get('/horario', async (req, res) => {
+    const horarios = await getHorario();
+    res.status(OK).json(horarios);
+});
+*/
+
+/*
+router.get('/activityParque', async (req, res) => {
+    const activityPark = await getActivityParque();
+    res.status(OK).json(activityPark);
+});
+*/
+
+
+
+
 
 // Export default
 export default router;

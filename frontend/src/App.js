@@ -5,18 +5,30 @@ import ListaDeParques from "./components/ListaDeParques";
 import AgregarParque from "./components/AgregarParque";
 import VistaParque from "./components/VistaParque";
 import CrearAnuncio from "./components/CrearAnuncio";
+import AgregarCartaRuta from "./components/AgregarCartaRuta";
+import EditarParque from "./components/EditarParque";
+import AgregarHorario from "./components/AgregarHorario";
+import AgregarFauna from "./components/AgregarFauna";
+import AgregarFlora from "./components/AgregarFlora";
+import AgregarAnuncio from "./components/AgregarAnuncio";
 
 function App() {
   return (
     <div className="App">
-     <BrowserRouter>
-     <Routes>
-      <Route path="/" element={<ListaDeParques />} />
-      <Route path="/agregar" element={<AgregarParque />} />
-      <Route path="/parque/:id" element={<VistaParque />} />
-      <Route path="/anuncio" element={<CrearAnuncio />} />
-    </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListaDeParques />} />
+          <Route path="/agregar" element={<AgregarParque />} />
+          <Route path="/agregartarjetaderuta" element={<AgregarCartaRuta />} />
+          <Route path="/parque/:id" element={<VistaParque />} />
+          <Route path="/anuncio" element={<CrearAnuncio />} />
+          <Route path="/editarparque" element={<EditarParque />} />
+          <Route path="/agregarhorario" element={<AgregarHorario />} />
+          <Route path="/agregarfauna" element={<AgregarFauna />} />
+          <Route path="/agregarflora" element={<AgregarFlora />} />
+          <Route path="/agregaranuncio" element={<AgregarAnuncio />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

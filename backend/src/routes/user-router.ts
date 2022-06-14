@@ -25,7 +25,7 @@ export const p = {
  */
 router.get(p.get, async (_: Request, res: Response) => {
     const users = await userService.getAll();
-    return res.status(OK).json({users});
+    return res.status(OK).json({ users });
 });
 
 
@@ -40,7 +40,7 @@ router.post(p.add, async (req: Request, res: Response) => {
     }
     // Fetch data
     await userService.addOne(user);
-    return res.status(CREATED).end();
+    return res.status(CREATED).json({ user });
 });
 
 
@@ -69,7 +69,7 @@ router.delete(p.delete, async (req: Request, res: Response) => {
         throw new ParamMissingError();
     }
     // Fetch data
-    await userService.delete(Number(id));
+    await userService.deleteOne(Number(id));
     return res.status(OK).end();
 });
 

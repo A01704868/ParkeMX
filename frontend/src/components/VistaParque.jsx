@@ -1,30 +1,25 @@
-import React from 'react';
-import Navbar from './BarraNav';
-import Anuncio from './Anuncio';
-import "../css/styles.css"
-import { useParams } from 'react-router-dom';
-import { Card, Button, Carousel, Container} from 'react-bootstrap';
+import React from "react";
+import Navbar from "./BarraNav";
+import Weather from "./Weather";
+import Contacto from "./Contacto";
+import "../css/styles.css";
+//import { useParams } from "react-router-dom";
+//import { Card, Button, Carousel, Container } from "react-bootstrap";
+import Anuncio from "./Anuncio";
+import "../css/styles.css";
+import { useParams } from "react-router-dom";
+import { Card, Button, Carousel, Container, Dropdown } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import { useEffect, useRef, ReactElement, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-const render = (status: Status): ReactElement => {
+const render = (status) => {
   if (status === Status.LOADING) return <h3>{status} ..</h3>;
   if (status === Status.FAILURE) return <h3>{status} ...</h3>;
   return null;
 };
 
-function MyMapComponent({
-  center,
-  zoom,
-  width,
-  height,
-}: {
-  center: google.maps.LatLngLiteral;
-  zoom: number;
-  width: 100;
-  height: 100;
-}) {
+function MyMapComponent({ center, zoom, width, height }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -38,8 +33,7 @@ function MyMapComponent({
 }
 
 function VistaParque() {
-
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [parque, setParque] = useState({});
   const [anuncios, setAnuncios] = useState([]);
@@ -48,9 +42,10 @@ function VistaParque() {
   const [dias, setDias] = useState("");
 
   useEffect(() => {
-
     const getData = () => {
-        let promise1 = axios.get("http://localhost:4000/api/parques/parque/"+id);
+      let promise1 = axios.get(
+        "http://localhost:4000/api/parques/parque/" + id
+      );
 
         Promise.all([promise1])
         .then(values => {
@@ -65,7 +60,7 @@ function VistaParque() {
 
     getData();
 
-}, []);
+}, [id]);
 const url = "http://localhost:4000/api/parques/img/"+parque.id;
 
   const center = { lat: parque.latitud, lng: parque.longitud };
@@ -73,7 +68,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
   const height = 600;
   const visitar = "https://www.google.com/maps/place/"+parque.nombre;
 
-  return(
+  return (
     <div>
 
       <Navbar/>
@@ -124,10 +119,29 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         <Card.Body>
           <Button className="mt-5" href={visitar}>¿CÓMO LLEGAR?</Button>
         </Card.Body>
+
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Agregar
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>
+              <Dropdown.Item href={"/agregarflora"}>Flora</Dropdown.Item>
+              <Dropdown.Item href={"/agregartarjetaderuta"}>
+                Tarjeta de Ruta
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
       </Card>
       </Container>
 
-
+      <Weather
+        style={{ padding: "1rem" }}
+        latitude={parque.latitud}
+        longitude={parque.longitud}
+      />
+      <Contacto style={{ padding: "1rem" }} id={1} />
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>
@@ -139,8 +153,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             <p>Bicicleta</p>
           </div>
           <div className="col-6 pt-5">
-            <img className="d-block w-100" src={url} alt="Imagen no disponible"
-            />
+            <img className="d-block w-100" src={url} alt="Imagen no disponible"/>
           </div>
         </div>
       </div>
@@ -173,7 +186,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         </div>
       </div>
     </div>
-  )
-};
+  );
+}
 
 export default VistaParque;

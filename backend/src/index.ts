@@ -4,8 +4,8 @@ import server from './server';
 
 
 // Constants
-const serverStartMsg = 'Express server started on port: ',
-        port = (4000);
+const serverStartMsg = 'Express server started on port: ';
+const port = (process.env.PORT || 3000);
 
 // Start server
 server.listen(port, () => {

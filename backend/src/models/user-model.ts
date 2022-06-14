@@ -1,14 +1,15 @@
+import { Usuario, Role } from "@prisma/client";
 
 export enum UserRoles {
-    Standard,
+    User,
     Admin,
 }
 
 export interface IUser {
-    id: number;
+    id?: number;
     name: string;
     email: string;
-    pwdHash: string;
+    password: string;
     role: UserRoles;
 }
 
@@ -19,21 +20,33 @@ export interface IUser {
  * @param name 
  * @param email 
  * @param role 
- * @param pwdHash 
+ * @param password 
  * @returns 
  */
 function getNew(
     name: string,
     email: string,
     role?: UserRoles,
-    pwdHash?: string,
+    password?: string,
 ): IUser {
     return {
         id: -1,
         email,
         name,
-        role: role ?? UserRoles.Standard,
-        pwdHash: pwdHash ?? '',
+        role: role ?? UserRoles.User,
+        password: password ?? '',
+    };
+}
+
+export function fromDbUser(user: Usuario): IUser {
+    return {
+        id: user.id,
+        email: user.email,
+        name: user.nombre,
+        password: user.password,
+        role: user.role === Role.ADMIN
+            ? UserRoles.Admin
+            : UserRoles.User 
     };
 }
 
@@ -51,6 +64,7 @@ function copy(user: IUser): IUser {
 
 // Export default
 export default {
+    fromDbUser,
     new: getNew,
     copy,
 }
