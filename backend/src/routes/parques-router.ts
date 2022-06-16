@@ -67,9 +67,26 @@ async function getPark(id){
           },
         include: {
             anuncios: true,
+            horario: true,
+            flora: true,
+            fauna:true,
+            actividades: true
         }
     });
     return park;
+}
+
+async function postAnuncio(titulo, descripcion, variante, parqueId){
+    const anuncio = await prisma.anuncio.create({
+        data: {
+            titulo: titulo,
+            descripcion: descripcion,
+            variante: variante,
+            parqueId: parqueId,
+        },
+    });
+
+    return anuncio;
 }
 
 //route for retrieving single park by id
@@ -100,6 +117,11 @@ router.get('/activityParque', async (req, res) => {
 
 
 
+router.post('/anuncio', async (req,res) => {
+    const {titulo, descripcion, variante, parqueId} = req.body;
+    const result = await postAnuncio(titulo, descripcion, variante, parseInt(parqueId));
+    res.status(OK).json(result);
+});
 
 // Export default
 export default router;

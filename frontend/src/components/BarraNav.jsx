@@ -17,6 +17,15 @@ function BarraNav() {
             alt="N/A"
           />
         </Navbar.Brand>
+        <Navbar.Brand href='#login'>
+                <img
+                    src={usericon}
+                    width="50"
+                    height="50"
+                    className="d-inline-block align-top"
+                    alt="N/A"
+                />
+                </Navbar.Brand>
         <Navbar.Collapse id="navbar-dark-example">
           <Nav>
             <NavDropdown

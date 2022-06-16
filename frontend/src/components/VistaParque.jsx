@@ -35,7 +35,11 @@ function MyMapComponent({ center, zoom, width, height }) {
 function VistaParque() {
   const { id } = useParams();
 
-  const [parque, setParque] = useState([]);
+  const [parque, setParque] = useState({});
+  const [anuncios, setAnuncios] = useState([]);
+  const [abrir, setAbrir] = useState("");
+  const [cerrar, setCerrar] = useState("");
+  const [dias, setDias] = useState("");
 
   useEffect(() => {
     const getData = () => {
@@ -43,6 +47,7 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
+<<<<<<< HEAD
       Promise.all([promise1])
         .then((values) => {
           setParque(values[0].data);
@@ -52,17 +57,39 @@ function VistaParque() {
 
     getData();
   }, [id]);
+=======
+        Promise.all([promise1])
+        .then(values => {
+          setParque(values[0].data);
+          setAnuncios(values[0].data.anuncios);
+          setAbrir(values[0].data.horario[0].horaAbrir);
+          setCerrar(values[0].data.horario[0].horaCerrar);
+          setDias(values[0].data.horario[0].dias);
+        })
+        .catch(e=>console.log(e))
+    }
+
+    getData();
+
+}, []);
+const url = "http://localhost:4000/api/parques/img/"+parque.id;
+>>>>>>> 17c15b44c65973ee59ed9881b4e61153e729984f
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
+  const visitar = "https://www.google.com/maps/place/"+parque.nombre;
 
   return (
     <div>
-      <Navbar />
 
+      <Navbar/>
+      {
+       anuncios.map(e=> <Anuncio descripcion={e.descripcion} titulo={e.titulo} variante={e.variante} />)
+      }
       <Carousel>
         <Carousel.Item className="carousel-hero">
+<<<<<<< HEAD
           <img
             className="d-block w-100"
             src={require("../assets/header-placeholder.jpeg")}
@@ -81,6 +108,20 @@ function VistaParque() {
           <Carousel.Caption className="caption">
             <h3>{parque.nombre}</h3>
           </Carousel.Caption>
+=======
+          <img className="d-block w-100" src={url} alt="First slide"
+        />
+        <Carousel.Caption className="caption">
+          <h3>{parque.nombre}</h3>
+        </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item className="carousel-hero">
+          <img className="d-block w-100" src={url} alt="First slide"
+        />
+        <Carousel.Caption className="caption">
+          <h3>{parque.nombre}</h3>
+        </Carousel.Caption>
+>>>>>>> 17c15b44c65973ee59ed9881b4e61153e729984f
         </Carousel.Item>
       </Carousel>
 
@@ -111,6 +152,7 @@ function VistaParque() {
               Agregar
             </Dropdown.Toggle>
 
+<<<<<<< HEAD
             <Dropdown.Menu>
               <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>
               <Dropdown.Item href={"/agregarflora"}>Flora</Dropdown.Item>
@@ -124,6 +166,36 @@ function VistaParque() {
 
       <Weather style={{padding: "1rem"}} latitude={parque.latitud} longitude={parque.longitud} />
       <Contacto style={{padding: "1rem"}} id={1} />
+=======
+      <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
+        <MyMapComponent center={center} zoom={zoom} height={height}/>
+      </Wrapper>
+        <Card.Body className="row-info-card">
+        <div className="col-3">
+          <Card.Title>HORARIO</Card.Title>
+          <Card.Text>
+          {dias}
+          </Card.Text>
+          <Card.Text>
+          {abrir} - {cerrar}
+          </Card.Text>
+        </div>
+        <div className="col-3">
+          <Card.Title>UBICACIÓN</Card.Title>
+          <Card.Text>
+            {parque.direccion}
+          </Card.Text>
+        </div>
+        </Card.Body>
+
+        <Card.Body>
+          <Button className="mt-5" href={visitar}>¿CÓMO LLEGAR?</Button>
+        </Card.Body>
+      </Card>
+      </Container>
+
+
+>>>>>>> 17c15b44c65973ee59ed9881b4e61153e729984f
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>
@@ -135,10 +207,14 @@ function VistaParque() {
             <p>Bicicleta</p>
           </div>
           <div className="col-6 pt-5">
+<<<<<<< HEAD
             <img
               className="d-block w-100"
               src={require("../assets/header-placeholder.jpeg")}
               alt="Imagen no disponible"
+=======
+            <img className="d-block w-100" src={url} alt="Imagen no disponible"
+>>>>>>> 17c15b44c65973ee59ed9881b4e61153e729984f
             />
           </div>
         </div>
@@ -146,6 +222,7 @@ function VistaParque() {
 
       <div className="mt-16">
         <h1 className="mb-3"> FLORA Y FAUNA </h1>
+<<<<<<< HEAD
         <Carousel className="car-center">
           <Carousel.Item className="carousel-img">
             <img
@@ -162,6 +239,32 @@ function VistaParque() {
             />
           </Carousel.Item>
         </Carousel>
+=======
+        <div className="row-info-card">
+          <div className="col-6">
+            <h2 className="mb-3"> FLORA </h2>
+            <Carousel className="car-center">
+              <Carousel.Item className="carousel-img">
+                <img className="d-block w-100" src={url} alt="First slide"/>
+              </Carousel.Item>
+              <Carousel.Item className="carousel-img">
+                <img className="d-block w-100" src={url} alt="First slide"/>
+              </Carousel.Item>
+            </Carousel>
+          </div>
+          <div className="col-6">
+            <h2 className="mb-3"> FAUNA </h2>
+            <Carousel className="car-center">
+              <Carousel.Item className="carousel-img">
+                <img className="d-block w-100" src={url} alt="First slide"/>
+              </Carousel.Item>
+              <Carousel.Item className="carousel-img">
+                <img className="d-block w-100" src={url} alt="First slide"/>
+              </Carousel.Item>
+            </Carousel>
+          </div>
+        </div>
+>>>>>>> 17c15b44c65973ee59ed9881b4e61153e729984f
       </div>
     </div>
   );

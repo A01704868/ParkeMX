@@ -11,6 +11,13 @@
     display: none;
   }
 
+  .banner {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
   .row-hero {
     width: 90%;
     text-align: center;
@@ -51,7 +58,7 @@
   .row-info-card {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .row-activities {

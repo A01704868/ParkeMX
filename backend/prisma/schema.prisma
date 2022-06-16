@@ -152,7 +152,9 @@ model ActividadParque {
 //Tablas N:1
 model Anuncio {
   id          Int    @id @default(autoincrement())
+  titulo      String
   descripcion String
+  variante    String
   parque      Parque @relation(fields: [parqueId], references: [id])
   parqueId    Int
 }
