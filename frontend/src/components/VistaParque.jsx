@@ -41,6 +41,7 @@ function VistaParque() {
   const [cerrar, setCerrar] = useState("");
   const [dias, setDias] = useState("");
 
+
   useEffect(() => {
     const getData = () => {
       let promise1 = axios.get(
@@ -93,7 +94,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
       </Carousel>
 
       <Container className="row-hero">
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: '100%' }} className="pb-4">
 
       <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
         <MyMapComponent center={center} zoom={zoom} height={height}/>
@@ -136,14 +137,20 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
       </Card>
       </Container>
 
+      <Container className="sections-container">
+      <h2>Clima</h2>
       <Weather
         style={{ padding: "1rem" }}
         latitude={parque.latitud}
         longitude={parque.longitud}
       />
-      <Contacto style={{ padding: "1rem" }} id={1} />
+      </Container>
 
-      <div className="activities container-wide">
+      <Container className="sections-container">
+        <Contacto style={{ padding: "1rem" }} id={1} />
+      </Container>
+
+      <div className="mt-16 activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
           <div className="col-6 pt-5 col-custom">

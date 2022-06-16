@@ -45,7 +45,7 @@ const Weather = ({ longitude, latitude }) => {
 
   return (
     <>
-      <h2>{weatherData.name}</h2>
+      {/*<h2>{weatherData.name}</h2>*/}
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
