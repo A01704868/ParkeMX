@@ -34,9 +34,9 @@ function FloraId() {
   return(
     <div>
       <Navbar />
-      <div>
+      <div className="full-width mt-4">
         <img
-          className="full-img pb-4"
+          className="hero-img-flora img-fauna pb-4"
           src= {flora.imagen}
         />
         <div>
@@ -46,7 +46,7 @@ function FloraId() {
       <Container className="pb-4">
         <h2>{ flora.titulo }</h2>
         <div className="pb-4"></div>
-        <div className="row-info-card">
+        {/*<div className="row-info-card">
           <div className="col-6 col-custom">
             <p className="mb-3">{flora.descripcion}</p>
           </div>
@@ -56,7 +56,8 @@ function FloraId() {
             src= {flora.imagen}
           />
           </div>
-        </div>
+        </div>*/}
+        <p className="mb-3">{flora.descripcion}</p>
       </Container>
 
       <Footer />

@@ -41,9 +41,9 @@ function FaunaId() {
   return(
     <div>
       <Navbar />
-      <div>
+      <div className="full-width mt-4">
         <img
-          className="full-img pb-4"
+          className="hero-img-flora img-fauna pb-4"
           src= {fauna.imagen}
         />
         <div>
@@ -53,7 +53,7 @@ function FaunaId() {
       <Container className="pb-4">
         <h2>{fauna.titulo}</h2>
         <div className="pb-4"></div>
-        <div className="row-info-card">
+        {/*<div className="row-info-card">
           <div className="col-6 col-custom">
             <p className="mb-3">{fauna.descripcion}</p>
           </div>
@@ -63,7 +63,8 @@ function FaunaId() {
             src= {fauna.imagen}
           />
           </div>
-        </div>
+        </div>*/}
+        <p className="mb-3">{fauna.descripcion}</p>
       </Container>
 
       <Footer />
