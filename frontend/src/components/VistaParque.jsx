@@ -94,7 +94,6 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
-<<<<<<< HEAD
       let promise2 = axios.get(
         "http://localhost:4000/api/parques/pActivities/" + id
       );
@@ -113,10 +112,6 @@ function VistaParque() {
 
         Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then(values => {
-=======
-      Promise.all([promise1])
-        .then((values) => {
->>>>>>> origin/RodolfoFinal
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
@@ -234,17 +229,9 @@ function VistaParque() {
             </p>
           </div>
           <div className="col-6 pt-5">
-<<<<<<< HEAD
           <Carousel>
             {activityImg.map(activityImgList)}
           </Carousel>
-=======
-            <img
-              className="d-block w-100"
-              src={parque.imagen}
-              alt="Imagen no disponible"
-            />
->>>>>>> origin/RodolfoFinal
           </div>
         </div>
       </div>
@@ -255,47 +242,13 @@ function VistaParque() {
           <div className="col-6">
             <h2 className="mb-3"> FLORA </h2>
             <Carousel className="car-center">
-<<<<<<< HEAD
               {flora.map(floraListImg)}
-=======
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
->>>>>>> origin/RodolfoFinal
             </Carousel>
           </div>
           <div className="col-6">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
-<<<<<<< HEAD
               {fauna.map(faunaListImg)}
-=======
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
->>>>>>> origin/RodolfoFinal
             </Carousel>
           </div>
         </div>
