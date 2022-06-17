@@ -113,13 +113,8 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parkFlora/" + id
       );
 
-<<<<<<< HEAD
         Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then(values => {
-=======
-      Promise.all([promise1, promise2, promise3, promise4, promise5])
-        .then((values) => {
->>>>>>> origin/RodolfoFinal
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
