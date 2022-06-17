@@ -4,6 +4,7 @@ import { Alert, Table, Modal, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
 import ContactoEditar from "./ContactoEditar";
+import ContactoAgregar from "./ContactoAgregar";
 
 const contactoUrl = "http://localhost:4000/api/encargado";
 
@@ -17,6 +18,7 @@ const Contacto = ({ id }) => {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editIsOpen, setEditIsOpen] = useState(false);
+  const [addIsOpen, setAddIsOpen] = useState(false);
   const [contactoWasUpdated, setContactoWasUpdated] = useState(false);
 
   useEffect(() => {
@@ -52,8 +54,13 @@ const Contacto = ({ id }) => {
     });
   };
 
-  const onFormClose = () => {
+  const onEditClosed = () => {
     setEditIsOpen(false);
+    setContactoWasUpdated(!contactoWasUpdated);
+  };
+
+  const onAddClosed = () => {
+    setAddIsOpen(false);
     setContactoWasUpdated(!contactoWasUpdated);
   };
 
@@ -67,6 +74,7 @@ const Contacto = ({ id }) => {
             <th>Teléfono</th>
             <th>Borrar</th>
             <th>Editar</th>
+            <th>Agregar</th>
           </tr>
         </thead>
         <tbody>
@@ -75,17 +83,26 @@ const Contacto = ({ id }) => {
             <td>{contactoData.telefono}</td>
             <td>
               <Icon.Trash
-                color="red"
+                color={contactoData.id ? "red" : "grey"}
                 title="Borrar Contacto"
-                style={{ cursor: "pointer" }}
-                onClick={() => setIsDialogOpen(true)}
+                style={{ cursor: contactoData.id ? "pointer" : "initial" }}
+                onClick={() => contactoData.id && setIsDialogOpen(true)}
               />
             </td>
             <td>
               <Icon.PencilFill
                 title="Editar Contacto"
-                style={{ cursor: "pointer" }}
-                onClick={() => setEditIsOpen(true)}
+                color={contactoData.id ? "black" : "grey"}
+                style={{ cursor: contactoData.id ? "pointer" : "initial" }}
+                onClick={() => contactoData.id && setEditIsOpen(true)}
+              />
+            </td>
+            <td>
+              <Icon.PlusCircle
+                color={contactoData.id ? "grey" : "green"}
+                title="Agregar Contacto"
+                style={{ cursor: contactoData.id ? "initial" : "pointer" }}
+                onClick={() => !contactoData.id && setAddIsOpen(true)}
               />
             </td>
           </tr>
@@ -100,12 +117,24 @@ const Contacto = ({ id }) => {
       <ContactoEditar
         idContacto={contactoData.id}
         mostrarForma={editIsOpen}
-        onClose={onFormClose}
+        onClose={onEditClosed}
+      />
+      <ContactoAgregar
+        parqueId={id}
+        mostrarForma={addIsOpen}
+        onClose={onAddClosed}
       />
     </>
   );
 };
 
+/**
+ * Component para borrar un contacto
+ * @param {number} id ID del contacto a borrar
+ * @param {boolean} isOpen Bandera para abrir o cerrar el diálogo
+ * @callback onCancel Funcion que ejecutar al cancelar la acción de borrar
+ * @callback onDelete Funcion que ejecutar al borrar el contacto correctamente
+ */
 const DialogoBorrar = ({ id, isOpen, onCancel, onDelete }) => {
   const borrarContacto = () => {
     if (id === null || id === undefined) {
@@ -114,9 +143,7 @@ const DialogoBorrar = ({ id, isOpen, onCancel, onDelete }) => {
 
     axios
       .delete(`${contactoUrl}/delete/${id}`)
-      .then((res) => {
-        onDelete && onDelete();
-      })
+      .then((_) => { onDelete && onDelete(); })
       .catch((err) => alert(err));
   };
 

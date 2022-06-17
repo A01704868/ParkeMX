@@ -47,7 +47,7 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
-        Promise.all([promise1])
+      Promise.all([promise1])
         .then(values => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
@@ -55,72 +55,71 @@ function VistaParque() {
           setCerrar(values[0].data.horario[0].horaCerrar);
           setDias(values[0].data.horario[0].dias);
         })
-        .catch(e=>console.log(e))
+        .catch(e => console.log(e))
     }
 
     getData();
 
-}, [id]);
-const url = "http://localhost:4000/api/parques/img/"+parque.id;
+  }, [id]);
+  const url = "http://localhost:4000/api/parques/img/" + parque.id;
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
-  const visitar = "https://www.google.com/maps/place/"+parque.nombre;
+  const visitar = "https://www.google.com/maps/place/" + parque.nombre;
 
   return (
     <div>
 
-      <Navbar/>
+      <Navbar />
       {
-       anuncios.map(e=> <Anuncio descripcion={e.descripcion} titulo={e.titulo} variante={e.variante} />)
+        anuncios.map(e => <Anuncio descripcion={e.descripcion} titulo={e.titulo} variante={e.variante} />)
       }
       <Carousel>
         <Carousel.Item className="carousel-hero">
           <img className="d-block w-100" src={url} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className="carousel-hero">
           <img className="d-block w-100" src={url} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
 
       <Container className="row-hero">
-      <Card style={{ width: '100%' }}>
+        <Card style={{ width: '100%' }}>
 
-      <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
-        <MyMapComponent center={center} zoom={zoom} height={height}/>
-      </Wrapper>
-        <Card.Body className="row-info-card">
-        <div className="col-3">
-          <Card.Title>HORARIO</Card.Title>
-          <Card.Text>
-          {dias}
-          </Card.Text>
-          <Card.Text>
-          {abrir} - {cerrar}
-          </Card.Text>
-        </div>
-        <div className="col-3">
-          <Card.Title>UBICACIÓN</Card.Title>
-          <Card.Text>
-            {parque.direccion}
-          </Card.Text>
-        </div>
-        </Card.Body>
+          <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
+            <MyMapComponent center={center} zoom={zoom} height={height} />
+          </Wrapper>
+          <Card.Body className="row-info-card">
+            <div className="col-3">
+              <Card.Title>HORARIO</Card.Title>
+              <Card.Text>
+                {dias}
+              </Card.Text>
+              <Card.Text>
+                {abrir} - {cerrar}
+              </Card.Text>
+            </div>
+            <div className="col-3">
+              <Card.Title>UBICACIÓN</Card.Title>
+              <Card.Text>
+                {parque.direccion}
+              </Card.Text>
+            </div>
+          </Card.Body>
 
-        <Card.Body>
-          <Button className="mt-5" href={visitar}>¿CÓMO LLEGAR?</Button>
-        </Card.Body>
-
-        <Dropdown>
+          <Card.Body>
+            <Button className="mt-5" href={visitar}>¿CÓMO LLEGAR?</Button>
+          </Card.Body>
+          <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Agregar
             </Dropdown.Toggle>
@@ -133,7 +132,8 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-      </Card>
+
+        </Card>
       </Container>
 
       <Weather
@@ -141,7 +141,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         latitude={parque.latitud}
         longitude={parque.longitud}
       />
-      <Contacto style={{ padding: "1rem" }} id={1} />
+      <Contacto style={{ padding: "1rem" }} id={parque.id} />
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>
@@ -153,7 +153,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             <p>Bicicleta</p>
           </div>
           <div className="col-6 pt-5">
-            <img className="d-block w-100" src={url} alt="Imagen no disponible"/>
+            <img className="d-block w-100" src={url} alt="Imagen no disponible" />
           </div>
         </div>
       </div>
@@ -165,10 +165,10 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             <h2 className="mb-3"> FLORA </h2>
             <Carousel className="car-center">
               <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
+                <img className="d-block w-100" src={url} alt="First slide" />
               </Carousel.Item>
               <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
+                <img className="d-block w-100" src={url} alt="First slide" />
               </Carousel.Item>
             </Carousel>
           </div>
@@ -176,10 +176,10 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
               <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
+                <img className="d-block w-100" src={url} alt="First slide" />
               </Carousel.Item>
               <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
+                <img className="d-block w-100" src={url} alt="First slide" />
               </Carousel.Item>
             </Carousel>
           </div>
