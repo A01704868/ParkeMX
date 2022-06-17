@@ -127,6 +127,20 @@ export async function getParkFauna(id){
     return parkFauna;
 }
 
+export async function getParkFlora(id){
+    const parkFlora = await prisma.flora.findMany({
+        where: {
+            parques:{
+                some: {
+                    parqueId: id,
+                },
+            },
+        },
+    });
+
+    return parkFlora;
+}
+
 //route for retrieving single park by id
 router.get('/parque/:id', async (req, res) => {
     const park = await getPark(parseInt(req.params.id));
@@ -159,6 +173,11 @@ router.get('/activityImg/:id', async (req, res) => {
 router.get('/parkFauna/:id', async (req, res) => {
     const parkFauna = await getParkFauna(parseInt(req.params.id));
     res.status(OK).json(parkFauna);
+});
+
+router.get('/parkFlora/:id', async (req, res) => {
+    const parkFlora = await getParkFlora(parseInt(req.params.id));
+    res.status(OK).json(parkFlora);
 });
 
 /*router.get('/horario', async (req, res) => {

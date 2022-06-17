@@ -108,10 +108,10 @@ async function main() {
 
     const floraSeeder = db.flora.createMany({
         data: [
-            { nombre: "Bugambilia", imagen: "bugambilia.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Lirio amarillo", imagen: "lily.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Hortensia", imagen: "hortensia.jpg", descripcion: "info de la planta"},
-            { nombre: "Margarita", imagen: "margarita.jpg", descripcion: "info de la planta"},
+            { nombre: "Bugambilia", imagen: "https://t1.ev.ltmcdn.com/es/posts/1/3/7/cuidados_de_la_bugambilia_731_600_square.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Lirio amarillo", imagen: "https://t2.ev.ltmcdn.com/es/posts/1/7/8/cultivo_y_cuidados_del_lirio_amarillo_871_orig.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Hortensia", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/04/cuidados-de-las-hortensias-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
+            { nombre: "Margarita", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/07/cuidados-de-las-margaritas-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
 
         ]
     });
@@ -119,16 +119,23 @@ async function main() {
     const floraParqueSeeder = db.floraParque.createMany({
         data: [
             {parqueId: 1, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 1, floraId: 2, assignedBy: "Seeder"},
             {parqueId: 2, floraId: 2, assignedBy: "Seeder"},
+            {parqueId: 2, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 3, floraId: 1, assignedBy: "Seeder"},
             {parqueId: 3, floraId: 3, assignedBy: "Seeder"},
-            {parqueId: 4, floraId: 4, assignedBy: "Seeder"},
+            {parqueId: 4, floraId: 3, assignedBy: "Seeder"},
+            {parqueId: 4, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 5, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 5, floraId: 2, assignedBy: "Seeder"},
+            {parqueId: 6, floraId: 2, assignedBy: "Seeder"},
             {parqueId: 6, floraId: 1, assignedBy: "Seeder"},
         ]
     });
 
     const faunaSeeder = db.fauna.createMany({
         data: [
-            { nombre: "Aguila", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Bald_Eagle_%28Haliaeetus_leucocephalus%29_Kachemak_Bay%2C_Alaska.jpg/1200px-Bald_Eagle_%28Haliaeetus_leucocephalus%29_Kachemak_Bay%2C_Alaska.jpg", descripcion: "tiene ojos de aguila"},
+            { nombre: "Aguila", imagen: "https://dam.ngenespanol.com/wp-content/uploads/2022/02/a%CC%81guila-calva1.jpg", descripcion: "tiene ojos de aguila"},
             { nombre: "Tarantula", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Brachypelma_smithi_2009_G03.jpg/1200px-Brachypelma_smithi_2009_G03.jpg", descripcion: "informacion sobre el animal"},
             { nombre: "Leon", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/800px-Lion_waiting_in_Namibia.jpg", descripcion: "simba"},
             { nombre: "Lobo", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Canis_lupus_265b.jpg", descripcion: "cazan en grupos"},
