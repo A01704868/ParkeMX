@@ -154,13 +154,13 @@ async function main() {
 
     const actividadParqueSeeder = db.actividadParque.createMany({
         data: [
-            {parqueId: 1, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 2, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 3, actividadId: 2, assignedBy: "Seeder"},
-            {parqueId: 3, actividadId: 1, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 2, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 4, assignedBy: "Seeder"},
+            {parqueId: 1, actividadId: 3, imagen:"https://elcomercio.pe/resizer/B0yJ41HDtd1L3GsfSSZwv27xSuA=/1200x800/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJ6WCG2JNFEJ3OMAFVBW54TSV4.JPG", assignedBy: "Seeder"},
+            {parqueId: 2, actividadId: 3, imagen:"https://www.swimtonictech.com/wp-content/uploads/2018/01/nataci%C3%B3n-aguas-abiertas-larga-distancia-1920x1080.jpg", assignedBy: "Seeder"},
+            {parqueId: 3, actividadId: 2, imagen:"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/natacion-aguas-abiertas-1594887282.jpg?crop=1.00xw:0.753xh;0,0.169xh&resize=1200:*", assignedBy: "Seeder"}, 
+            {parqueId: 3, actividadId: 1, imagen:"https://planetatriatlon.com/assets/uploads/2016/05/outsidebox.jpg", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 2, imagen:"https://scontent.fqro3-1.fna.fbcdn.net/v/t1.6435-9/29496190_2058191701124869_4934977398027321344_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=973b4a&_nc_ohc=VrifJUfY2gUAX_mqI13&_nc_ht=scontent.fqro3-1.fna&oh=00_AT8eHqUib6Tv24MG9T4eVHp1_ZumKfCgbcaiPdsn2D9HDQ&oe=62D05517", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 1, imagen:"https://www.ambientum.com/wp-content/uploads/2020/10/caminata-senderismo.jpg", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 4, imagen:"https://www.sport.es/labolsadelcorredor/wp-content/uploads/2020/09/jogging-o-trotar-1.jpg", assignedBy: "Seeder"},
         ]
     });
 
