@@ -108,10 +108,10 @@ async function main() {
 
     const floraSeeder = db.flora.createMany({
         data: [
-            { nombre: "Bugambilia", imagen: "https://t1.ev.ltmcdn.com/es/posts/1/3/7/cuidados_de_la_bugambilia_731_600_square.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Lirio amarillo", imagen: "https://t2.ev.ltmcdn.com/es/posts/1/7/8/cultivo_y_cuidados_del_lirio_amarillo_871_orig.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Hortensia", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/04/cuidados-de-las-hortensias-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
-            { nombre: "Margarita", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/07/cuidados-de-las-margaritas-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
+            { nombre: "Bugambilia", imagen: "https://t1.ev.ltmcdn.com/es/posts/1/3/7/cuidados_de_la_bugambilia_731_600_square.jpg", titulo: "Algo Importante", descripcion: "informacion sobre la planta"},
+            { nombre: "Lirio amarillo", imagen: "https://t2.ev.ltmcdn.com/es/posts/1/7/8/cultivo_y_cuidados_del_lirio_amarillo_871_orig.jpg", titulo: "Algo importante", descripcion: "informacion sobre la planta"},
+            { nombre: "Hortensia", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/04/cuidados-de-las-hortensias-florestore-portada.jpg?fit=846%2C635&ssl=1", titulo: "Algo Importante", descripcion: "info de la planta"},
+            { nombre: "Margarita", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/07/cuidados-de-las-margaritas-florestore-portada.jpg?fit=846%2C635&ssl=1", titulo: "Algo Importante", descripcion: "info de la planta"},
 
         ]
     });
@@ -135,14 +135,13 @@ async function main() {
 
     const faunaSeeder = db.fauna.createMany({
         data: [
-            { nombre: "Aguila", imagen: "https://dam.ngenespanol.com/wp-content/uploads/2022/02/a%CC%81guila-calva1.jpg", descripcion: "tiene ojos de aguila"},
-            { nombre: "Tarantula", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Brachypelma_smithi_2009_G03.jpg/1200px-Brachypelma_smithi_2009_G03.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "Leon", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/800px-Lion_waiting_in_Namibia.jpg", descripcion: "simba"},
-            { nombre: "Lobo", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Canis_lupus_265b.jpg", descripcion: "cazan en grupos"},
-            { nombre: "Serpiente", imagen: "https://www.nationalgeographic.com.es/medio/2022/02/21/las-serpientes-unos-animales-temidos-y-repudiados-pero-imprescindibles-para-el-mantenimiento-de-los-ecosistemas-pues-entre-otras-cosas-ayudan-a-controlar-las-poblaciones-de-roedores_214d7ffa_800x800.jpg", descripcion: "tiene veneno"},
-            { nombre: "Dragon", imagen: "https://media.gq.com.mx/photos/5bf81f5c4958a158fb9a25a3/1:1/w_2142,h_2143,c_limit/targaryen.jpg", descripcion: "escupe fuego"},
-            { nombre: "Tiburon", imagen: "https://www.nationalgeographic.com.es/medio/2018/02/27/tiburon__1280x720.jpg", descripcion: "nemo"},
-            { nombre: "Octopus", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Octopus_at_Kelly_Tarlton%27s.jpg/1280px-Octopus_at_Kelly_Tarlton%27s.jpg", descripcion: "Sus tentaculos se regeneran"},
+            { nombre: "Aguila", imagen: "https://dam.ngenespanol.com/wp-content/uploads/2022/02/a%CC%81guila-calva1.jpg", titulo: "La aguila es patriotica para Mexico", descripcion: "Los ojos de una aguila pueden ver mucho desde el aire."},
+            { nombre: "Tarantula", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Brachypelma_smithi_2009_G03.jpg/1200px-Brachypelma_smithi_2009_G03.jpg", titulo: "Aqui va la informacion mas importante sobre el animal", descripcion: "Aqui va una descripcion con los hechos mas pertinentes de los que quieres informar."},
+            { nombre: "Serpiente", imagen: "https://www.nationalgeographic.com.es/medio/2022/02/21/las-serpientes-unos-animales-temidos-y-repudiados-pero-imprescindibles-para-el-mantenimiento-de-los-ecosistemas-pues-entre-otras-cosas-ayudan-a-controlar-las-poblaciones-de-roedores_214d7ffa_800x800.jpg", titulo: "Estas viven en climas aridos o humedos", descripcion: "Tienen dos maneras de cazar. Unas te ahorcan y otras the pican con veneno."},
+            { nombre: "Dragon", imagen: "https://media.gq.com.mx/photos/5bf81f5c4958a158fb9a25a3/1:1/w_2142,h_2143,c_limit/targaryen.jpg", titulo: "Estos ni existen" , descripcion: "escupe fuego en las historias de fantasia. Pueden volar con sus alas."},
+            { nombre: "Tiburon", imagen: "https://www.nationalgeographic.com.es/medio/2018/02/27/tiburon__1280x720.jpg", titulo: "Los tiburones del area no te hacen daño", descripcion: "Tienen que seguirse moviendo para que puedan respirar"},
+            { nombre: "Octopus", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Octopus_at_Kelly_Tarlton%27s.jpg/1280px-Octopus_at_Kelly_Tarlton%27s.jpg", titulo: "Octopus es un animal que tiene tentaculos", descripcion: "Sus tentaculos se regeneran cuando los cortas"},
+            { nombre: "Albatross", imagen: "https://www.doc.govt.nz/thumbs/gallery/globalassets/images/nature/native-animals/birds/albatrosses/royal-albatross-and-chick-1200.jpg", titulo: "Albatrosses are the world's largest seabirds. They spend at least 85% of their lives at sea returning to land (usually remote islands) to breed and raise their young.", descripcion: "Naturally low productivity, combined with changes in climate and habitat conditions and certain fishing practices, make these seabirds highly vulnerable. Until recently scientists recognised 14 different species of albatrosses, but new research using DNA technology has confirmed as many as 24. Thirteen varieties breed in the New Zealand region -> more than anywhere else in the world. Several are extremely rare, like the Antipodean albatross which breed in the sub Antarctic Island of Antipodes. "},
             
         ]
     });
@@ -152,12 +151,12 @@ async function main() {
             {parqueId: 1, faunaID: 1, assignedBy: "Seeder"},
             {parqueId: 1, faunaID: 6, assignedBy: "Seeder"},
             {parqueId: 1, faunaID: 7, assignedBy: "Seeder"},
-            {parqueId: 1, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 4, assignedBy: "Seeder"},
             {parqueId: 2, faunaID: 1, assignedBy: "Seeder"},
             {parqueId: 2, faunaID: 7, assignedBy: "Seeder"},
-            {parqueId: 2, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 3, assignedBy: "Seeder"},
             {parqueId: 3, faunaID: 1, assignedBy: "Seeder"},
-            {parqueId: 3, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 3, faunaID: 2, assignedBy: "Seeder"},
             {parqueId: 4, faunaID: 5, assignedBy: "Seeder"},
             {parqueId: 4, faunaID: 3, assignedBy: "Seeder"},
             {parqueId: 5, faunaID: 3, assignedBy: "Seeder"},
