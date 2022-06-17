@@ -143,6 +143,7 @@ model ActividadParque {
   parqueId    Int
   actividad   Actividad @relation(fields: [actividadId], references: [id])
   actividadId Int
+  imagen      String
   assignedAt  DateTime  @default(now())
   assignedBy  String
 

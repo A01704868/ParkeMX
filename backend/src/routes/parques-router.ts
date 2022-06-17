@@ -89,6 +89,58 @@ async function postAnuncio(titulo, descripcion, variante, parqueId){
     return anuncio;
 }
 
+export async function getPactivities(id){
+    const pActivities = await prisma.actividad.findMany({
+        where: {
+            parques: {
+              some: {
+                parqueId: id,
+              },
+            },
+          },
+    });
+
+    return pActivities;
+}
+
+export async function getParkActivityImg(id){
+    const forImage = await prisma.actividadParque.findMany({
+        where: {
+            parqueId: id
+          },
+    });
+
+    return forImage;
+}
+
+export async function getParkFauna(id){
+    const parkFauna = await prisma.fauna.findMany({
+        where: {
+            parques: {
+                some: {
+                    parqueId: id,
+                },
+            },
+        },
+    });
+    
+    return parkFauna;
+}
+
+export async function getParkFlora(id){
+    const parkFlora = await prisma.flora.findMany({
+        where: {
+            parques:{
+                some: {
+                    parqueId: id,
+                },
+            },
+        },
+    });
+
+    return parkFlora;
+}
+
 //route for retrieving single park by id
 router.get('/parque/:id', async (req, res) => {
     const park = await getPark(parseInt(req.params.id));
@@ -106,6 +158,28 @@ router.post('/anuncio', async (req,res) => {
     const result = await postAnuncio(titulo, descripcion, variante, parseInt(parqueId));
     res.status(OK).json(result);
 });
+
+
+router.get('/pActivities/:id', async (req, res) => {
+    const activities = await getPactivities(parseInt(req.params.id));
+    res.status(OK).json(activities);
+});
+
+router.get('/activityImg/:id', async (req, res) => {
+    const activityImg = await getParkActivityImg(parseInt(req.params.id));
+    res.status(OK).json(activityImg);
+});
+
+router.get('/parkFauna/:id', async (req, res) => {
+    const parkFauna = await getParkFauna(parseInt(req.params.id));
+    res.status(OK).json(parkFauna);
+});
+
+router.get('/parkFlora/:id', async (req, res) => {
+    const parkFlora = await getParkFlora(parseInt(req.params.id));
+    res.status(OK).json(parkFlora);
+});
+
 /*router.get('/horario', async (req, res) => {
     const horarios = await getHorario();
     res.status(OK).json(horarios);

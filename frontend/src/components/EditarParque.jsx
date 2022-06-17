@@ -3,6 +3,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useRef } from "react";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import { savePark } from "../services/index";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -300,8 +301,9 @@ function EditarParque() {
           </Form.Group>
         </Row>
 
-        <Button type="submit">Agregar</Button>
+        <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
+      <Footer/>
     </div>
   );
 }

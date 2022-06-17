@@ -2,6 +2,10 @@
     background-color: #b3d9ff;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .stockImage{
     background-size: 1920px 300px;
     width: 100%;

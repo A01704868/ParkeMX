@@ -108,10 +108,10 @@ async function main() {
 
     const floraSeeder = db.flora.createMany({
         data: [
-            { nombre: "Bugambilia", imagen: "https://sumedico.blob.core.windows.net/images/2019/06/14/60285_flor_de_bugambilia.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Lirio amarillo", imagen: "https://www.jardineriaon.com/wp-content/uploads/2016/04/lirio-amarillo.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Hortensia", imagen: "https://cdn.pixabay.com/photo/2018/08/10/12/16/flowers-3596734_960_720.jpg", descripcion: "info de la planta"},
-            { nombre: "Margarita", imagen: "https://www.lysaflores.com/blog/wp-content/uploads/2019/06/margaritas2.jpg", descripcion: "info de la planta"},
+            { nombre: "Bugambilia", imagen: "https://t1.ev.ltmcdn.com/es/posts/1/3/7/cuidados_de_la_bugambilia_731_600_square.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Lirio amarillo", imagen: "https://t2.ev.ltmcdn.com/es/posts/1/7/8/cultivo_y_cuidados_del_lirio_amarillo_871_orig.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Hortensia", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/04/cuidados-de-las-hortensias-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
+            { nombre: "Margarita", imagen: "https://i0.wp.com/www.florestore.com/flores-a-domicilio/wp-content/uploads/2018/07/cuidados-de-las-margaritas-florestore-portada.jpg?fit=846%2C635&ssl=1", descripcion: "info de la planta"},
 
         ]
     });
@@ -119,27 +119,52 @@ async function main() {
     const floraParqueSeeder = db.floraParque.createMany({
         data: [
             {parqueId: 1, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 1, floraId: 2, assignedBy: "Seeder"},
             {parqueId: 2, floraId: 2, assignedBy: "Seeder"},
+            {parqueId: 2, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 3, floraId: 1, assignedBy: "Seeder"},
             {parqueId: 3, floraId: 3, assignedBy: "Seeder"},
-            {parqueId: 4, floraId: 4, assignedBy: "Seeder"},
+            {parqueId: 4, floraId: 3, assignedBy: "Seeder"},
+            {parqueId: 4, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 5, floraId: 1, assignedBy: "Seeder"},
+            {parqueId: 5, floraId: 2, assignedBy: "Seeder"},
+            {parqueId: 6, floraId: 2, assignedBy: "Seeder"},
             {parqueId: 6, floraId: 1, assignedBy: "Seeder"},
         ]
     });
 
     const faunaSeeder = db.fauna.createMany({
         data: [
-            { nombre: "aguila", imagen: "https://misanimales.com/wp-content/uploads/2020/07/aguila-calva-caza-1024x745.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "sardinilla", imagen: "https://pescadoacasa.com/wp-content/uploads/2020/08/sardina-fresca.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "tarantula", imagen: "https://sooluciona.com/wp-content/uploads/2018/11/alimentacion-de-las-tarantulas-de-anillos-rojos.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "Aguila", imagen: "https://dam.ngenespanol.com/wp-content/uploads/2022/02/a%CC%81guila-calva1.jpg", descripcion: "tiene ojos de aguila"},
+            { nombre: "Tarantula", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Brachypelma_smithi_2009_G03.jpg/1200px-Brachypelma_smithi_2009_G03.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "Leon", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/800px-Lion_waiting_in_Namibia.jpg", descripcion: "simba"},
+            { nombre: "Lobo", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Canis_lupus_265b.jpg", descripcion: "cazan en grupos"},
+            { nombre: "Serpiente", imagen: "https://www.nationalgeographic.com.es/medio/2022/02/21/las-serpientes-unos-animales-temidos-y-repudiados-pero-imprescindibles-para-el-mantenimiento-de-los-ecosistemas-pues-entre-otras-cosas-ayudan-a-controlar-las-poblaciones-de-roedores_214d7ffa_800x800.jpg", descripcion: "tiene veneno"},
+            { nombre: "Dragon", imagen: "https://media.gq.com.mx/photos/5bf81f5c4958a158fb9a25a3/1:1/w_2142,h_2143,c_limit/targaryen.jpg", descripcion: "escupe fuego"},
+            { nombre: "Tiburon", imagen: "https://www.nationalgeographic.com.es/medio/2018/02/27/tiburon__1280x720.jpg", descripcion: "nemo"},
+            { nombre: "Octopus", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Octopus_at_Kelly_Tarlton%27s.jpg/1280px-Octopus_at_Kelly_Tarlton%27s.jpg", descripcion: "Sus tentaculos se regeneran"},
+            
         ]
     });
 
     const faunaParqueSeeder = db.faunaParque.createMany({
         data: [
             {parqueId: 1, faunaID: 1, assignedBy: "Seeder"},
-            {parqueId: 2, faunaID: 2, assignedBy: "Seeder"},
-            {parqueId: 3, faunaID: 2, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 6, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 7, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 1, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 7, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 3, faunaID: 1, assignedBy: "Seeder"},
+            {parqueId: 3, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 4, faunaID: 5, assignedBy: "Seeder"},
+            {parqueId: 4, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 5, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 5, faunaID: 4, assignedBy: "Seeder"},
             {parqueId: 6, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 6, faunaID: 2, assignedBy: "Seeder"},
+            {parqueId: 6, faunaID: 1, assignedBy: "Seeder"},
         ]
     });
 
@@ -154,13 +179,13 @@ async function main() {
 
     const actividadParqueSeeder = db.actividadParque.createMany({
         data: [
-            {parqueId: 1, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 2, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 3, actividadId: 2, assignedBy: "Seeder"},
-            {parqueId: 3, actividadId: 1, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 2, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 3, assignedBy: "Seeder"},
-            {parqueId: 6, actividadId: 4, assignedBy: "Seeder"},
+            {parqueId: 1, actividadId: 3, imagen:"https://elcomercio.pe/resizer/B0yJ41HDtd1L3GsfSSZwv27xSuA=/1200x800/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJ6WCG2JNFEJ3OMAFVBW54TSV4.JPG", assignedBy: "Seeder"},
+            {parqueId: 2, actividadId: 3, imagen:"https://www.swimtonictech.com/wp-content/uploads/2018/01/nataci%C3%B3n-aguas-abiertas-larga-distancia-1920x1080.jpg", assignedBy: "Seeder"},
+            {parqueId: 3, actividadId: 2, imagen:"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/natacion-aguas-abiertas-1594887282.jpg?crop=1.00xw:0.753xh;0,0.169xh&resize=1200:*", assignedBy: "Seeder"}, 
+            {parqueId: 3, actividadId: 1, imagen:"https://planetatriatlon.com/assets/uploads/2016/05/outsidebox.jpg", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 2, imagen:"https://scontent.fqro3-1.fna.fbcdn.net/v/t1.6435-9/29496190_2058191701124869_4934977398027321344_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=973b4a&_nc_ohc=VrifJUfY2gUAX_mqI13&_nc_ht=scontent.fqro3-1.fna&oh=00_AT8eHqUib6Tv24MG9T4eVHp1_ZumKfCgbcaiPdsn2D9HDQ&oe=62D05517", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 1, imagen:"https://www.ambientum.com/wp-content/uploads/2020/10/caminata-senderismo.jpg", assignedBy: "Seeder"},
+            {parqueId: 6, actividadId: 4, imagen:"https://www.sport.es/labolsadelcorredor/wp-content/uploads/2020/09/jogging-o-trotar-1.jpg", assignedBy: "Seeder"},
         ]
     });
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import carousel from "./Carousel";
 import "../css/customStyles.css";
 import {

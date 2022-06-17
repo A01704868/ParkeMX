@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./BarraNav";
+import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
 import "../css/styles.css";
@@ -8,7 +9,14 @@ import "../css/styles.css";
 import Anuncio from "./Anuncio";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
-import { Card, Button, Carousel, Container, Dropdown } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Carousel,
+  Container,
+  Dropdown,
+  Link,
+} from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -32,6 +40,44 @@ function MyMapComponent({ center, zoom, width, height }) {
   return <div ref={ref} id="map" />;
 }
 
+function activityList(actividad) {
+  return (
+    <Container key={actividad.id}>
+      <p>{actividad.nombre}</p>
+    </Container>
+  );
+}
+
+function activityImgList(imagen) {
+  return (
+    <Carousel.Item>
+      <img className="d-block w-100" src={imagen.imagen} />
+    </Carousel.Item>
+  );
+}
+
+function faunaListImg(fauna) {
+  const url = "/fauna/" + fauna.id;
+  return (
+    <Carousel.Item>
+      <a href={url}>
+        <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
+      </a>
+    </Carousel.Item>
+  );
+}
+
+function floraListImg(flora) {
+  const url = "/flora/" + flora.id;
+  return (
+    <Carousel.Item key={flora.id}>
+      <a href={url}>
+        <img className="d-block w-100 img-flora" src={flora.imagen}></img>
+      </a>
+    </Carousel.Item>
+  );
+}
+
 function VistaParque() {
   const { id } = useParams();
 
@@ -40,6 +86,10 @@ function VistaParque() {
   const [abrir, setAbrir] = useState("");
   const [cerrar, setCerrar] = useState("");
   const [dias, setDias] = useState("");
+  const [actividades, setActivity] = useState([]);
+  const [activityImg, setImgActivity] = useState([]);
+  const [fauna, setFauna] = useState([]);
+  const [flora, setFlora] = useState([]);
 
   useEffect(() => {
     const getData = () => {
@@ -47,13 +97,33 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
-      Promise.all([promise1])
+      let promise2 = axios.get(
+        "http://localhost:4000/api/parques/pActivities/" + id
+      );
+
+      let promise3 = axios.get(
+        "http://localhost:4000/api/parques/activityImg/" + id
+      );
+
+      let promise4 = axios.get(
+        "http://localhost:4000/api/parques/parkFauna/" + id
+      );
+
+      let promise5 = axios.get(
+        "http://localhost:4000/api/parques/parkFlora/" + id
+      );
+
+      Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then((values) => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
           setCerrar(values[0].data.horario[0].horaCerrar);
           setDias(values[0].data.horario[0].dias);
+          setActivity(values[1].data);
+          setImgActivity(values[2].data);
+          setFauna(values[3].data);
+          setFlora(values[4].data);
         })
         .catch((e) => console.log(e));
     };
@@ -140,75 +210,49 @@ function VistaParque() {
         </Card>
       </Container>
 
-      <Weather
-        style={{ padding: "1rem" }}
-        latitude={parque.latitud}
-        longitude={parque.longitud}
-      />
-      <Contacto style={{ padding: "1rem" }} id={1} />
+      <Container className="sections-container">
+        <h2>Clima</h2>
+        <Weather
+          style={{ padding: "1rem" }}
+          latitude={parque.latitud}
+          longitude={parque.longitud}
+        />
+      </Container>
 
-      <div className="activities container-wide">
+      <Container className="sections-container">
+        <Contacto style={{ padding: "1rem" }} id={1} />
+      </Container>
+
+      <div className="mt-16 activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
           <div className="col-6 pt-5 col-custom">
-            <p>Acampar</p>
-            <p>Pescar</p>
-            <p>Caminar</p>
-            <p>Bicicleta</p>
+            <p>{actividades.map(activityList)}</p>
           </div>
           <div className="col-6 pt-5">
-            <img
-              className="d-block w-100"
-              src={parque.imagen}
-              alt="Imagen no disponible"
-            />
+            <Carousel>{activityImg.map(activityImgList)}</Carousel>
           </div>
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16 pb-4">
         <h1 className="mb-3"> FLORA Y FAUNA </h1>
         <div className="row-info-card">
           <div className="col-6">
             <h2 className="mb-3"> FLORA </h2>
             <Carousel className="car-center">
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
+              {flora.map(floraListImg)}
             </Carousel>
           </div>
           <div className="col-6">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img
-                  className="d-block w-100"
-                  src={parque.imagen}
-                  alt="First slide"
-                />
-              </Carousel.Item>
+              {fauna.map(faunaListImg)}
             </Carousel>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

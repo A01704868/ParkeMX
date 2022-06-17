@@ -11,6 +11,21 @@
     display: none;
   }
 
+  .img-flora {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    background-size: 300px 300px;
+  }
+
+  .full-height-vh {
+    height: 100vh;
+  }
+
+  .pb-4 {
+    padding-bottom: 2rem;
+  }
+
   .banner {
     position: absolute;
     width: 100%;
@@ -40,6 +55,12 @@
   .container-wide {
     width: 90%;
     max-width: 1420px;
+  }
+
+  .sections-container {
+    width: 90%;
+    max-width: 1420px;
+    padding-top: 4rem;
   }
 
   #map {
