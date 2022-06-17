@@ -7,7 +7,6 @@ import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
 import Anuncio from "./Anuncio";
-import "../css/styles.css";
 import { useParams } from "react-router-dom";
 import {
   Card,
@@ -15,7 +14,6 @@ import {
   Carousel,
   Container,
   Dropdown,
-  Link,
 } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
