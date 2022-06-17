@@ -141,6 +141,26 @@ export async function getParkFlora(id){
     return parkFlora;
 }
 
+export async function getFlora(id){
+    const flora = await prisma.flora.findUnique({
+        where: {
+            id: id,
+        }
+    });
+
+    return flora;
+}
+
+export async function getFauna(id){
+    const fauna = await prisma.fauna.findUnique({
+        where: {
+            id: id,
+        }
+    });
+
+    return fauna;
+}
+
 //route for retrieving single park by id
 router.get('/parque/:id', async (req, res) => {
     const park = await getPark(parseInt(req.params.id));
@@ -178,6 +198,16 @@ router.get('/parkFauna/:id', async (req, res) => {
 router.get('/parkFlora/:id', async (req, res) => {
     const parkFlora = await getParkFlora(parseInt(req.params.id));
     res.status(OK).json(parkFlora);
+});
+
+router.get('/flora/:id', async (req, res) => {
+    const flora = await getFlora(parseInt(req.params.id));
+    res.status(OK).json(flora);
+});
+
+router.get('/fauna/:id', async (req, res) => {
+    const fauna = await getFauna(parseInt(req.params.id));  
+    res.status(OK).json(fauna);
 });
 
 /*router.get('/horario', async (req, res) => {
