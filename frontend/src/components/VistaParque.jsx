@@ -158,12 +158,6 @@ function VistaParque() {
             <h3>{parque.nombre}</h3>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={url} alt="First slide" />
-          <Carousel.Caption className="caption">
-            <h3>{parque.nombre}</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
       </Carousel>
 
       <Container className="row-hero">
