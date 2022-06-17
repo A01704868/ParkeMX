@@ -9,7 +9,7 @@ import "../css/styles.css";
 import Anuncio from "./Anuncio";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
-import { Card, Button, Carousel, Container, Dropdown } from "react-bootstrap";
+import { Card, Button, Carousel, Container, Dropdown, Link } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -53,9 +53,23 @@ function activityImgList(imagen) {
 };
 
 function faunaListImg(fauna) {
+  const url = "/fauna/"+ fauna.id;
   return(
     <Carousel.Item>
+      <a href={url}>
       <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
+      </a>
+    </Carousel.Item>
+  )
+}
+
+function floraListImg(flora) {
+  const url = "/flora/"+ flora.id;
+  return(
+    <Carousel.Item key={flora.id}>
+    <a href={url}>
+      <img className="d-block w-100 img-flora" src={flora.imagen}></img>
+    </a>
     </Carousel.Item>
   )
 }
@@ -71,6 +85,7 @@ function VistaParque() {
   const [actividades, setActivity] = useState([]);
   const [activityImg, setImgActivity] = useState([]);
   const [fauna, setFauna] = useState([]);
+  const [flora, setFlora] = useState([]);
 
 
   useEffect(() => {
@@ -91,7 +106,11 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parkFauna/" + id
       );
 
-        Promise.all([promise1, promise2, promise3, promise4])
+      let promise5 = axios.get(
+        "http://localhost:4000/api/parques/parkFlora/" + id
+      )
+
+        Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then(values => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
@@ -101,6 +120,7 @@ function VistaParque() {
           setActivity(values[1].data);
           setImgActivity(values[2].data);
           setFauna(values[3].data);
+          setFlora(values[4].data);
         })
         .catch(e=>console.log(e))
     }
@@ -218,12 +238,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
           <div className="col-6">
             <h2 className="mb-3"> FLORA </h2>
             <Carousel className="car-center">
-              <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
-              </Carousel.Item>
+              {flora.map(floraListImg)}
             </Carousel>
           </div>
           <div className="col-6">

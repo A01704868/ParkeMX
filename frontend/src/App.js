@@ -11,6 +11,10 @@ import AgregarHorario from "./components/AgregarHorario";
 import AgregarFauna from "./components/AgregarFauna";
 import AgregarFlora from "./components/AgregarFlora";
 import AgregarAnuncio from "./components/AgregarAnuncio";
+import FloraId from "./components/FloraId";
+import FaunaId from "./components/FaunaId";
+
+
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           <Route path="/agregarfauna" element={<AgregarFauna />} />
           <Route path="/agregarflora" element={<AgregarFlora />} />
           <Route path="/agregaranuncio" element={<AgregarAnuncio />} />
+          <Route path="/flora/:id" element={<FloraId />} />
+          <Route path="/fauna/:id" element={<FaunaId />} />
+
+
         </Routes>
       </BrowserRouter>
     </div>
