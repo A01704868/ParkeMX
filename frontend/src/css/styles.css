@@ -11,6 +11,10 @@
     display: none;
   }
 
+  .full-height-vh {
+    height: 100vh;
+  }
+
   .pb-4 {
     padding-bottom: 2rem;
   }

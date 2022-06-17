@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import carousel from "./Carousel";
 import "../css/customStyles.css";
 import {
@@ -192,7 +193,7 @@ function ListaDeParques(){
 
             <h1>Encuentra Parques filtrando por Actividad</h1>
 
-            <Container>
+            <Container className="pb-4">
             <Row>
                 <Col>
                 <button type='button' className='arrow' onClick={() => cardOrder()}>
@@ -231,6 +232,10 @@ function ListaDeParques(){
             </Row>
             </Container>
 
+            <Button type="submit" variant="success" href={"/agregar"}>
+              Agregar
+            </Button>
+
             <Row className="m-5 g-4">
                 {// eslint-disable-next-line
                 parques.filter((parque) => {
@@ -266,9 +271,8 @@ function ListaDeParques(){
 
                 }).map(renderCard)}
             </Row>
-            <Button type="submit" variant="success" href={"/agregar"}>
-              Agregar
-            </Button>
+
+            <Footer/>
         </div>
     );
 }

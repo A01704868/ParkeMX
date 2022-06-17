@@ -3,6 +3,7 @@ import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useRef } from "react";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import { saveFauna } from "../services/index";
 
 function AgregarFauna() {
@@ -82,8 +83,9 @@ function AgregarFauna() {
           </Form.Group>
         </Row>
 
-        <Button type="submit">Agregar</Button>
+        <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
+      <Footer/>
     </div>
   );
 }

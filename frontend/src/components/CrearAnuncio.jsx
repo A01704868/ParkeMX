@@ -1,5 +1,6 @@
 import axios from "axios";
 import BarraNav from './BarraNav';
+import Footer from './Footer';
 import React, {useState} from "react";
 import { Form, Button } from 'react-bootstrap';
 
@@ -37,7 +38,7 @@ function CrearAnuncio(){
     return (
         <>
         <BarraNav />
-        
+
         <Form onSubmit={(e)=>submit(e)}>
         <Form.Group className="mb-3">
             <Form.Label>Titulo</Form.Label>
@@ -66,11 +67,11 @@ function CrearAnuncio(){
         </Form.Select>
 
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="mb-4">
             Submit
         </Button>
         </Form>
-
+        <Footer/>
         </>
     );
 }

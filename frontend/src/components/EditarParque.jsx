@@ -3,6 +3,7 @@ import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useRef } from "react";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import { savePark } from "../services/index";
 
 function EditarParque() {
@@ -166,8 +167,9 @@ function EditarParque() {
           </Form.Group>
         </Row>
 
-        <Button type="submit">Agregar</Button>
+        <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
+      <Footer/>
     </div>
   );
 }

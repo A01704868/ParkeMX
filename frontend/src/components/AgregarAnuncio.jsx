@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 //import TimePicker from "react-bootstrap-time-picker";
 import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 import { saveAnuncio } from "../services/index";
 
 function AgregarAnuncio() {
@@ -61,8 +62,9 @@ function AgregarAnuncio() {
           </Form.Group>
         </Row>
 
-        <Button type="submit">Agregar</Button>
+        <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
+      <Footer/>
     </div>
   );
 }

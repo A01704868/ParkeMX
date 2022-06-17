@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./BarraNav";
+import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
 import "../css/styles.css";
@@ -32,6 +33,16 @@ function MyMapComponent({ center, zoom, width, height }) {
   return <div ref={ref} id="map" />;
 }
 
+function activityList(actividad) {
+  return(
+    <Container key={actividad.id}>
+      <p>
+        {actividad.nombre}
+      </p>
+    </Container>
+  )
+}
+
 function VistaParque() {
   const { id } = useParams();
 
@@ -40,6 +51,7 @@ function VistaParque() {
   const [abrir, setAbrir] = useState("");
   const [cerrar, setCerrar] = useState("");
   const [dias, setDias] = useState("");
+  const [actividades, setActivity] = useState([]);
 
 
   useEffect(() => {
@@ -48,13 +60,18 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
-        Promise.all([promise1])
+      let promise2 = axios.get(
+        "http://localhost:4000/api/parques/pActivities/" + id
+      );
+
+        Promise.all([promise1, promise2])
         .then(values => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
           setCerrar(values[0].data.horario[0].horaCerrar);
           setDias(values[0].data.horario[0].dias);
+          setActivity(values[1].data);
         })
         .catch(e=>console.log(e))
     }
@@ -68,6 +85,8 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
   const zoom = 15;
   const height = 600;
   const visitar = "https://www.google.com/maps/place/"+parque.nombre;
+
+  console.log(actividades)
 
   return (
     <div>
@@ -154,10 +173,9 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
           <div className="col-6 pt-5 col-custom">
-            <p>Acampar</p>
-            <p>Pescar</p>
-            <p>Caminar</p>
-            <p>Bicicleta</p>
+          <p>
+            {actividades.map(activityList)}
+            </p>
           </div>
           <div className="col-6 pt-5">
             <img className="d-block w-100" src={url} alt="Imagen no disponible"/>
@@ -165,7 +183,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16 pb-4">
         <h1 className="mb-3"> FLORA Y FAUNA </h1>
         <div className="row-info-card">
           <div className="col-6">
@@ -192,6 +210,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
