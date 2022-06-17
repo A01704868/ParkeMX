@@ -11,6 +11,13 @@
     display: none;
   }
 
+  .img-flora {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    background-size: 300px 300px;
+  }
+
   .full-height-vh {
     height: 100vh;
   }

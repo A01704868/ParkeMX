@@ -52,6 +52,14 @@ function activityImgList(imagen) {
   )
 };
 
+function faunaListImg(fauna) {
+  return(
+    <Carousel.Item>
+      <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
+    </Carousel.Item>
+  )
+}
+
 function VistaParque() {
   const { id } = useParams();
 
@@ -62,6 +70,7 @@ function VistaParque() {
   const [dias, setDias] = useState("");
   const [actividades, setActivity] = useState([]);
   const [activityImg, setImgActivity] = useState([]);
+  const [fauna, setFauna] = useState([]);
 
 
   useEffect(() => {
@@ -74,11 +83,15 @@ function VistaParque() {
         "http://localhost:4000/api/parques/pActivities/" + id
       );
 
-      let promise3= axios.get(
+      let promise3 = axios.get(
         "http://localhost:4000/api/parques/activityImg/" + id
-      )
+      );
 
-        Promise.all([promise1, promise2, promise3])
+      let promise4 = axios.get(
+        "http://localhost:4000/api/parques/parkFauna/" + id
+      );
+
+        Promise.all([promise1, promise2, promise3, promise4])
         .then(values => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
@@ -87,6 +100,7 @@ function VistaParque() {
           setDias(values[0].data.horario[0].dias);
           setActivity(values[1].data);
           setImgActivity(values[2].data);
+          setFauna(values[3].data);
         })
         .catch(e=>console.log(e))
     }
@@ -215,12 +229,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
           <div className="col-6">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
-              <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
-              </Carousel.Item>
-              <Carousel.Item className="carousel-img">
-                <img className="d-block w-100" src={url} alt="First slide"/>
-              </Carousel.Item>
+              {fauna.map(faunaListImg)}
             </Carousel>
           </div>
         </div>
