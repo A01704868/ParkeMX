@@ -128,18 +128,36 @@ async function main() {
 
     const faunaSeeder = db.fauna.createMany({
         data: [
-            { nombre: "aguila", imagen: "aguila.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "sardinilla", imagen: "sardinilla.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "tarantula", imagen: "tarantula.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "Aguila", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Bald_Eagle_%28Haliaeetus_leucocephalus%29_Kachemak_Bay%2C_Alaska.jpg/1200px-Bald_Eagle_%28Haliaeetus_leucocephalus%29_Kachemak_Bay%2C_Alaska.jpg", descripcion: "tiene ojos de aguila"},
+            { nombre: "Tarantula", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Brachypelma_smithi_2009_G03.jpg/1200px-Brachypelma_smithi_2009_G03.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "Leon", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/800px-Lion_waiting_in_Namibia.jpg", descripcion: "simba"},
+            { nombre: "Lobo", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Canis_lupus_265b.jpg", descripcion: "cazan en grupos"},
+            { nombre: "Serpiente", imagen: "https://www.nationalgeographic.com.es/medio/2022/02/21/las-serpientes-unos-animales-temidos-y-repudiados-pero-imprescindibles-para-el-mantenimiento-de-los-ecosistemas-pues-entre-otras-cosas-ayudan-a-controlar-las-poblaciones-de-roedores_214d7ffa_800x800.jpg", descripcion: "tiene veneno"},
+            { nombre: "Dragon", imagen: "https://media.gq.com.mx/photos/5bf81f5c4958a158fb9a25a3/1:1/w_2142,h_2143,c_limit/targaryen.jpg", descripcion: "escupe fuego"},
+            { nombre: "Tiburon", imagen: "https://www.nationalgeographic.com.es/medio/2018/02/27/tiburon__1280x720.jpg", descripcion: "nemo"},
+            { nombre: "Octopus", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Octopus_at_Kelly_Tarlton%27s.jpg/1280px-Octopus_at_Kelly_Tarlton%27s.jpg", descripcion: "Sus tentaculos se regeneran"},
+            
         ]
     });
 
     const faunaParqueSeeder = db.faunaParque.createMany({
         data: [
             {parqueId: 1, faunaID: 1, assignedBy: "Seeder"},
-            {parqueId: 2, faunaID: 2, assignedBy: "Seeder"},
-            {parqueId: 3, faunaID: 2, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 6, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 7, assignedBy: "Seeder"},
+            {parqueId: 1, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 1, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 7, assignedBy: "Seeder"},
+            {parqueId: 2, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 3, faunaID: 1, assignedBy: "Seeder"},
+            {parqueId: 3, faunaID: 8, assignedBy: "Seeder"},
+            {parqueId: 4, faunaID: 5, assignedBy: "Seeder"},
+            {parqueId: 4, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 5, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 5, faunaID: 4, assignedBy: "Seeder"},
             {parqueId: 6, faunaID: 3, assignedBy: "Seeder"},
+            {parqueId: 6, faunaID: 2, assignedBy: "Seeder"},
+            {parqueId: 6, faunaID: 1, assignedBy: "Seeder"},
         ]
     });
 

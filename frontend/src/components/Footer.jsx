@@ -1,6 +1,5 @@
 import React from "react";
 import logotipo from "../assets/app-logo.svg";
-import usericon from "../assets/avatar.svg";
 import "../css/customStyles.css";
 
 function Footer() {
