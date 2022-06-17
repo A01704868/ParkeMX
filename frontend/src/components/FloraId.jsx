@@ -34,31 +34,27 @@ function FloraId() {
   return(
     <div>
       <Navbar />
+      <div>
+        <img
+          className="full-img pb-4"
+          src= {flora.imagen}
+        />
+        <div>
+          <h1>{flora.nombre}</h1>
+        </div>
+      </div>
       <Container className="pb-4">
-        <h1>AQUI VA UNA IMAGEN QUE EL BUEN ALEX SE VA A RIFAR :D</h1>
-      <img
-        className="d-block w-100"
-        src= {flora.imagen}
-      />
-      </Container>
-      <h1>{/*flora.nombre*/}</h1>
-      <Container className="pb-4">
-        <h2>{/*flora.titulo*/}Albatrosses are the world's largest seabirds.
-        They spend at least 85% of their lives at sea returning
-        to land (usually remote islands) to breed and raise their young. SUSTITUIR POR TITULO DESC</h2>
-
+        <h2>{ flora.titulo }</h2>
+        <div className="pb-4"></div>
         <div className="row-info-card">
-          <div className="col-6">
-            <p className="mb-3">{/*flora.descripcion*/}Naturally low productivity, combined with changes in climate and habitat conditions and certain fishing practices, make these seabirds highly vulnerable.
-            Until recently scientists recognised 14 different species of albatrosses, but new research using DNA technology has confirmed as many as 24.
-            Thirteen varieties breed in the New Zealand region – more than anywhere else in the world.
-            Several are extremely rare, like the Antipodean albatross which breed in the sub Antarctic Island of Antipodes. </p>
+          <div className="col-6 col-custom">
+            <p className="mb-3">{flora.descripcion}</p>
           </div>
           <div className="col-6">
-            <h2 className="mb-3"> Acá va el carusel </h2>
-            <Carousel className="car-center">
-
-            </Carousel>
+          <img
+            className="size-fixed pb-4"
+            src= {flora.imagen}
+          />
           </div>
         </div>
       </Container>
