@@ -135,7 +135,7 @@ function VistaParque() {
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
-  const visitar = "https://www.google.com/maps/place/" + parque.nombre;
+  const visitar = "https://www.google.com/maps/place/" + parque.direccion;
 
   return (
     <div>
