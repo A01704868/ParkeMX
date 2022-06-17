@@ -7,14 +7,15 @@ import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { saveCart } from "../services/index";
 import "../css/styles.css";
-
+import { useParams } from "react-router-dom";
 
 function AgregarCartaRuta() {
+  const { id } = useParams();
   const [validated, setValidated] = useState(false);
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
-    parqueId: "",
+    parqueId: id,
   });
 
   const handleSubmit = (event) => {
@@ -63,23 +64,13 @@ function AgregarCartaRuta() {
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>id parque</Form.Label>
-            <Form.Control
-              required
-              type="number"
-              placeholder="Esta ruta esta compuesta por..."
-              name="parqueId"
-              value={formValues.parqueId}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
         </Row>
 
-        <Button type="submit" className="mb-4">Agregar</Button>
+        <Button type="submit" className="mb-4">
+          Agregar
+        </Button>
       </Form>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

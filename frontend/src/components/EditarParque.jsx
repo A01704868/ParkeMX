@@ -1,162 +1,40 @@
 import React from "react";
-
+import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
-import { savePark } from "../services/index";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { updatePark } from "../services/index";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Modal, Button, Form } from "react-bootstrap";
 
-const parqueUrl = "http://localhost:4000/api/editParque";
-const editarParque = (parque, onClose) => {
-  if (!parque) {
-    return;
-  }
-
-  axios
-    .put(`${parqueUrl}/update`, parque)
-    .then((_) => onClose())
-    .catch((_) => onClose());
-};
-
-const ParqueEditar = ({ idEvento, mostrarForma, onClose }) => {
-  const handleSave = (event) => {
-    const [
-      nombreField,
-      descripcionField,
-      imagenField,
-      direccionField,
-      latitudField,
-      fechaDecretoField,
-      superficieTerrestreField,
-      superficieMarinaField,
-    ] = event.target;
-    const nombre = nombreField.value ?? "";
-    const descripcion = descripcionField.value ?? "";
-    const imagen = imagenField.value ?? "";
-    const direccion = direccionField.value ?? "";
-    const latitud = latitudField.value ?? "";
-    const fechaDecreto = fechaDecretoField.value ?? "";
-    const superficieTerrestre = superficieTerrestreField.value ?? "";
-    const superficieMarina = superficieMarinaField.value ?? "";
-
-    if (idEvento === null || idEvento === undefined) {
-      return;
-    }
-    if (
-      !nombre ||
-      !descripcion ||
-      !imagen ||
-      !direccion ||
-      !latitud ||
-      !fechaDecreto ||
-      !superficieTerrestre ||
-      !superficieMarina
-    ) {
-      return;
-    }
-
-    const eventoUpdated = {
-      evento: {
-        id: idEvento,
-        nombre,
-        descripcion,
-        imagen,
-        direccion,
-        latitud,
-        fechaDecreto,
-        superficieTerrestre,
-        superficieMarina,
-      },
-    };
-    editarParque(eventoUpdated, onClose);
-    event.preventDefault();
-  };
-
-  return (
-    <Modal show={mostrarForma} onHide={onClose}>
-      <Modal.Header>
-        <Modal.Title>Editar Evento</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>{renderForm(handleSave, onClose)}</Modal.Body>
-    </Modal>
-  );
-};
-
-const renderForm = (handleSave, onClose) => {
-  return (
-    <Form onSubmit={handleSave}>
-      <Form.Group className="mb-3" controlId="formNombre">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formDescripcion">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formImagen">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formDireccion">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formLatitud">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formFechaDecreto">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formSuperficieTerrestre">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formSuperficieMaarina">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="name" placeholder="Nuevo Nombre" />
-      </Form.Group>
-
-      <Button
-        variant="primary"
-        type="submit"
-        value="submit"
-        style={{ margin: "0.5rem" }}
-      >
-        Submit
-      </Button>
-      <Button variant="secondary" onClick={onClose}>
-        Close
-      </Button>
-    </Form>
-  );
-};
-
-export default ParqueEditar;
-
-/*
 function EditarParque() {
+  const { id } = useParams();
+
+  const [parque, setParque] = useState({});
+  let [formValues, setFormValues] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      let promise1 = await axios.get(
+        "http://localhost:4000/api/parques/parque/" + id
+      );
+
+      Promise.all([promise1])
+        .then((values) => {
+          setParque(values[0].data);
+          setFormValues(values[0].data);
+        })
+        .catch((e) => console.log(e));
+    };
+
+    let data = getData();
+  }, [id]);
   //Validar
   const [validated, setValidated] = useState(false);
   //Axios
-  const [formValues, setFormValues] = useState({
-    nombre: "",
-    descripcion: "",
-    imagen: "",
-    direccion: "",
-    latitud: 0.0,
-    longitud: 0.0,
-    fechaDecreto: "",
-    superficieTerrestre: 0.0,
-    superficieMarina: 0.0,
-  });
 
-  const inputFileRef = useRef();
+  //const inputFileRef = useRef();
 
   //Validar
   const handleSubmit = (event) => {
@@ -164,7 +42,7 @@ function EditarParque() {
     //console.log(inputFileRef.current.files);
     //handleSubmit({ ...formValues, image: inputFileRef.current.files[0] });
     console.log("FIRST: ", formValues);
-    savePark({ ...formValues, image: inputFileRef.current.files[0] });
+    updatePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -290,23 +168,27 @@ function EditarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom03">
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Insertar imagen parque</Form.Label>
-              <Form.Control type="file" ref={inputFileRef} />
-            </Form.Group>
-            <Form.Control.Feedback type="invalid">
-              Ingresa una ciudad valida.
-            </Form.Control.Feedback>
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>Inserta Url de imagen</Form.Label>
+            <Form.Control
+              required
+              type="string"
+              placeholder="http:...."
+              name="imagen"
+              value={formValues.imagen}
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
         </Row>
 
-        <Button type="submit" className="mb-4">Agregar</Button>
+        <Button type="submit" className="mb-4">
+          Guardar
+        </Button>
       </Form>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 export default EditarParque;
-*/

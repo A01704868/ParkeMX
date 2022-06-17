@@ -95,20 +95,28 @@ export async function deletePark(parkId) {
   }
 }
 
-export async function updatePark(parkId) {
+export async function updatePark(park) {
   try {
-    console.log("ID: ", parkId);
-    let response = axios;
-    /*  .delete(`${baseUrl}/deleteparque/${parkId}`, {
-        id: parkId,
+    console.log("ID: ", park.id);
+    let response = axios
+      .put(`${baseUrl}/editParque/${park.id}`, {
+        id: park.id,
+        nombre: park.nombre,
+        descripcion: park.descripcion,
+        imagen: park.imagen,
+        direccion: park.direccion,
+        latitud: park.latitud,
+        longitud: park.longitud,
+        fechaDecreto: park.fechaDecreto,
+        superficieTerrestre: park.superficieTerrestre,
+        superficieMarina: park.superficieMarina,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
-      */
 
     return response;
   } catch (event) {

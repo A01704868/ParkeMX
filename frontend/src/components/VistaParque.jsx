@@ -3,6 +3,7 @@ import Navbar from "./BarraNav";
 import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
+import EditarParque from "./EditarParque";
 import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
@@ -113,8 +114,8 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parkFlora/" + id
       );
 
-        Promise.all([promise1, promise2, promise3, promise4, promise5])
-        .then(values => {
+      Promise.all([promise1, promise2, promise3, promise4, promise5])
+        .then((values) => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
@@ -167,34 +168,34 @@ function VistaParque() {
       </Carousel>
 
       <Container className="row-hero">
-      <Card style={{ width: '100%' }} className="pb-4">
+        <Card style={{ width: "100%" }} className="pb-4">
+          <Wrapper
+            apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA"
+            render={render}
+          >
+            <MyMapComponent center={center} zoom={zoom} height={height} />
+          </Wrapper>
+          <Card.Body className="row-info-card">
+            <div className="col-3">
+              <Card.Title>HORARIO</Card.Title>
+              <Card.Text>{dias}</Card.Text>
+              <Card.Text>
+                {abrir} - {cerrar}
+              </Card.Text>
+            </div>
+            <div className="col-3">
+              <Card.Title>UBICACIÓN</Card.Title>
+              <Card.Text>{parque.direccion}</Card.Text>
+            </div>
+          </Card.Body>
 
-      <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
-        <MyMapComponent center={center} zoom={zoom} height={height}/>
-      </Wrapper>
-        <Card.Body className="row-info-card">
-        <div className="col-3">
-          <Card.Title>HORARIO</Card.Title>
-          <Card.Text>
-          {dias}
-          </Card.Text>
-          <Card.Text>
-          {abrir} - {cerrar}
-          </Card.Text>
-        </div>
-        <div className="col-3">
-          <Card.Title>UBICACIÓN</Card.Title>
-          <Card.Text>
-            {parque.direccion}
-          </Card.Text>
-        </div>
-        </Card.Body>
+          <Card.Body>
+            <Button className="mt-5" href={visitar}>
+              ¿CÓMO LLEGAR?
+            </Button>
+          </Card.Body>
 
-        <Card.Body>
-          <Button className="mt-5" href={visitar}>¿CÓMO LLEGAR?</Button>
-        </Card.Body>
-
-        <Dropdown>
+          <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Agregar
             </Dropdown.Toggle>
@@ -202,7 +203,7 @@ function VistaParque() {
             <Dropdown.Menu>
               <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>
               <Dropdown.Item href={"/agregarflora"}>Flora</Dropdown.Item>
-              <Dropdown.Item href={"/agregartarjetaderuta"}>
+              <Dropdown.Item href={"/agregartarjetaderuta/" + id}>
                 Tarjeta de Ruta
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -223,6 +224,10 @@ function VistaParque() {
         <Contacto style={{ padding: "1rem" }} id={1} />
       </Container>
 
+      <Container className="sections-container">
+        <EditarParque style={{ padding: "1rem" }} id={1} />
+      </Container>
+
       <div className="mt-16 activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
@@ -230,9 +235,7 @@ function VistaParque() {
             <p>{actividades.map(activityList)}</p>
           </div>
           <div className="col-6 pt-5">
-          <Carousel>
-            {activityImg.map(activityImgList)}
-          </Carousel>
+            <Carousel>{activityImg.map(activityImgList)}</Carousel>
           </div>
         </div>
       </div>

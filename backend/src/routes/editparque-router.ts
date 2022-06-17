@@ -6,9 +6,14 @@ import { editParks } from '@services/editPark-service';
 const router = Router();
 const { OK } = StatusCodes;
 
-router.put('/editParque', async (req:Request, res:Response) => {
+router.put('/editParque/:id', async (req:Request, res:Response) => {
 
-    let parque = req.body;
+    //let parque = req.body;
+
+    const parque  = req.body ?? {};
+    console.log('NEXT: ', req.body);
+    console.log('PARQUE: ', parque);
+    parque 
 
     if(!parque.id) {
         throw new ParamMissingError();
@@ -17,11 +22,12 @@ router.put('/editParque', async (req:Request, res:Response) => {
 
 
     const updateParque = await editParks(parque);
-    return res.status(OK).json()
+    return res.status(OK).json(updateParque)
     
 })
 
 export default router;
+
 
 
 /*

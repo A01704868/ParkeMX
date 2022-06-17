@@ -14,8 +14,6 @@ import AgregarAnuncio from "./components/AgregarAnuncio";
 import FloraId from "./components/FloraId";
 import FaunaId from "./components/FaunaId";
 
-
-
 function App() {
   return (
     <div className="App">
@@ -23,18 +21,19 @@ function App() {
         <Routes>
           <Route path="/" element={<ListaDeParques />} />
           <Route path="/agregar" element={<AgregarParque />} />
-          <Route path="/agregartarjetaderuta" element={<AgregarCartaRuta />} />
+          <Route
+            path="/agregartarjetaderuta/:id"
+            element={<AgregarCartaRuta />}
+          />
           <Route path="/parque/:id" element={<VistaParque />} />
           <Route path="/anuncio" element={<CrearAnuncio />} />
-          <Route path="/editarparque" element={<EditarParque />} />
+          <Route path="/editarparque/:id" element={<EditarParque />} />
           <Route path="/agregarhorario" element={<AgregarHorario />} />
           <Route path="/agregarfauna" element={<AgregarFauna />} />
           <Route path="/agregarflora" element={<AgregarFlora />} />
           <Route path="/agregaranuncio" element={<AgregarAnuncio />} />
           <Route path="/flora/:id" element={<FloraId />} />
           <Route path="/fauna/:id" element={<FaunaId />} />
-
-
         </Routes>
       </BrowserRouter>
     </div>
