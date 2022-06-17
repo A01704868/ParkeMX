@@ -55,7 +55,7 @@ const renderCard = (card) => {
       <Card style={{ width: "22rem", height: "100%" }}>
         <Card.Body>
           <Card.Title>{card.nombre}</Card.Title>
-          <Card.Img src={url} className="cardImage" />
+          <Card.Img src={card.imagen} className="cardImage" />
           <Card.Text>{card.descripcion}</Card.Text>
           Direccion
           <Card.Text>{card.direccion}</Card.Text>
@@ -95,84 +95,93 @@ const renderDropdown = (activity) => {
   );
 };
 
-let color = 'info';
+let color = "info";
 let icon = "caret-down-outline";
 let toggle = 0;
 
-function ListaDeParques(){
+function ListaDeParques() {
+  const [parques, setParques] = useState([]);
+  const [searchTerm, setSearch] = useState("");
+  const [activityButton, setActivityButton] = useState([]);
+  const [searchActivity, setSearchActivity] = useState(0);
+  const [calcDistance, setCalcDistance] = useState(false);
+  const [latitud, setLatitud] = useState(0);
+  const [longitud, setLongitud] = useState(0);
+  //investigate reducer in react manual
 
-    const [parques, setParques] = useState([]);
-    const [searchTerm, setSearch] = useState("");
-    const [activityButton, setActivityButton] = useState([]);
-    const [searchActivity, setSearchActivity] = useState(0);
-    const [calcDistance, setCalcDistance] = useState(false);
-    const [latitud, setLatitud] = useState(0);
-    const [longitud, setLongitud] = useState(0);
-    //investigate reducer in react manual
+  useEffect(() => {
+    function getPosition(position) {
+      //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
 
-    useEffect(() => {
-
-        function getPosition(position){
-            //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
-
-            setLatitud(position.coords.latitude);
-            setLongitud(position.coords.longitude);
-        }
-
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(getPosition)
-        }else{
-            console.log("geolocation not available");
-        }
-
-        const getData = () => {
-            let promise1 = axios.get("http://localhost:4000/api/parques");
-
-            let promise2 = axios.get("http://localhost:4000/api/parques/activity");
-
-            Promise.all([promise1, promise2])
-            .then(values => {setParques(values[0].data); setActivityButton(values[1].data);})
-            .catch(e=>console.log(e))
-        }
-
-        getData();
-
-        parques.forEach(parque => parque.superficieMarina = distance(latitud, longitud, parque.latitud, parque.longitud));
-// eslint-disable-next-line
-    }, []);
-
-    const cardOrder = () => {
-        if(toggle === 0){
-            icon = "caret-up-outline";
-            toggle = 1;
-        }else{
-            icon = "caret-down-outline";
-            toggle = 0;
-        }
-        setParques(reverse(parques));
-
+      setLatitud(position.coords.latitude);
+      setLongitud(position.coords.longitude);
     }
 
-    //Haversine algorithm
-    function distance(lat1, lon1, lat2, lon2) {
-        var p = 0.017453292519943295;    // Math.PI / 180
-        var c = Math.cos;
-        var a = 0.5 - c((lat2 - lat1) * p)/2 +
-                c(lat1 * p) * c(lat2 * p) *
-                (1 - c((lon2 - lon1) * p))/2;
-
-        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-      }
-
-    function toggleDistance(){
-        if(calcDistance === true){
-            setCalcDistance(false);
-            color = 'info';
-        }else {
-            setCalcDistance(true);
-            color = 'secondary';
-        }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition);
+    } else {
+      console.log("geolocation not available");
     }
+
+    const getData = () => {
+      let promise1 = axios.get("http://localhost:4000/api/parques");
+
+      let promise2 = axios.get("http://localhost:4000/api/parques/activity");
+
+      Promise.all([promise1, promise2])
+        .then((values) => {
+          setParques(values[0].data);
+          setActivityButton(values[1].data);
+        })
+        .catch((e) => console.log(e));
+    };
+
+    getData();
+
+    parques.forEach(
+      (parque) =>
+        (parque.superficieMarina = distance(
+          latitud,
+          longitud,
+          parque.latitud,
+          parque.longitud
+        ))
+    );
+    // eslint-disable-next-line
+  }, []);
+
+  const cardOrder = () => {
+    if (toggle === 0) {
+      icon = "caret-up-outline";
+      toggle = 1;
+    } else {
+      icon = "caret-down-outline";
+      toggle = 0;
+    }
+    setParques(reverse(parques));
+  };
+
+  //Haversine algorithm
+  function distance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295; // Math.PI / 180
+    var c = Math.cos;
+    var a =
+      0.5 -
+      c((lat2 - lat1) * p) / 2 +
+      (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
+
+    return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  }
+
+  function toggleDistance() {
+    if (calcDistance === true) {
+      setCalcDistance(false);
+      color = "info";
+    } else {
+      setCalcDistance(true);
+      color = "secondary";
+    }
+  }
 
     return(
         <div>

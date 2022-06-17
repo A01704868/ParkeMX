@@ -9,7 +9,7 @@ export async function savePark(parque) {
 
     formData.append("nombre", parque.nombre);
     formData.append("descripcion", parque.descripcion);
-    formData.append("imagen", parque.image.name);
+    formData.append("imagen", parque.image);
     formData.append("direccion", parque.direccion);
     formData.append("latitud", parque.latitud);
     formData.append("longitud", parque.longitud);
@@ -25,10 +25,10 @@ export async function savePark(parque) {
       .post("http://localhost:4000/api/addparques", {
         parque: parque,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -57,10 +57,10 @@ export async function saveCart(cartaruta) {
       .post("http://localhost:4000/api/addcartaruta/", {
         cartaruta: cartaruta,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -82,10 +82,10 @@ export async function deletePark(parkId) {
       .delete(`${baseUrl}/deleteparque/${parkId}`, {
         id: parkId,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -131,10 +131,10 @@ export async function saveHorario(horario) {
       .post("http://localhost:4000/api/addhorario/", {
         horario: horario,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -156,10 +156,10 @@ export async function deleteHorario(horarioId) {
       .delete(`${baseUrl}/deletehorario/${horarioId}`, {
         id: horarioId,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -177,7 +177,7 @@ export async function saveFauna(fauna) {
 
     formData.append("nombre", fauna.nombre);
     formData.append("descripcion", fauna.descripcion);
-    formData.append("imagen", fauna.image.name);
+    formData.append("imagen", fauna.image);
     console.log("Buscando: ", fauna);
     /*let response = await axios.post("http://localhost:4000/api/addparques", {
       parkData,
@@ -187,10 +187,10 @@ export async function saveFauna(fauna) {
       .post("http://localhost:4000/api/addfauna", {
         fauna: fauna,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -213,7 +213,7 @@ export async function saveFlora(flora) {
 
     formData.append("nombre", flora.nombre);
     formData.append("descripcion", flora.descripcion);
-    formData.append("imagen", flora.image.name);
+    formData.append("imagen", flora.image);
     console.log("Buscando: ", flora);
     /*let response = await axios.post("http://localhost:4000/api/addparques", {
       parkData,
@@ -223,10 +223,10 @@ export async function saveFlora(flora) {
       .post("http://localhost:4000/api/addflora", {
         flora: flora,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
@@ -253,10 +253,10 @@ export async function saveAnuncio(anuncio) {
       .post("http://localhost:4000/api/addanuncio/", {
         anuncio: anuncio,
       })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 

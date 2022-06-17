@@ -94,6 +94,7 @@ function VistaParque() {
         "http://localhost:4000/api/parques/parque/" + id
       );
 
+<<<<<<< HEAD
       let promise2 = axios.get(
         "http://localhost:4000/api/parques/pActivities/" + id
       );
@@ -112,6 +113,10 @@ function VistaParque() {
 
         Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then(values => {
+=======
+      Promise.all([promise1])
+        .then((values) => {
+>>>>>>> origin/RodolfoFinal
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
@@ -122,40 +127,44 @@ function VistaParque() {
           setFauna(values[3].data);
           setFlora(values[4].data);
         })
-        .catch(e=>console.log(e))
-    }
+        .catch((e) => console.log(e));
+    };
 
     getData();
-
-}, [id]);
-const url = "http://localhost:4000/api/parques/img/"+parque.id;
+  }, [id]);
+  const url = "http://localhost:4000/api/parques/img/" + parque.id;
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
   const height = 600;
-  const visitar = "https://www.google.com/maps/place/"+parque.nombre;
+  const visitar = "https://www.google.com/maps/place/" + parque.nombre;
 
   return (
     <div>
-
-      <Navbar/>
-      {
-       anuncios.map(e=> <Anuncio descripcion={e.descripcion} titulo={e.titulo} variante={e.variante} />)
-      }
+      <Navbar />
+      {anuncios.map((e) => (
+        <Anuncio
+          descripcion={e.descripcion}
+          titulo={e.titulo}
+          variante={e.variante}
+        />
+      ))}
       <Carousel>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={url} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          <img
+            className="d-block w-100"
+            src={parque.imagen}
+            alt="First slide"
+          />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={url} alt="First slide"
-        />
-        <Carousel.Caption className="caption">
-          <h3>{parque.nombre}</h3>
-        </Carousel.Caption>
+          <img className="d-block w-100" src={url} alt="First slide" />
+          <Carousel.Caption className="caption">
+            <h3>{parque.nombre}</h3>
+          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
 
@@ -200,7 +209,7 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-      </Card>
+        </Card>
       </Container>
 
       <Container className="sections-container">
@@ -225,9 +234,17 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             </p>
           </div>
           <div className="col-6 pt-5">
+<<<<<<< HEAD
           <Carousel>
             {activityImg.map(activityImgList)}
           </Carousel>
+=======
+            <img
+              className="d-block w-100"
+              src={parque.imagen}
+              alt="Imagen no disponible"
+            />
+>>>>>>> origin/RodolfoFinal
           </div>
         </div>
       </div>
@@ -238,13 +255,47 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
           <div className="col-6">
             <h2 className="mb-3"> FLORA </h2>
             <Carousel className="car-center">
+<<<<<<< HEAD
               {flora.map(floraListImg)}
+=======
+              <Carousel.Item className="carousel-img">
+                <img
+                  className="d-block w-100"
+                  src={parque.imagen}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item className="carousel-img">
+                <img
+                  className="d-block w-100"
+                  src={parque.imagen}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+>>>>>>> origin/RodolfoFinal
             </Carousel>
           </div>
           <div className="col-6">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
+<<<<<<< HEAD
               {fauna.map(faunaListImg)}
+=======
+              <Carousel.Item className="carousel-img">
+                <img
+                  className="d-block w-100"
+                  src={parque.imagen}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item className="carousel-img">
+                <img
+                  className="d-block w-100"
+                  src={parque.imagen}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+>>>>>>> origin/RodolfoFinal
             </Carousel>
           </div>
         </div>

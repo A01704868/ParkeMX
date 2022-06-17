@@ -1,11 +1,145 @@
 import React from "react";
-import { Form, Col, Row, Button } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useRef } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { savePark } from "../services/index";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { Modal, Button, Form } from "react-bootstrap";
 
+const parqueUrl = "http://localhost:4000/api/editParque";
+const editarParque = (parque, onClose) => {
+  if (!parque) {
+    return;
+  }
+
+  axios
+    .put(`${parqueUrl}/update`, parque)
+    .then((_) => onClose())
+    .catch((_) => onClose());
+};
+
+const ParqueEditar = ({ idEvento, mostrarForma, onClose }) => {
+  const handleSave = (event) => {
+    const [
+      nombreField,
+      descripcionField,
+      imagenField,
+      direccionField,
+      latitudField,
+      fechaDecretoField,
+      superficieTerrestreField,
+      superficieMarinaField,
+    ] = event.target;
+    const nombre = nombreField.value ?? "";
+    const descripcion = descripcionField.value ?? "";
+    const imagen = imagenField.value ?? "";
+    const direccion = direccionField.value ?? "";
+    const latitud = latitudField.value ?? "";
+    const fechaDecreto = fechaDecretoField.value ?? "";
+    const superficieTerrestre = superficieTerrestreField.value ?? "";
+    const superficieMarina = superficieMarinaField.value ?? "";
+
+    if (idEvento === null || idEvento === undefined) {
+      return;
+    }
+    if (
+      !nombre ||
+      !descripcion ||
+      !imagen ||
+      !direccion ||
+      !latitud ||
+      !fechaDecreto ||
+      !superficieTerrestre ||
+      !superficieMarina
+    ) {
+      return;
+    }
+
+    const eventoUpdated = {
+      evento: {
+        id: idEvento,
+        nombre,
+        descripcion,
+        imagen,
+        direccion,
+        latitud,
+        fechaDecreto,
+        superficieTerrestre,
+        superficieMarina,
+      },
+    };
+    editarParque(eventoUpdated, onClose);
+    event.preventDefault();
+  };
+
+  return (
+    <Modal show={mostrarForma} onHide={onClose}>
+      <Modal.Header>
+        <Modal.Title>Editar Evento</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>{renderForm(handleSave, onClose)}</Modal.Body>
+    </Modal>
+  );
+};
+
+const renderForm = (handleSave, onClose) => {
+  return (
+    <Form onSubmit={handleSave}>
+      <Form.Group className="mb-3" controlId="formNombre">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formDescripcion">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formImagen">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formDireccion">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formLatitud">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formFechaDecreto">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formSuperficieTerrestre">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formSuperficieMaarina">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="name" placeholder="Nuevo Nombre" />
+      </Form.Group>
+
+      <Button
+        variant="primary"
+        type="submit"
+        value="submit"
+        style={{ margin: "0.5rem" }}
+      >
+        Submit
+      </Button>
+      <Button variant="secondary" onClick={onClose}>
+        Close
+      </Button>
+    </Form>
+  );
+};
+
+export default ParqueEditar;
+
+/*
 function EditarParque() {
   //Validar
   const [validated, setValidated] = useState(false);
@@ -175,3 +309,4 @@ function EditarParque() {
 }
 
 export default EditarParque;
+*/
