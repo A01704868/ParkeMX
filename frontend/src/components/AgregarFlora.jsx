@@ -12,6 +12,7 @@ function AgregarFlora() {
   //Axios
   const [formValues, setFormValues] = useState({
     nombre: "",
+    titulo: "",
     descripcion: "",
     imagen: "",
   });
@@ -57,13 +58,13 @@ function AgregarFlora() {
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Descripcion</Form.Label>
+            <Form.Label>Titulo</Form.Label>
             <Form.Control
               required
               type="string"
-              placeholder="Muy grande"
-              name="descripcion"
-              value={formValues.descripcion}
+              placeholder="Esta especie solamente crece en biomas semi-aridos"
+              name="titulo"
+              value={formValues.titulo}
               onChange={handleChange}
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
@@ -78,6 +79,18 @@ function AgregarFlora() {
               placeholder="http:...."
               name="imagen"
               value={formValues.imagen}
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>Descripcion</Form.Label>
+            <Form.Control
+              required
+              type="string"
+              placeholder="El doctor Alex descubrio esta planta en las Amazonas en 1934 y se la trajo a Mexico"
+              name="descripcion"
+              value={formValues.descripcion}
               onChange={handleChange}
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
