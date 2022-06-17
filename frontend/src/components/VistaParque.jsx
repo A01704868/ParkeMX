@@ -9,7 +9,14 @@ import "../css/styles.css";
 import Anuncio from "./Anuncio";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
-import { Card, Button, Carousel, Container, Dropdown, Link } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Carousel,
+  Container,
+  Dropdown,
+  Link,
+} from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -30,48 +37,45 @@ function MyMapComponent({ center, zoom, width, height }) {
     });
   });
 
-  return <div ref={ref} id="map" />
-};
+  return <div ref={ref} id="map" />;
+}
 
 function activityList(actividad) {
-  return(
+  return (
     <Container key={actividad.id}>
-      <p>
-        {actividad.nombre}
-      </p>
+      <p>{actividad.nombre}</p>
     </Container>
-  )
-};
+  );
+}
 
 function activityImgList(imagen) {
-  return(
-      <Carousel.Item>
-        <img className="d-block w-100" src={imagen.imagen}
-      />
-      </Carousel.Item>
-  )
-};
+  return (
+    <Carousel.Item>
+      <img className="d-block w-100" src={imagen.imagen} />
+    </Carousel.Item>
+  );
+}
 
 function faunaListImg(fauna) {
-  const url = "/fauna/"+ fauna.id;
-  return(
+  const url = "/fauna/" + fauna.id;
+  return (
     <Carousel.Item>
       <a href={url}>
-      <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
+        <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
       </a>
     </Carousel.Item>
-  )
+  );
 }
 
 function floraListImg(flora) {
-  const url = "/flora/"+ flora.id;
-  return(
+  const url = "/flora/" + flora.id;
+  return (
     <Carousel.Item key={flora.id}>
-    <a href={url}>
-      <img className="d-block w-100 img-flora" src={flora.imagen}></img>
-    </a>
+      <a href={url}>
+        <img className="d-block w-100 img-flora" src={flora.imagen}></img>
+      </a>
     </Carousel.Item>
-  )
+  );
 }
 
 function VistaParque() {
@@ -86,7 +90,6 @@ function VistaParque() {
   const [activityImg, setImgActivity] = useState([]);
   const [fauna, setFauna] = useState([]);
   const [flora, setFlora] = useState([]);
-
 
   useEffect(() => {
     const getData = () => {
@@ -108,10 +111,15 @@ function VistaParque() {
 
       let promise5 = axios.get(
         "http://localhost:4000/api/parques/parkFlora/" + id
-      )
+      );
 
+<<<<<<< HEAD
         Promise.all([promise1, promise2, promise3, promise4, promise5])
         .then(values => {
+=======
+      Promise.all([promise1, promise2, promise3, promise4, promise5])
+        .then((values) => {
+>>>>>>> origin/RodolfoFinal
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
           setAbrir(values[0].data.horario[0].horaAbrir);
@@ -164,6 +172,7 @@ function VistaParque() {
       </Carousel>
 
       <Container className="row-hero">
+<<<<<<< HEAD
       <Card style={{ width: '100%' }} className="pb-4">
 
       <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
@@ -192,6 +201,36 @@ function VistaParque() {
         </Card.Body>
 
         <Dropdown>
+=======
+        <Card style={{ width: "100%" }}>
+          <Wrapper
+            apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA"
+            render={render}
+          >
+            <MyMapComponent center={center} zoom={zoom} height={height} />
+          </Wrapper>
+          <Card.Body className="row-info-card">
+            <div className="col-3">
+              <Card.Title>HORARIO</Card.Title>
+              <Card.Text>{dias}</Card.Text>
+              <Card.Text>
+                {abrir} - {cerrar}
+              </Card.Text>
+            </div>
+            <div className="col-3">
+              <Card.Title>UBICACIÓN</Card.Title>
+              <Card.Text>{parque.direccion}</Card.Text>
+            </div>
+          </Card.Body>
+
+          <Card.Body>
+            <Button className="mt-5" href={visitar}>
+              ¿CÓMO LLEGAR?
+            </Button>
+          </Card.Body>
+
+          <Dropdown>
+>>>>>>> origin/RodolfoFinal
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Agregar
             </Dropdown.Toggle>
@@ -208,12 +247,12 @@ function VistaParque() {
       </Container>
 
       <Container className="sections-container">
-      <h2>Clima</h2>
-      <Weather
-        style={{ padding: "1rem" }}
-        latitude={parque.latitud}
-        longitude={parque.longitud}
-      />
+        <h2>Clima</h2>
+        <Weather
+          style={{ padding: "1rem" }}
+          latitude={parque.latitud}
+          longitude={parque.longitud}
+        />
       </Container>
 
       <Container className="sections-container">
@@ -224,14 +263,16 @@ function VistaParque() {
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
           <div className="col-6 pt-5 col-custom">
-          <p>
-            {actividades.map(activityList)}
-            </p>
+            <p>{actividades.map(activityList)}</p>
           </div>
           <div className="col-6 pt-5">
+<<<<<<< HEAD
           <Carousel>
             {activityImg.map(activityImgList)}
           </Carousel>
+=======
+            <Carousel>{activityImg.map(activityImgList)}</Carousel>
+>>>>>>> origin/RodolfoFinal
           </div>
         </div>
       </div>
@@ -253,7 +294,7 @@ function VistaParque() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
