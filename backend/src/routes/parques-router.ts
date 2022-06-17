@@ -89,6 +89,20 @@ async function postAnuncio(titulo, descripcion, variante, parqueId){
     return anuncio;
 }
 
+export async function getPactivities(id){
+    const pActivities = await prisma.actividad.findMany({
+        where: {
+            parques: {
+              some: {
+                parqueId: id,
+              },
+            },
+          },
+    });
+
+    return pActivities;
+}
+
 //route for retrieving single park by id
 router.get('/parque/:id', async (req, res) => {
     const park = await getPark(parseInt(req.params.id));
@@ -105,6 +119,12 @@ router.post('/anuncio', async (req,res) => {
     const {titulo, descripcion, variante, parqueId} = req.body;
     const result = await postAnuncio(titulo, descripcion, variante, parseInt(parqueId));
     res.status(OK).json(result);
+});
+
+
+router.get('/pActivities/:id', async (req, res) => {
+    const activities = await getPactivities(parseInt(req.params.id));
+    res.status(OK).json(activities);
 });
 /*router.get('/horario', async (req, res) => {
     const horarios = await getHorario();
