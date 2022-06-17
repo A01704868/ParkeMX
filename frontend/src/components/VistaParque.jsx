@@ -30,8 +30,8 @@ function MyMapComponent({ center, zoom, width, height }) {
     });
   });
 
-  return <div ref={ref} id="map" />;
-}
+  return <div ref={ref} id="map" />
+};
 
 function activityList(actividad) {
   return(
@@ -41,7 +41,16 @@ function activityList(actividad) {
       </p>
     </Container>
   )
-}
+};
+
+function activityImgList(imagen) {
+  return(
+      <Carousel.Item>
+        <img className="d-block w-100" src={imagen.imagen}
+      />
+      </Carousel.Item>
+  )
+};
 
 function VistaParque() {
   const { id } = useParams();
@@ -52,6 +61,7 @@ function VistaParque() {
   const [cerrar, setCerrar] = useState("");
   const [dias, setDias] = useState("");
   const [actividades, setActivity] = useState([]);
+  const [activityImg, setImgActivity] = useState([]);
 
 
   useEffect(() => {
@@ -64,7 +74,11 @@ function VistaParque() {
         "http://localhost:4000/api/parques/pActivities/" + id
       );
 
-        Promise.all([promise1, promise2])
+      let promise3= axios.get(
+        "http://localhost:4000/api/parques/activityImg/" + id
+      )
+
+        Promise.all([promise1, promise2, promise3])
         .then(values => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
@@ -72,6 +86,7 @@ function VistaParque() {
           setCerrar(values[0].data.horario[0].horaCerrar);
           setDias(values[0].data.horario[0].dias);
           setActivity(values[1].data);
+          setImgActivity(values[2].data);
         })
         .catch(e=>console.log(e))
     }
@@ -85,8 +100,6 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
   const zoom = 15;
   const height = 600;
   const visitar = "https://www.google.com/maps/place/"+parque.nombre;
-
-  console.log(actividades)
 
   return (
     <div>
@@ -178,7 +191,9 @@ const url = "http://localhost:4000/api/parques/img/"+parque.id;
             </p>
           </div>
           <div className="col-6 pt-5">
-            <img className="d-block w-100" src={url} alt="Imagen no disponible"/>
+          <Carousel>
+            {activityImg.map(activityImgList)}
+          </Carousel>
           </div>
         </div>
       </div>
