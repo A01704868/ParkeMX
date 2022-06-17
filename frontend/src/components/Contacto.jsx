@@ -5,6 +5,8 @@ import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
 import ContactoEditar from "./ContactoEditar";
 import ContactoAgregar from "./ContactoAgregar";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const contactoUrl = "http://localhost:4000/api/encargado";
 
@@ -72,58 +74,64 @@ const Contacto = ({ id }) => {
           <tr>
             <th>Nombre</th>
             <th>Teléfono</th>
-            <th>Borrar</th>
-            <th>Editar</th>
-            <th>Agregar</th>
+            <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+              <th>Borrar</th>
+              <th>Editar</th>
+              <th>Agregar</th>
+            </RBACWrapper>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{contactoData.nombre}</td>
             <td>{contactoData.telefono}</td>
-            <td>
-              <Icon.Trash
-                color={contactoData.id ? "red" : "grey"}
-                title="Borrar Contacto"
-                style={{ cursor: contactoData.id ? "pointer" : "initial" }}
-                onClick={() => contactoData.id && setIsDialogOpen(true)}
-              />
-            </td>
-            <td>
-              <Icon.PencilFill
-                title="Editar Contacto"
-                color={contactoData.id ? "black" : "grey"}
-                style={{ cursor: contactoData.id ? "pointer" : "initial" }}
-                onClick={() => contactoData.id && setEditIsOpen(true)}
-              />
-            </td>
-            <td>
-              <Icon.PlusCircle
-                color={contactoData.id ? "grey" : "green"}
-                title="Agregar Contacto"
-                style={{ cursor: contactoData.id ? "initial" : "pointer" }}
-                onClick={() => !contactoData.id && setAddIsOpen(true)}
-              />
-            </td>
+            <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+              <td>
+                <Icon.Trash
+                  color={contactoData.id ? "red" : "grey"}
+                  title="Borrar Contacto"
+                  style={{ cursor: contactoData.id ? "pointer" : "initial" }}
+                  onClick={() => contactoData.id && setIsDialogOpen(true)}
+                />
+              </td>
+              <td>
+                <Icon.PencilFill
+                  title="Editar Contacto"
+                  color={contactoData.id ? "black" : "grey"}
+                  style={{ cursor: contactoData.id ? "pointer" : "initial" }}
+                  onClick={() => contactoData.id && setEditIsOpen(true)}
+                />
+              </td>
+              <td>
+                <Icon.PlusCircle
+                  color={contactoData.id ? "grey" : "green"}
+                  title="Agregar Contacto"
+                  style={{ cursor: contactoData.id ? "initial" : "pointer" }}
+                  onClick={() => !contactoData.id && setAddIsOpen(true)}
+                />
+              </td>
+            </RBACWrapper>
           </tr>
         </tbody>
       </Table>
-      <DialogoBorrar
-        id={contactoData.id}
-        isOpen={isDialogOpen}
-        onCancel={() => setIsDialogOpen(false)}
-        onDelete={onDelete}
-      />
-      <ContactoEditar
-        idContacto={contactoData.id}
-        mostrarForma={editIsOpen}
-        onClose={onEditClosed}
-      />
-      <ContactoAgregar
-        parqueId={id}
-        mostrarForma={addIsOpen}
-        onClose={onAddClosed}
-      />
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <DialogoBorrar
+          id={contactoData.id}
+          isOpen={isDialogOpen}
+          onCancel={() => setIsDialogOpen(false)}
+          onDelete={onDelete}
+        />
+        <ContactoEditar
+          idContacto={contactoData.id}
+          mostrarForma={editIsOpen}
+          onClose={onEditClosed}
+        />
+        <ContactoAgregar
+          parqueId={id}
+          mostrarForma={addIsOpen}
+          onClose={onAddClosed}
+        />
+      </RBACWrapper>
     </>
   );
 };

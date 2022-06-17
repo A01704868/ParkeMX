@@ -33,7 +33,6 @@ export const cookieProps = Object.freeze({
 
 const isNil = (value: any) => value === null || value === undefined;
 
-
 /**
  * Login a user.
  */
@@ -49,6 +48,12 @@ router.post(p.login, async (req: Request, res: Response) => {
     // Add jwt to cookie
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
+    res.cookie('email', email, {
+        maxAge: Number(process.env.COOKIE_EXP),
+        domain: (process.env.COOKIE_DOMAIN),
+        secure: true
+    });
+
     // Return
     return res.status(OK).end();
 });
@@ -76,6 +81,11 @@ router.post(p.signon, async (req: Request, res: Response) => {
     // Add jwt to cookie
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
+    res.cookie('email', email, {
+        maxAge: Number(process.env.COOKIE_EXP),
+        domain: (process.env.COOKIE_DOMAIN),
+        secure: true
+    });
     // Return
     return res.status(CREATED).end();
 });
@@ -87,6 +97,7 @@ router.post(p.signon, async (req: Request, res: Response) => {
 router.get(p.logout, (_: Request, res: Response) => {
     const { key, options } = cookieProps;
     res.clearCookie(key, options);
+    res.clearCookie('email', options);
     return res.status(OK).end();
 });
 
