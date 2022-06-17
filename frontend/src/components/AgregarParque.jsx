@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import BarraNav from "./BarraNav";
 import { savePark } from "../services/index";
 
@@ -12,7 +12,7 @@ function AgregarParque() {
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
-    imagen: "cozumel-reef-parks.jpg",
+    imagen: "",
     direccion: "",
     latitud: 0.0,
     longitud: 0.0,
@@ -21,7 +21,7 @@ function AgregarParque() {
     superficieMarina: 0.0,
   });
 
-  const inputFileRef = useRef();
+  //const inputFileRef = useRef();
 
   //Validar
   const handleSubmit = (event) => {
@@ -29,7 +29,7 @@ function AgregarParque() {
     //console.log(inputFileRef.current.files);
     //handleSubmit({ ...formValues, image: inputFileRef.current.files[0] });
     console.log("FIRST: ", formValues);
-    savePark({ ...formValues, image: inputFileRef.current.files[0] });
+    savePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -155,14 +155,17 @@ function AgregarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom03">
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Insertar imagen parque</Form.Label>
-              <Form.Control type="file" ref={inputFileRef} />
-            </Form.Group>
-            <Form.Control.Feedback type="invalid">
-              Ingresa una ciudad valida.
-            </Form.Control.Feedback>
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>Inserta Url de imagen</Form.Label>
+            <Form.Control
+              required
+              type="string"
+              placeholder="http:...."
+              name="imagen"
+              value={formValues.imagen}
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
         </Row>
 

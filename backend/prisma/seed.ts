@@ -4,12 +4,12 @@ const db = new PrismaClient();
 async function main() {
      const parqueSeeder = db.parque.createMany({
          data: [
-             { nombre: "Alto Golfo de California y Delta del Río Colorado", descripcion: "alguna informacion basica", imagen: "20473816904.jpg", direccion: "P.º de los Héroes 96, Zona Urbana Rio Tijuana, 22010 Tijuana, B.C." , latitud: 31.737222222222, longitud: -114.5425, fechaDecreto: "1993/06/10", superficieMarina: 527608.70441, superficieTerrestre: 407147.54559, clicks: 20 },
-             { nombre: "Arrecife Alacranes",  descripcion: "alguna informacion basica", imagen: "Isla_Perez.jpg", direccion: "acceso exclusivamente por via maritima",  latitud: 22.474538, longitud: -89.69506, fechaDecreto: "1994/06/06", superficieMarina: 333715.503244, superficieTerrestre: 53.001756, clicks: 15 },
-             { nombre: "Arrecife de Puerto Morelos", descripcion: "alguna informacion basica", imagen: "PtoMorelos.jpg", direccion: "Plus Code: W53F+QXH Caracol, Quintana Roo",  latitud: 20.90444444, longitud: -86.825, fechaDecreto: "1998/02/02", superficieMarina: 9028.887456, superficieTerrestre: 37.743644, clicks: 30 },
-             { nombre: "Arrecifes de Cozumel", descripcion: "alguna informacion basica", imagen: "cozumel-reef-parks.jpg", direccion: "Avenida 4 356, Centro, 77600 San Miguel de Cozumel, Q.R.",  latitud: 20.29361111, longitud: -87.02472222, fechaDecreto: "1996/07/19", superficieMarina: 11905.596084, superficieTerrestre: 82.278916, clicks: 40 },
-             { nombre: "Arrecifes de Sian Ka'an", descripcion: "alguna informacion basica", imagen: "siankan-destacada.jpg",  direccion: "Felipe Carrillo Puerto, Quintana Roo",  latitud: 19.851182986831976,  longitud: -87.63879593136728, fechaDecreto: "1998/02/02", superficieMarina: 1361.001633, superficieTerrestre: 33566.156767, clicks: 10 },
-             { nombre: "El Cimatario", descripcion: "alguna informacion basica", imagen: "cimatario.jpg",  direccion: "Edo de Mexico 4660, La Ceja, Qro.",  latitud: 20.534849962159694,  longitud: -100.3577293854862, fechaDecreto: "1982/07/21", superficieMarina: 0, superficieTerrestre: 2447.874, clicks: 15 },
+             { nombre: "Alto Golfo de California y Delta del Río Colorado", descripcion: "alguna informacion basica", imagen: "https://tudu.com.mx/wp-content/uploads/2020/10/lugar-2515-1.jpg", direccion: "P.º de los Héroes 96, Zona Urbana Rio Tijuana, 22010 Tijuana, B.C." , latitud: 31.737222222222, longitud: -114.5425, fechaDecreto: "1993/06/10", superficieMarina: 527608.70441, superficieTerrestre: 407147.54559, clicks: 20 },
+             { nombre: "Arrecife Alacranes",  descripcion: "alguna informacion basica", imagen: "https://yucatan.travel/wp-content/uploads/2020/03/Arrecife_Alacranes.jpg", direccion: "acceso exclusivamente por via maritima",  latitud: 22.474538, longitud: -89.69506, fechaDecreto: "1994/06/06", superficieMarina: 333715.503244, superficieTerrestre: 53.001756, clicks: 15 },
+             { nombre: "Arrecife de Puerto Morelos", descripcion: "alguna informacion basica", imagen: "https://www.mayakaanresidences.com/wp-content/uploads/2021/12/Parque-nacional-arrecife-de-Puerto-Morelos.jpg", direccion: "Plus Code: W53F+QXH Caracol, Quintana Roo",  latitud: 20.90444444, longitud: -86.825, fechaDecreto: "1998/02/02", superficieMarina: 9028.887456, superficieTerrestre: 37.743644, clicks: 30 },
+             { nombre: "Arrecifes de Cozumel", descripcion: "alguna informacion basica", imagen: "https://aquaworld.com.mx/wp-content/uploads/2021/04/protege-arrecifes-de-coral_1100x619.jpeg", direccion: "Avenida 4 356, Centro, 77600 San Miguel de Cozumel, Q.R.",  latitud: 20.29361111, longitud: -87.02472222, fechaDecreto: "1996/07/19", superficieMarina: 11905.596084, superficieTerrestre: 82.278916, clicks: 40 },
+             { nombre: "Arrecifes de Sian Ka'an", descripcion: "alguna informacion basica", imagen: "https://planb.mx/wp-content/uploads/2021/05/excursion_bisofera_sian_kaan_tu_experiencia_520190424110451.jpg",  direccion: "Felipe Carrillo Puerto, Quintana Roo",  latitud: 19.851182986831976,  longitud: -87.63879593136728, fechaDecreto: "1998/02/02", superficieMarina: 1361.001633, superficieTerrestre: 33566.156767, clicks: 10 },
+             { nombre: "El Cimatario", descripcion: "alguna informacion basica", imagen: "https://www.ciudadypoder.mx/wp-content/uploads/2016/09/7-B_AR-1.jpg",  direccion: "Edo de Mexico 4660, La Ceja, Qro.",  latitud: 20.534849962159694,  longitud: -100.3577293854862, fechaDecreto: "1982/07/21", superficieMarina: 0, superficieTerrestre: 2447.874, clicks: 15 },
          ]
      });
 
@@ -108,10 +108,10 @@ async function main() {
 
     const floraSeeder = db.flora.createMany({
         data: [
-            { nombre: "Bugambilia", imagen: "bugambilia.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Lirio amarillo", imagen: "lily.jpg", descripcion: "informacion sobre la planta"},
-            { nombre: "Hortensia", imagen: "hortensia.jpg", descripcion: "info de la planta"},
-            { nombre: "Margarita", imagen: "margarita.jpg", descripcion: "info de la planta"},
+            { nombre: "Bugambilia", imagen: "https://sumedico.blob.core.windows.net/images/2019/06/14/60285_flor_de_bugambilia.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Lirio amarillo", imagen: "https://www.jardineriaon.com/wp-content/uploads/2016/04/lirio-amarillo.jpg", descripcion: "informacion sobre la planta"},
+            { nombre: "Hortensia", imagen: "https://cdn.pixabay.com/photo/2018/08/10/12/16/flowers-3596734_960_720.jpg", descripcion: "info de la planta"},
+            { nombre: "Margarita", imagen: "https://www.lysaflores.com/blog/wp-content/uploads/2019/06/margaritas2.jpg", descripcion: "info de la planta"},
 
         ]
     });
@@ -128,9 +128,9 @@ async function main() {
 
     const faunaSeeder = db.fauna.createMany({
         data: [
-            { nombre: "aguila", imagen: "aguila.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "sardinilla", imagen: "sardinilla.jpg", descripcion: "informacion sobre el animal"},
-            { nombre: "tarantula", imagen: "tarantula.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "aguila", imagen: "https://misanimales.com/wp-content/uploads/2020/07/aguila-calva-caza-1024x745.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "sardinilla", imagen: "https://pescadoacasa.com/wp-content/uploads/2020/08/sardina-fresca.jpg", descripcion: "informacion sobre el animal"},
+            { nombre: "tarantula", imagen: "https://sooluciona.com/wp-content/uploads/2018/11/alimentacion-de-las-tarantulas-de-anillos-rojos.jpg", descripcion: "informacion sobre el animal"},
         ]
     });
 

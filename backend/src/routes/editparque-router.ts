@@ -22,3 +22,25 @@ router.put('/editParque', async (req:Request, res:Response) => {
 })
 
 export default router;
+
+
+/*
+
+router.put(p.update, async (req: Request, res: Response) => {
+
+    const { encargado } = req.body ?? {};
+    console.log(encargado)
+    if(!encargado) {
+        throw new ParamMissingError();
+    }
+
+    const editEncargado = await updateEncargado(encargado);
+    if (!editEncargado) {
+        return res.status(NOT_FOUND).json({ error: `No hay un encargado con id: ${encargado.id}` })
+    }
+
+    return res.status(OK).json(editEncargado);
+});
+
+
+*/

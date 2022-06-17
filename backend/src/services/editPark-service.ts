@@ -28,6 +28,23 @@ export async function editParks(parque: Parque): Promise<Parque> {
 
 }
 
+/*
+export async function updateEncargado(encargado: encargadoParque) {
+  const { id, nombre, telefono } = encargado;
+
+  const updateEncargado: encargadoParque = await prisma.encargadoParque.update({
+    where: { id: id },
+    data: {
+      nombre: nombre,
+      telefono: telefono
+    },
+  });
+
+  return updateEncargado;
+}
+
+*/
+
 
 export default {
     editParks
