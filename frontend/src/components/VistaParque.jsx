@@ -172,7 +172,6 @@ function VistaParque() {
       </Carousel>
 
       <Container className="row-hero">
-<<<<<<< HEAD
       <Card style={{ width: '100%' }} className="pb-4">
 
       <Wrapper apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA" render={render}>
@@ -201,36 +200,6 @@ function VistaParque() {
         </Card.Body>
 
         <Dropdown>
-=======
-        <Card style={{ width: "100%" }}>
-          <Wrapper
-            apiKey="AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA"
-            render={render}
-          >
-            <MyMapComponent center={center} zoom={zoom} height={height} />
-          </Wrapper>
-          <Card.Body className="row-info-card">
-            <div className="col-3">
-              <Card.Title>HORARIO</Card.Title>
-              <Card.Text>{dias}</Card.Text>
-              <Card.Text>
-                {abrir} - {cerrar}
-              </Card.Text>
-            </div>
-            <div className="col-3">
-              <Card.Title>UBICACIÓN</Card.Title>
-              <Card.Text>{parque.direccion}</Card.Text>
-            </div>
-          </Card.Body>
-
-          <Card.Body>
-            <Button className="mt-5" href={visitar}>
-              ¿CÓMO LLEGAR?
-            </Button>
-          </Card.Body>
-
-          <Dropdown>
->>>>>>> origin/RodolfoFinal
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Agregar
             </Dropdown.Toggle>
@@ -266,13 +235,9 @@ function VistaParque() {
             <p>{actividades.map(activityList)}</p>
           </div>
           <div className="col-6 pt-5">
-<<<<<<< HEAD
           <Carousel>
             {activityImg.map(activityImgList)}
           </Carousel>
-=======
-            <Carousel>{activityImg.map(activityImgList)}</Carousel>
->>>>>>> origin/RodolfoFinal
           </div>
         </div>
       </div>
