@@ -3,7 +3,6 @@ import Navbar from "./BarraNav";
 import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
-import EditarParque from "./EditarParque";
 import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";

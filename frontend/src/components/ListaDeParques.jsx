@@ -14,12 +14,10 @@ import {
   Container,
   InputGroup,
   FormControl,
-  Link,
 } from "react-bootstrap";
 
 import { deletePark } from "../services/index";
 import { deleteHorario } from "../services/index";
-import { updatePark } from "../services/index";
 
 const reverse = (arr1) => {
   const aux = [];
@@ -49,7 +47,7 @@ const renderAbrir = (horario) => {
 };
 
 const renderCard = (card) => {
-  const url = "http://localhost:4000/api/parques/img/" + card.id;
+  //const url = "http://localhost:4000/api/parques/img/" + card.id;
 
   return (
     <Col key={card.id}>
@@ -85,9 +83,9 @@ const renderCard = (card) => {
   );
 };
 
-function updateHandler(card) {
-  updatePark(card);
-}
+// function updateHandler(card) {
+//   updatePark(card);
+// }
 function deleteHandler(id) {
   deletePark(id);
 }

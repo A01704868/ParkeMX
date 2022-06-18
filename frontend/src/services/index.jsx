@@ -124,6 +124,29 @@ export async function updatePark(park) {
   }
 }
 
+export async function updateFlora(flora) {
+  try {
+    let response = axios
+      .put(`${baseUrl}/editFlora/${flora.id}`, {
+        id: flora.id,
+        nombre: flora.nombre,
+        imagen: flora.imagen,
+        titulo: flora.titulo,
+        descripcion: flora.descripcion,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
 export async function saveHorario(horario) {
   console.log("ORE: ", horario);
   try {

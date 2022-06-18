@@ -18,6 +18,23 @@ function BarraNav() {
           />
         </Navbar.Brand>
 
+        <Navbar.Collapse id="navbar-dark-example">
+          <Nav>
+            <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Opciones"
+              menuVariant="dark"
+            >
+              <NavDropdown.Item href={"/agregarhorario"}>
+                Agregar Horario
+              </NavDropdown.Item>
+              <NavDropdown.Item href={"/agregaranuncio"}>
+                Agregar Anuncio
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+
         <Navbar.Brand href="#login">
           <img
             src={usericon}

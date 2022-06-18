@@ -5,8 +5,8 @@ import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Carousel, Container } from "react-bootstrap";
-import { useEffect, useRef, useState } from "react";
+import { Container, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function FloraId() {
@@ -28,7 +28,7 @@ function FloraId() {
       .catch((e) => console.log(e));
     };
     getData();
-  }, []);
+  }, [id]);
   console.log(flora)
 
   return(
@@ -38,6 +38,7 @@ function FloraId() {
         <img
           className="hero-img-flora img-fauna pb-4"
           src= {flora.imagen}
+          alt="Error al cargar la imagen"
         />
         <div>
           <h1>{flora.nombre}</h1>
@@ -59,6 +60,14 @@ function FloraId() {
         </div>*/}
         <p className="mb-3">{flora.descripcion}</p>
       </Container>
+
+      <Button
+          className="link"
+          variant="secondary"
+          href={"/editFlora/" + flora.id}
+        >
+          Editar
+        </Button>
 
       <Footer />
     </div>

@@ -28,7 +28,7 @@ function EditarParque() {
         .catch((e) => console.log(e));
     };
 
-    let data = getData();
+    getData();
   }, [id]);
   //Validar
   const [validated, setValidated] = useState(false);
