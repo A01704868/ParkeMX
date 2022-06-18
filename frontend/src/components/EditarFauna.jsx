@@ -38,15 +38,19 @@ function EditarFauna() {
     // console.log(formValues);
     //console.log(inputFileRef.current.files);
     //handleSubmit({ ...formValues, image: inputFileRef.current.files[0] });
-    updateFauna({ ...formValues });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      setValidated(true);
     }
 
-    setValidated(true);
+    if(validated){
+      updateFauna({ ...formValues });
+      document.location.href="/";
+    }
   };
 
   const handleChange = (event) => {

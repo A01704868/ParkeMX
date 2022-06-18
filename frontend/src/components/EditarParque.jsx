@@ -43,16 +43,23 @@ function EditarParque() {
     // console.log(formValues);
     //console.log(inputFileRef.current.files);
     //handleSubmit({ ...formValues, image: inputFileRef.current.files[0] });
-    console.log("FIRST: ", formValues);
     updatePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      setValidated(true);
     }
 
-    setValidated(true);
+
+    if(validated){
+      updatePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
+      document.location.href="/";
+    }
+
+    
   };
   //Axios
   const handleChange = (event) => {

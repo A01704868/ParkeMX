@@ -77,7 +77,6 @@ export async function saveCart(cartaruta) {
 
 export async function deletePark(parkId) {
   try {
-    console.log("ID: ", parkId);
     let response = axios
       .delete(`${baseUrl}/deleteparque/${parkId}`, {
         id: parkId,
@@ -89,10 +88,12 @@ export async function deletePark(parkId) {
         console.log(error);
       });
 
-    return response;
+    //return response;
   } catch (event) {
     console.log(event);
   }
+
+  document.location.href="/";
 }
 
 export async function updateFauna(fauna) {
@@ -205,7 +206,6 @@ export async function saveHorario(horario) {
 
 export async function deleteHorario(horarioId) {
   try {
-    console.log("ID: ", horarioId);
     let response = axios
       .delete(`${baseUrl}/deletehorario/${horarioId}`, {
         id: horarioId,
@@ -225,7 +225,6 @@ export async function deleteHorario(horarioId) {
 
 export async function deleteAnuncio(anuncioId) {
   try {
-    console.log("ID: ", anuncioId);
     let response = axios
       .delete(`${baseUrl}/deleteanuncio/${anuncioId}`, {
         id: anuncioId,

@@ -206,7 +206,7 @@ function ListaDeParques() {
             </button>
           </Col>
           <Col>
-            <Button variant={color} onClick={toggleDistance}>Palanca: Ordenar por distancia a mi</Button>
+            <Button variant={color} onClick={toggleDistance}>Cual parque esta mas cerca a mi?</Button>
           </Col>
           <Col>
 
@@ -234,12 +234,6 @@ function ListaDeParques() {
           </Col>
         </Row>
       </Container>
-
-      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <Button type="submit" variant="success" href={"/agregar"}>
-          Agregar
-        </Button>
-      </RBACWrapper>
       
       <Row className="m-5 g-4">
         {// eslint-disable-next-line

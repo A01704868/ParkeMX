@@ -90,10 +90,10 @@ const Usuario = () => {
                                 <td>{usuario.role === 1 ? "Admin" : "User"}</td>
                                 <td>
                                     <Icon.Trash
-                                        color={usuario.id ? "red" : "grey"}
+                                        color={usuario.role === 0 ? "red" : "grey"}
                                         title="Borrar Contacto"
                                         style={{ cursor: usuario.id ? "pointer" : "initial" }}
-                                        onClick={() => borrarContacto(usuario.id)}
+                                        onClick={usuario.role === 0 ? () => borrarContacto(usuario.id) : null}
                                     />
                                 </td>
                                 <td>

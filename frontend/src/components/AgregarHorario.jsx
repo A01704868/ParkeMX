@@ -20,15 +20,20 @@ function AgregarHorario() {
   });
 
   const handleSubmit = (event) => {
-    saveHorario({ ...formValues });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      setValidated(true);
     }
 
-    setValidated(true);
+    if(validated){
+      saveHorario({ ...formValues });
+      document.location.href="/";
+    }
+    
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,6 +42,7 @@ function AgregarHorario() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Horario</h1>
@@ -86,6 +92,7 @@ function AgregarHorario() {
         </Button>
       </Form>
       <Footer />
+      </RBACWrapper>
     </div>
   );
 }

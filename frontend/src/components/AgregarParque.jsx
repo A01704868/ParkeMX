@@ -13,30 +13,33 @@ function AgregarParque() {
   const [validated, setValidated] = useState(false);
   //Axios
   const [formValues, setFormValues] = useState({
-    nombre: "",
-    descripcion: "",
-    imagen: "",
-    direccion: "",
-    latitud: "",
-    longitud: "",
-    fechaDecreto: "",
-    superficieTerrestre: "",
-    superficieMarina: "",
+    nombre: null,
+    descripcion: null,
+    imagen: null,
+    direccion: null,
+    latitud: null,
+    longitud: null,
+    fechaDecreto: null,
+    superficieTerrestre: null,
+    superficieMarina: null,
   });
 
   //Validar
   const handleSubmit = (event) => {
-    console.log("FIRST: ", formValues);
-    savePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
 
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      setValidated(true);
     }
 
-    setValidated(true);
+    if(validated){
+      savePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
+      document.location.href="/";
+    }
   };
   //Axios
   const handleChange = (event) => {

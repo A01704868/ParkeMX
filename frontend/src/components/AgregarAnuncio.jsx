@@ -17,15 +17,20 @@ function AgregarAnuncio() {
   });
 
   const handleSubmit = (event) => {
-    saveAnuncio({ ...formValues });
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      setValidated(true);
     }
 
-    setValidated(true);
+    if(validated){
+      saveAnuncio({ ...formValues });
+      document.location.href="/";
+    }
+
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
