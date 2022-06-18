@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,15 +8,12 @@ import Footer from "./Footer";
 import { saveHorario } from "../services/index";
 import { useParams } from "react-router-dom";
 
-function AgregarHorario() {
+
+function EditarHorario() {
   const { id } = useParams();
-  const [validated, setValidated] = useState(false);
-  const [formValues, setFormValues] = useState({
-    dias: "",
-    horaAbrir: "",
-    horaCerrar: "",
-    parqueId: id,
-  });
+
+  const [horario, setHorario] = useState({});
+  const [formValues, setFormValues] = useState({});
 
   const handleSubmit = (event) => {
     saveHorario({ ...formValues });
@@ -77,6 +75,19 @@ function AgregarHorario() {
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>id parque</Form.Label>
+            <Form.Control
+              required
+              type="number"
+              placeholder="Esta ruta esta compuesta por..."
+              name="parqueId"
+              value={formValues.parqueId}
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+          </Form.Group>
         </Row>
 
         <Button type="submit" className="mb-4">
@@ -88,4 +99,4 @@ function AgregarHorario() {
   );
 }
 
-export default AgregarHorario;
+export default EditarHorario;*/

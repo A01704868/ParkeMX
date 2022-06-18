@@ -42,7 +42,7 @@ const renderAbrir = (horario) => {
         variant="warning"
         onClick={() => deletehHandler(horario.id)}
       >
-        Eliminar
+        Eliminar Horario
       </Button>
     </Container>
   );
@@ -68,7 +68,7 @@ const renderCard = (card) => {
         </Button>
         <Button
           className="link"
-          variant="Secondary"
+          variant="secondary"
           href={"/editarparque/" + card.id}
         >
           Editar

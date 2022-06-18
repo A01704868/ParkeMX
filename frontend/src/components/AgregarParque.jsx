@@ -15,22 +15,18 @@ function AgregarParque() {
     descripcion: "",
     imagen: "",
     direccion: "",
-    latitud: 0.0,
-    longitud: 0.0,
+    latitud: "",
+    longitud: "",
     fechaDecreto: "",
-    superficieTerrestre: 0.0,
-    superficieMarina: 0.0,
+    superficieTerrestre: "",
+    superficieMarina: "",
   });
-
-  //const inputFileRef = useRef();
 
   //Validar
   const handleSubmit = (event) => {
-    // console.log(formValues);
-    //console.log(inputFileRef.current.files);
-    //handleSubmit({ ...formValues, image: inputFileRef.current.files[0] });
     console.log("FIRST: ", formValues);
     savePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
+
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -49,7 +45,7 @@ function AgregarParque() {
   return (
     <div>
       <BarraNav />
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form required noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Nuevo Parque</h1>
         <Row className="row justify-content-between">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -64,7 +60,7 @@ function AgregarParque() {
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom02">
             <Form.Label>Descripcion</Form.Label>
             <Form.Control
               required
@@ -78,19 +74,19 @@ function AgregarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>Latitud</Form.Label>
             <Form.Control
               required
               type="number"
-              placeholder="Ubicado en ..."
+              placeholder="65165"
               name="latitud"
               value={formValues.latitud}
               onChange={handleChange}
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom04">
             <Form.Label>Direccion</Form.Label>
             <Form.Control
               required
@@ -104,7 +100,7 @@ function AgregarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom05">
             <Form.Label>Longitud</Form.Label>
             <Form.Control
               required
@@ -116,7 +112,7 @@ function AgregarParque() {
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom06">
             <Form.Label>Fecha Decreto</Form.Label>
             <Form.Control
               required
@@ -130,7 +126,7 @@ function AgregarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom07">
             <Form.Label>Superficie Terrestre</Form.Label>
             <Form.Control
               required
@@ -142,10 +138,10 @@ function AgregarParque() {
             />
             <Form.Control.Feedback>Listo!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom08">
             <Form.Label>Superficie Marina</Form.Label>
             <Form.Control
-              required
+              required="required"
               type="number"
               placeholder="-15151."
               name="superficieMarina"
@@ -156,10 +152,10 @@ function AgregarParque() {
           </Form.Group>
         </Row>
         <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="4" controlId="validationCustom09">
             <Form.Label>Inserta Url de imagen</Form.Label>
             <Form.Control
-              required
+              required="required"
               type="string"
               placeholder="http:...."
               name="imagen"
@@ -170,9 +166,11 @@ function AgregarParque() {
           </Form.Group>
         </Row>
 
-        <Button type="submit" className="mb-4">Agregar</Button>
+        <Button type="submit" className="mb-4">
+          Agregar
+        </Button>
       </Form>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

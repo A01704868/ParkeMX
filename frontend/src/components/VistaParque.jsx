@@ -206,6 +206,9 @@ function VistaParque() {
               <Dropdown.Item href={"/agregartarjetaderuta/" + id}>
                 Tarjeta de Ruta
               </Dropdown.Item>
+              <Dropdown.Item href={"/agregarhorario/" + id}>
+                Agregar Horario
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Card>
@@ -222,10 +225,6 @@ function VistaParque() {
 
       <Container className="sections-container">
         <Contacto style={{ padding: "1rem" }} id={1} />
-      </Container>
-
-      <Container className="sections-container">
-        <EditarParque style={{ padding: "1rem" }} id={1} />
       </Container>
 
       <div className="mt-16 activities">
