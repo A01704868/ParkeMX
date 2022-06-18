@@ -27,10 +27,11 @@ export const cookieProps = Object.freeze({
         path: (process.env.COOKIE_PATH),
         maxAge: Number(process.env.COOKIE_EXP),
         domain: (process.env.COOKIE_DOMAIN),
-        secure: (process.env.SECURE_COOKIE === 'true'),
+        // secure: (process.env.SECURE_COOKIE === 'true'),
     },
 });
 
+const isNil = (value: any) => value === null || value === undefined;
 
 /**
  * Login a user.
@@ -38,14 +39,20 @@ export const cookieProps = Object.freeze({
 router.post(p.login, async (req: Request, res: Response) => {
     // Check email and password present
     const { email, password } = req.body;
-    if (!(email && password)) {
+    if (!email || !password) {
         throw new ParamMissingError();
     }
     // Get jwt
     const jwt = await authService.login(email, password);
+
     // Add jwt to cookie
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
+    res.cookie('email', email, {
+        maxAge: Number(process.env.COOKIE_EXP),
+        domain: (process.env.COOKIE_DOMAIN)
+    });
+
     // Return
     return res.status(OK).end();
 });
@@ -56,7 +63,7 @@ router.post(p.login, async (req: Request, res: Response) => {
 router.post(p.signon, async (req: Request, res: Response) => {
     // Check user data present
     const { name, email, password, role } = req.body;
-    if (!name || !email || !password || !role) {
+    if (isNil(name) || isNil(email) || isNil(password) || isNil(role)) {
         throw new ParamMissingError();
     }
     const user: IUser = {
@@ -73,6 +80,12 @@ router.post(p.signon, async (req: Request, res: Response) => {
     // Add jwt to cookie
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
+    res.cookie('email', email, {
+        maxAge: Number(process.env.COOKIE_EXP),
+        domain: (process.env.COOKIE_DOMAIN),
+        secure: true
+    });
+
     // Return
     return res.status(CREATED).end();
 });
@@ -84,6 +97,7 @@ router.post(p.signon, async (req: Request, res: Response) => {
 router.get(p.logout, (_: Request, res: Response) => {
     const { key, options } = cookieProps;
     res.clearCookie(key, options);
+    res.clearCookie('email', options);
     return res.status(OK).end();
 });
 

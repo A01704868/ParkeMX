@@ -155,3 +155,56 @@
   .arrow:hover{
       background: #b3d9ff;
   }
+
+
+
+
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.crear {
+  position: fixed;
+  width: 30vw;
+  left: 35vw;
+  z-index: 2;
+  animation-name: slide-in-bottom !important;
+  animation-duration: 0.75s;
+}
+
+#boton {
+  width: 49%;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 49%;
+  font-size: 1rem;
+}

@@ -43,7 +43,7 @@ router.put(p.update, async (req: Request, res: Response) => {
 
     const { encargado } = req.body ?? {};
     console.log(encargado)
-    if(!encargado) {
+    if (!encargado) {
         throw new ParamMissingError();
     }
 
@@ -62,7 +62,7 @@ router.delete(p.delete, async (req: Request, res: Response) => {
     if (id === null || id === undefined) {
         throw new ParamMissingError();
     }
-    
+
     const borrarEncargado = await deleteEncargado(id);
     res.status(OK).json(borrarEncargado);
 });

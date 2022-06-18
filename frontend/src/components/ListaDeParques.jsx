@@ -4,6 +4,7 @@ import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import carousel from "./Carousel";
 import "../css/customStyles.css";
+import "../css/styles.css";
 import {
   Dropdown,
   Card,
@@ -18,6 +19,8 @@ import {
 
 import { deletePark } from "../services/index";
 import { deleteHorario } from "../services/index";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const reverse = (arr1) => {
   const aux = [];
@@ -38,7 +41,7 @@ const renderAbrir = (horario) => {
       <Button
         className="link"
         variant="warning"
-        onClick={() => deletehHandler(horario.id)}
+        onClick={() => deleteHorario(horario.id)}
       >
         Eliminar Horario
       </Button>
@@ -50,7 +53,7 @@ const renderCard = (card) => {
   //const url = "http://localhost:4000/api/parques/img/" + card.id;
 
   return (
-    <Col key={card.id}>
+    <Col key={card.id} style={{ display: "flex", justifyContent: "center" }}>
       <Card style={{ width: "22rem", height: "100%" }}>
         <Card.Body>
           <Card.Title>{card.nombre}</Card.Title>
@@ -74,7 +77,7 @@ const renderCard = (card) => {
         <Button
           className="link"
           variant="danger"
-          onClick={() => deleteHandler(card.id)}
+          onClick={() => deletePark(card.id)}
         >
           Eliminar
         </Button>
@@ -82,16 +85,6 @@ const renderCard = (card) => {
     </Col>
   );
 };
-
-// function updateHandler(card) {
-//   updatePark(card);
-// }
-function deleteHandler(id) {
-  deletePark(id);
-}
-function deletehHandler(id) {
-  deleteHorario(id);
-}
 
 const renderDropdown = (activity) => {
   return (
@@ -106,6 +99,7 @@ let icon = "caret-down-outline";
 let toggle = 0;
 
 function ListaDeParques() {
+
   const [parques, setParques] = useState([]);
   const [searchTerm, setSearch] = useState("");
   const [activityButton, setActivityButton] = useState([]);
@@ -116,6 +110,7 @@ function ListaDeParques() {
   //investigate reducer in react manual
 
   useEffect(() => {
+
     function getPosition(position) {
       //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
 
@@ -124,7 +119,7 @@ function ListaDeParques() {
     }
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getPosition);
+      navigator.geolocation.getCurrentPosition(getPosition)
     } else {
       console.log("geolocation not available");
     }
@@ -132,32 +127,16 @@ function ListaDeParques() {
     const getData = () => {
       let promise1 = axios.get("http://localhost:4000/api/parques");
 
-      console.log("PARQUES: ", promise1);
-
       let promise2 = axios.get("http://localhost:4000/api/parques/activity");
 
-      console.log("PARQUES: ", promise2);
-
       Promise.all([promise1, promise2])
-        .then((values) => {
-          setParques(values[0].data);
-          setActivityButton(values[1].data);
-        })
-        .catch((e) => console.log(e));
-    };
+        .then(values => { setParques(values[0].data); setActivityButton(values[1].data); })
+        .catch(e => console.log(e))
+    }
 
     getData();
 
-    parques.forEach(
-      (parque) =>
-        (parque.superficieMarina = distance(
-          latitud,
-          longitud,
-          parque.latitud,
-          parque.longitud
-        ))
-    );
-
+    parques.forEach(parque => parque.superficieMarina = distance(latitud, longitud, parque.latitud, parque.longitud));
     // eslint-disable-next-line
   }, []);
 
@@ -170,16 +149,16 @@ function ListaDeParques() {
       toggle = 0;
     }
     setParques(reverse(parques));
-  };
+
+  }
 
   //Haversine algorithm
   function distance(lat1, lon1, lat2, lon2) {
-    var p = 0.017453292519943295; // Math.PI / 180
+    var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
-    var a =
-      0.5 -
-      c((lat2 - lat1) * p) / 2 +
-      (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
+    var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+      c(lat1 * p) * c(lat2 * p) *
+      (1 - c((lon2 - lon1) * p)) / 2;
 
     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
   }
@@ -187,32 +166,28 @@ function ListaDeParques() {
   function toggleDistance() {
     if (calcDistance === true) {
       setCalcDistance(false);
-      color = "info";
+      color = 'info';
     } else {
       setCalcDistance(true);
-      color = "secondary";
+      color = 'secondary';
     }
   }
 
   return (
     <div>
       <BarraNav />
-
       <Carousel>
-        {[...parques]
-          .sort((a, b) => {
-            //crean un nuevo arreglo y los 3 puntos copian los datos de parques al nuevo arreglo spread operator. tambien se puede copiar un arreglo
-            if (a.clicks > b.clicks) {
-              return -1;
-            }
-            if (a.clicks < b.clicks) {
-              return 1;
-            }
+        {[...parques].sort((a, b) => {
+          if (a.clicks > b.clicks) {
+            return -1;
+          }
 
-            return 0;
-          })
-          .slice(0, 3)
-          .map(carousel)}
+          if (a.clicks < b.clicks) {
+            return 1;
+          }
+
+          return 0;
+        }).slice(0, 3).map(carousel)}
       </Carousel>
 
       <h1>Encuentra Parques filtrando por Actividad</h1>
@@ -227,40 +202,28 @@ function ListaDeParques() {
             </button>
           </Col>
           <Col>
-            <Button variant={color} onClick={toggleDistance}>
-              Palanca: Sortear por distancia a mi
-            </Button>
+            <Button variant={color} onClick={toggleDistance}>Palanca: Ordenar por distancia a mi</Button>
           </Col>
           <Col>
+
             <InputGroup className="mb-3">
-              <FormControl
-                onChange={(event) => {
-                  setSearch(event.target.value);
-                }}
+              <FormControl onChange={(event) => { setSearch(event.target.value) }}
                 placeholder="Busqueda"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
-              <InputGroup.Text id="basic-addon2">
-                <ion-icon name="search-outline" size="large"></ion-icon>
-              </InputGroup.Text>
+              <InputGroup.Text id="basic-addon2"><ion-icon name="search-outline" size="large"></ion-icon></InputGroup.Text>
             </InputGroup>
+
           </Col>
           <Col>
-            <Dropdown
-              className="drop"
-              onSelect={(eventKey, event) => {
-                setSearchActivity(eventKey);
-              }}
-            >
+            <Dropdown className="drop" onSelect={(eventKey, event) => { setSearchActivity(eventKey); }}>
               <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                 Actividades
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item eventKey="0" href="#/action-1">
-                  Todos
-                </Dropdown.Item>
+                <Dropdown.Item eventKey="0" href="#/action-1">Todos</Dropdown.Item>
                 {activityButton.map(renderDropdown)}
               </Dropdown.Menu>
             </Dropdown>
@@ -271,50 +234,49 @@ function ListaDeParques() {
       <Button type="submit" variant="success" href={"/agregar"}>
         Agregar
       </Button>
-
+      
       <Row className="m-5 g-4">
-        {
-          // eslint-disable-next-line
-          parques
-            .filter((parque) => {
-              let result = true;
+        {// eslint-disable-next-line
+          parques.filter((parque) => {
 
-              if (searchTerm !== "") {
-                result =
-                  result &&
-                  parque.nombre
-                    .toLowerCase()
-                    .includes(searchTerm.toString().toLowerCase());
-              }
-              if (calcDistance !== false) {
-                parques.sort((parque1, parque2) => {
-                  if (parque1.superficieMarina > parque2.superficieMarina) {
-                    return 1;
-                  }
-                  if (parque1.superficieMarina < parque2.superficieMarina) {
-                    return -1;
-                  }
+            let result = true;
 
-                  return 0;
-                });
-              }
-              // eslint-disable-next-line
-              if (searchActivity != 0) {
-                let index = parque.actividades.findIndex((activity) => {
-                  // eslint-disable-next-line
-                  return activity.actividadId == searchActivity;
-                });
+            if (searchTerm !== "") {
+              result = result && parque.nombre.toLowerCase().includes(searchTerm.toString().toLowerCase())
+            }
+            if (calcDistance !== false) {
+              parques.sort((parque1, parque2) => {
+                if (parque1.superficieMarina > parque2.superficieMarina) {
+                  return 1;
+                }
+                if (parque1.superficieMarina < parque2.superficieMarina) {
+                  return -1;
+                }
 
-                result = result && index !== -1;
-              }
+                return 0;
+              });
+            }
+            // eslint-disable-next-line
+            if (searchActivity != 0) {
+              let index = parque.actividades.findIndex((activity) => {
+                // eslint-disable-next-line
+                return (activity.actividadId == searchActivity);
+              });
 
-              return result;
-            })
-            .map(renderCard)
-        }
+              result = result && (index !== -1);
+            }
+
+            return result;
+
+          }).map(renderCard)}
       </Row>
-
-      <Footer />
+      <div id="boton">
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+          <Button className="crear" type="submit" variant="success" href={"/agregar"} style={{ position: "fixed", top: "95%", width: "20vw", left: "calc(50% - 10vw)" }}>
+            Agregar
+          </Button>
+        </RBACWrapper>
+      </div>
     </div>
   );
 }

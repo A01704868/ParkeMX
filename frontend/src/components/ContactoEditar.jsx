@@ -8,14 +8,14 @@ const editarContacto = (encargado, onClose) => {
   if (!encargado) {
     return;
   }
-  
+
   axios.put(`${contactoUrl}/update`, encargado)
     .then((_) => onClose())
     .catch((_) => onClose());
 }
 
 const ContactoEditar = ({ idContacto, mostrarForma, onClose }) => {
-  const handleSave = (event) => {
+  const guardCambios = (event) => {
     const [nombreField, telefonoField] = event.target;
     const nombre = nombreField.value ?? "";
     const telefono = telefonoField.value ?? "";
@@ -26,7 +26,7 @@ const ContactoEditar = ({ idContacto, mostrarForma, onClose }) => {
     if (!nombre || !telefono) {
       return;
     }
-    
+
     const contactoUpdated = { encargado: { id: idContacto, nombre, telefono } };
     editarContacto(contactoUpdated, onClose);
     event.preventDefault();
@@ -39,16 +39,16 @@ const ContactoEditar = ({ idContacto, mostrarForma, onClose }) => {
       </Modal.Header>
 
       <Modal.Body>
-        {renderForm(handleSave, onClose)}
+        {renderForm(guardCambios, onClose)}
       </Modal.Body>
     </Modal>
   );
 
 };
 
-const renderForm = (handleSave, onClose) => {
+const renderForm = (guardCambios, onClose) => {
   return (
-    <Form onSubmit={handleSave}>
+    <Form onSubmit={guardCambios}>
       <Form.Group className="mb-3" controlId="formNombre">
         <Form.Label>Nombre</Form.Label>
         <Form.Control type="name" placeholder="Nuevo Nombre" />
@@ -56,14 +56,14 @@ const renderForm = (handleSave, onClose) => {
 
       <Form.Group className="mb-3" controlId="formTelefono">
         <Form.Label>Telefono</Form.Label>
-        <Form.Control type="phone" placeholder="442-987-6677" />
+        <Form.Control type="number" placeholder="442-987-6677" />
       </Form.Group>
 
-      <Button variant="primary" type="submit" value="submit" style={{margin: "0.5rem"}}>
-        Submit
+      <Button variant="primary" type="submit" value="submit" style={{ margin: "0.5rem" }}>
+        Actualizar
       </Button>
       <Button variant="secondary" onClick={onClose}>
-        Close
+        Cerrar
       </Button>
     </Form>
   );

@@ -3,6 +3,7 @@ import Navbar from "./BarraNav";
 import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
+import Usuario from "./Usuario";
 import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
@@ -25,14 +26,15 @@ const render = (status) => {
   return null;
 };
 
-function MyMapComponent({ center, zoom, width, height }) {
+function MyMapComponent({ center, zoom }) {
   const ref = useRef();
 
   useEffect(() => {
-    new window.google.maps.Map(ref.current, {
-      center,
-      zoom,
-    });
+    if (!center || !zoom) {
+      return;
+    }
+
+    new window.google.maps.Map(ref.current, { center, zoom });
   });
 
   return <div ref={ref} id="map" />;
@@ -203,21 +205,17 @@ function VistaParque() {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+
         </Card>
       </Container>
 
-      <Container className="sections-container">
-        <h2>Clima</h2>
-        <Weather
-          style={{ padding: "1rem" }}
-          latitude={parque.latitud}
-          longitude={parque.longitud}
-        />
-      </Container>
-
-      <Container className="sections-container">
-        <Contacto style={{ padding: "1rem" }} id={1} />
-      </Container>
+      <Weather
+        style={{ padding: "1rem" }}
+        latitude={parque.latitud}
+        longitude={parque.longitud}
+      />
+      <Contacto style={{ padding: "1rem" }} id={parque.id} />
+      <Usuario style={{ padding: "1rem" }} />
 
       <div className="mt-16 activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
