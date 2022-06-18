@@ -95,6 +95,29 @@ export async function deletePark(parkId) {
   }
 }
 
+export async function updateFauna(fauna) {
+  try {
+    let response = axios
+      .put(`${baseUrl}/editFauna/${fauna.id}`, {
+        id: fauna.id,
+        nombre: fauna.nombre,
+        imagen: fauna.imagen,
+        titulo: fauna.titulo,
+        descripcion: fauna.descripcion,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
 export async function updatePark(park) {
   try {
     console.log("ID: ", park.id);

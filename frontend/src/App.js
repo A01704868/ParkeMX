@@ -14,6 +14,7 @@ import FloraId from "./components/FloraId";
 import FaunaId from "./components/FaunaId";
 import EditarHorario from "./components/EditarHorario";
 import EditarFlora from "./components/EditarFlora";
+import EditarFauna from "./components/EditarFauna";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/flora/:id" element={<FloraId />} />
           <Route path="/fauna/:id" element={<FaunaId />} />
           <Route path="/editFlora/:id" element={<EditarFlora />} />
+          <Route path="/editFauna/:id" element={<EditarFauna />} />
         </Routes>
       </BrowserRouter>
     </div>
