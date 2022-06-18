@@ -98,6 +98,7 @@ model Flora {
   id          Int           @id @default(autoincrement())
   nombre      String
   imagen      String
+  titulo      String        //titulo es para dividir informacion de la descripcion
   descripcion String
   parques     FloraParque[]
 }
@@ -117,6 +118,7 @@ model Fauna {
   id          Int           @id @default(autoincrement())
   nombre      String
   imagen      String
+  titulo      String        //titulo es para dividir informacion de la descripcion
   descripcion String
   parques     FaunaParque[]
 }

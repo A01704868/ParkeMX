@@ -177,6 +177,26 @@ export async function deleteHorario(horarioId) {
   }
 }
 
+export async function deleteAnuncio(anuncioId) {
+  try {
+    console.log("ID: ", anuncioId);
+    let response = axios
+      .delete(`${baseUrl}/deleteanuncio/${anuncioId}`, {
+        id: anuncioId,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
 export async function saveFauna(fauna) {
   console.log("ORE: ", fauna);
   try {

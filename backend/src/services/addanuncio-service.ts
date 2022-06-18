@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export async function postAnuncio(anuncio: Anuncio): Promise<Anuncio> {
     //Crear un registro
-    console.log('EX: ',anuncio);
 
     const newAnuncio: Anuncio =
      await prisma.anuncio.create({
@@ -19,8 +18,6 @@ export async function postAnuncio(anuncio: Anuncio): Promise<Anuncio> {
             
         },
     });
-
-    console.log('PRISMA: ', newAnuncio);
     return newAnuncio;
 }
 

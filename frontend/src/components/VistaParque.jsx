@@ -8,7 +8,6 @@ import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
 import Anuncio from "./Anuncio";
-import "../css/styles.css";
 import { useParams } from "react-router-dom";
 import {
   Card,
@@ -16,7 +15,6 @@ import {
   Carousel,
   Container,
   Dropdown,
-  Link,
 } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
@@ -52,7 +50,7 @@ function activityList(actividad) {
 function activityImgList(imagen) {
   return (
     <Carousel.Item>
-      <img className="d-block w-100" src={imagen.imagen} />
+      <img className="d-block w-100" src={imagen.imagen} alt="Error al cargar img"/>
     </Carousel.Item>
   );
 }
@@ -62,7 +60,7 @@ function faunaListImg(fauna) {
   return (
     <Carousel.Item>
       <a href={url}>
-        <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
+        <img className="d-block w-100 img-flora" src={fauna.imagen} alt="Error al cargar img"></img>
       </a>
     </Carousel.Item>
   );
@@ -73,7 +71,7 @@ function floraListImg(flora) {
   return (
     <Carousel.Item key={flora.id}>
       <a href={url}>
-        <img className="d-block w-100 img-flora" src={flora.imagen}></img>
+        <img className="d-block w-100 img-flora" src={flora.imagen} alt="Error al cargar img"></img>
       </a>
     </Carousel.Item>
   );
@@ -131,7 +129,7 @@ function VistaParque() {
 
     getData();
   }, [id]);
-  const url = "http://localhost:4000/api/parques/img/" + parque.id;
+  //const url = "http://localhost:4000/api/parques/img/" + parque.id;
 
   const center = { lat: parque.latitud, lng: parque.longitud };
   const zoom = 15;
@@ -143,6 +141,7 @@ function VistaParque() {
       <Navbar />
       {anuncios.map((e) => (
         <Anuncio
+          id={e.id}
           descripcion={e.descripcion}
           titulo={e.titulo}
           variante={e.variante}
@@ -155,12 +154,6 @@ function VistaParque() {
             src={parque.imagen}
             alt="First slide"
           />
-          <Carousel.Caption className="caption">
-            <h3>{parque.nombre}</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item className="carousel-hero">
-          <img className="d-block w-100" src={url} alt="First slide" />
           <Carousel.Caption className="caption">
             <h3>{parque.nombre}</h3>
           </Carousel.Caption>

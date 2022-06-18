@@ -13,6 +13,7 @@ export async function postFauna(fauna: Fauna): Promise<Fauna> {
      await prisma.fauna.create({
         data: {
             nombre:  fauna.nombre,
+            titulo: fauna.titulo,
             descripcion: fauna.descripcion,
             imagen: fauna.imagen,
             

@@ -13,6 +13,7 @@ export async function postFlora(flora: Flora): Promise<Flora> {
      await prisma.flora.create({
         data: {
             nombre:  flora.nombre,
+            titulo: flora.titulo,
             descripcion: flora.descripcion,
             imagen: flora.imagen,
             
