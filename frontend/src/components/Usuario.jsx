@@ -70,6 +70,7 @@ const Usuario = () => {
     return (
         <>
             <div>
+                <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
                 <h2>Usuario</h2>
                 <Table striped bordered hover size="sm">
                     <thead>
@@ -106,7 +107,6 @@ const Usuario = () => {
                             </tr>)}
                     </tbody>
                 </Table>
-                <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
                     <div id="boton">
                         <Button
                             style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%" }}

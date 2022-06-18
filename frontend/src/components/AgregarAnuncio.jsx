@@ -6,6 +6,8 @@ import { useState } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { saveAnuncio } from "../services/index";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function AgregarAnuncio() {
   const [validated, setValidated] = useState(false);
@@ -32,6 +34,7 @@ function AgregarAnuncio() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Anuncio</h1>
@@ -65,6 +68,7 @@ function AgregarAnuncio() {
         <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
       <Footer/>
+      </RBACWrapper>
     </div>
   );
 }

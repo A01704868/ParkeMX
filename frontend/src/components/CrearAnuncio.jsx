@@ -4,6 +4,8 @@ import Footer from './Footer';
 import React, {useState, useEffect} from "react";
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate  } from 'react-router-dom';
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function dynamoOpt(parque){
     return (
@@ -66,6 +68,7 @@ function CrearAnuncio(){
     }
     return (
         <>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
         <BarraNav />
 
         <h1 class="h1-form">Agregar Anuncio</h1>
@@ -100,6 +103,7 @@ function CrearAnuncio(){
         </Button>
         </Form>
         <Footer/>
+        </RBACWrapper>
         </>
     );
 }

@@ -6,8 +6,10 @@ import "../css/styles.css";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Carousel, Container, Button } from "react-bootstrap";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function faunaListImg(fauna) {
   return (
@@ -60,13 +62,16 @@ function FaunaId() {
         </div>*/}
         <p className="mb-3">{fauna.descripcion}</p>
       </Container>
-      <Button
-        className="link"
-        variant="secondary"
-        href={"/editFauna/" + fauna.id}
-      >
-        Editar
-      </Button>
+
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <Button
+          className="link"
+          variant="secondary"
+          href={"/editFauna/" + fauna.id}
+        >
+          Editar
+        </Button>
+        </RBACWrapper>
 
       <Footer />
     </div>

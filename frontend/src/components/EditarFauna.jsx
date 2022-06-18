@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import { updateFauna } from "../services/index";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function EditarFauna() {
   const { id } = useParams();
@@ -54,6 +56,7 @@ function EditarFauna() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Editar Fauna</h1>
@@ -115,6 +118,7 @@ function EditarFauna() {
         </Button>
       </Form>
       <Footer />
+      </RBACWrapper>
     </div>
   );
 }

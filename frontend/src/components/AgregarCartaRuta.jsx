@@ -8,6 +8,8 @@ import Footer from "./Footer";
 import { saveCart } from "../services/index";
 import "../css/styles.css";
 import { useParams } from "react-router-dom";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function AgregarCartaRuta() {
   const { id } = useParams();
@@ -36,6 +38,7 @@ function AgregarCartaRuta() {
 
   return (
     <div className="full-height-vh">
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Tarjeta de ruta</h1>
@@ -71,6 +74,7 @@ function AgregarCartaRuta() {
         </Button>
       </Form>
       <Footer />
+      </RBACWrapper>
     </div>
   );
 }

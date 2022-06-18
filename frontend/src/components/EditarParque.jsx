@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import { updatePark } from "../services/index";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function EditarParque() {
   const { id } = useParams();
@@ -60,6 +62,7 @@ function EditarParque() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Editar Parque</h1>
@@ -187,6 +190,7 @@ function EditarParque() {
         </Button>
       </Form>
       <Footer />
+      </RBACWrapper>
     </div>
   );
 }

@@ -63,7 +63,7 @@ router.post(p.login, async (req: Request, res: Response) => {
 router.post(p.signon, async (req: Request, res: Response) => {
     // Check user data present
     const { name, email, password, role } = req.body;
-    if (isNil(name) || isNil(email) || isNil(password) || isNil(role)) {
+    if (isNil(name) || isNil(email) || isNil(password)) {
         throw new ParamMissingError();
     }
     const user: IUser = {
@@ -75,16 +75,16 @@ router.post(p.signon, async (req: Request, res: Response) => {
 
     await userService.addOne(user);
 
-    // Get jwt
-    const jwt = await authService.login(user.email, user.password);
-    // Add jwt to cookie
-    const { key, options } = cookieProps;
-    res.cookie(key, jwt, options);
-    res.cookie('email', email, {
-        maxAge: Number(process.env.COOKIE_EXP),
-        domain: (process.env.COOKIE_DOMAIN),
-        secure: true
-    });
+    // // Get jwt
+    // const jwt = await authService.login(user.email, user.password);
+    // // Add jwt to cookie
+    // const { key, options } = cookieProps;
+    // res.cookie(key, jwt, options);
+    // res.cookie('email', email, {
+    //     maxAge: Number(process.env.COOKIE_EXP),
+    //     domain: (process.env.COOKIE_DOMAIN),
+    //     secure: true
+    // });
 
     // Return
     return res.status(CREATED).end();

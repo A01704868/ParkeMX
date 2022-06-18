@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const contactoUrl = "http://localhost:4000/api/encargado";
 const editarContacto = (encargado, onClose) => {
@@ -48,6 +50,7 @@ const ContactoEditar = ({ idContacto, mostrarForma, onClose }) => {
 
 const renderForm = (guardCambios, onClose) => {
   return (
+    <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
     <Form onSubmit={guardCambios}>
       <Form.Group className="mb-3" controlId="formNombre">
         <Form.Label>Nombre</Form.Label>
@@ -66,6 +69,7 @@ const renderForm = (guardCambios, onClose) => {
         Cerrar
       </Button>
     </Form>
+    </RBACWrapper>
   );
 }
 

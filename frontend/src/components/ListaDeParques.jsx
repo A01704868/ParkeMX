@@ -38,13 +38,15 @@ const renderAbrir = (horario) => {
       <Card.Text>
         {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
       </Card.Text>
-      <Button
-        className="link"
-        variant="warning"
-        onClick={() => deleteHorario(horario.id)}
-      >
-        Eliminar Horario
-      </Button>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <Button
+          className="link"
+          variant="warning"
+          onClick={() => deleteHorario(horario.id)}
+        >
+          Eliminar Horario
+        </Button>
+      </RBACWrapper>
     </Container>
   );
 };
@@ -67,20 +69,22 @@ const renderCard = (card) => {
         <Button className="link" variant="primary" href={"/parque/" + card.id}>
           Mas Informacion
         </Button>
-        <Button
-          className="link"
-          variant="secondary"
-          href={"/editarparque/" + card.id}
-        >
-          Editar
-        </Button>
-        <Button
-          className="link"
-          variant="danger"
-          onClick={() => deletePark(card.id)}
-        >
-          Eliminar
-        </Button>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+          <Button
+            className="link"
+            variant="secondary"
+            href={"/editarparque/" + card.id}
+          >
+            Editar
+          </Button>
+          <Button
+            className="link"
+            variant="danger"
+            onClick={() => deletePark(card.id)}
+          >
+            Eliminar
+          </Button>
+        </RBACWrapper>
       </Card>
     </Col>
   );
@@ -231,9 +235,11 @@ function ListaDeParques() {
         </Row>
       </Container>
 
-      <Button type="submit" variant="success" href={"/agregar"}>
-        Agregar
-      </Button>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <Button type="submit" variant="success" href={"/agregar"}>
+          Agregar
+        </Button>
+      </RBACWrapper>
       
       <Row className="m-5 g-4">
         {// eslint-disable-next-line
@@ -277,6 +283,8 @@ function ListaDeParques() {
           </Button>
         </RBACWrapper>
       </div>
+
+      <Footer />
     </div>
   );
 }

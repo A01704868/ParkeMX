@@ -3,6 +3,8 @@ import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
 import logotipo from "../assets/app-logo.svg";
 import usericon from "../assets/avatar.svg";
 import "../css/customStyles.css";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function BarraNav() {
   return (
@@ -18,22 +20,21 @@ function BarraNav() {
           />
         </Navbar.Brand>
 
-        <Navbar.Collapse id="navbar-dark-example">
-          <Nav>
-            <NavDropdown
-              id="nav-dropdown-dark-example"
-              title="Opciones"
-              menuVariant="dark"
-            >
-              <NavDropdown.Item href={"/agregarhorario"}>
-                Agregar Horario
-              </NavDropdown.Item>
-              <NavDropdown.Item href={"/agregaranuncio"}>
-                Agregar Anuncio
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+          <Navbar.Collapse id="navbar-dark-example">
+            <Nav>
+              <NavDropdown
+                id="nav-dropdown-dark-example"
+                title="Opciones"
+                menuVariant="dark"
+              >
+                <NavDropdown.Item href={"/agregaranuncio"}>
+                  Agregar Anuncio
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </RBACWrapper>
 
         <Navbar.Brand href="#login">
           <img

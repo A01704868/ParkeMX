@@ -5,6 +5,8 @@ import { useState } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { savePark } from "../services/index";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function AgregarParque() {
   //Validar
@@ -44,6 +46,7 @@ function AgregarParque() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form required noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Nuevo Parque</h1>
@@ -171,6 +174,7 @@ function AgregarParque() {
         </Button>
       </Form>
       <Footer />
+      </RBACWrapper>
     </div>
   );
 }

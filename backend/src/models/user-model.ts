@@ -43,7 +43,7 @@ export function fromDbUser(user: Usuario): IUser {
         id: user.id,
         email: user.email,
         name: user.nombre,
-        password: "undefined",
+        password: user.password,
         role: user.role === Role.ADMIN
             ? UserRoles.Admin
             : UserRoles.User

@@ -5,8 +5,6 @@ import Weather from "./Weather";
 import Contacto from "./Contacto";
 import Usuario from "./Usuario";
 import "../css/styles.css";
-//import { useParams } from "react-router-dom";
-//import { Card, Button, Carousel, Container } from "react-bootstrap";
 import Anuncio from "./Anuncio";
 import { useParams } from "react-router-dom";
 import {
@@ -19,6 +17,8 @@ import {
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const render = (status) => {
   if (status === Status.LOADING) return <h3>{status} ..</h3>;
@@ -190,9 +190,11 @@ function VistaParque() {
           </Card.Body>
 
           <Dropdown>
+          <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Agregar
             </Dropdown.Toggle>
+          </RBACWrapper>
 
             <Dropdown.Menu>
               <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>

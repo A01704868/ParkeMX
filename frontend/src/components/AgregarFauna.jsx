@@ -5,6 +5,8 @@ import { useState } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { saveFauna } from "../services/index";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function AgregarFauna() {
   //Validar
@@ -41,6 +43,7 @@ function AgregarFauna() {
 
   return (
     <div>
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
       <BarraNav />
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h1 class="h1-form">Agregar Nuevo Animal</h1>
@@ -100,6 +103,7 @@ function AgregarFauna() {
         <Button type="submit" className="mb-4">Agregar</Button>
       </Form>
       <Footer/>
+      </RBACWrapper>
     </div>
   );
 }

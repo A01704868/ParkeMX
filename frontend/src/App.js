@@ -10,14 +10,11 @@ import EditarParque from "./components/EditarParque";
 import AgregarHorario from "./components/AgregarHorario";
 import AgregarFauna from "./components/AgregarFauna";
 import AgregarFlora from "./components/AgregarFlora";
-<<<<<<< HEAD
 import FloraId from "./components/FloraId";
 import FaunaId from "./components/FaunaId";
 import EditarHorario from "./components/EditarHorario";
 import EditarFlora from "./components/EditarFlora";
 import EditarFauna from "./components/EditarFauna";
-=======
-import AgregarAnuncio from "./components/AgregarAnuncio";
 import { RBACProvider, useRBACContext } from "react-simple-rbac";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -25,7 +22,6 @@ import axios from "axios";
 const rolesMap = { 0: "usuario", 1: "admin" };
 const roles = ['admin', 'usuario'];
 const UserContext = React.createContext();
->>>>>>> origin/sofiLastLast
 
 function App() {
   const [userInfo, setUserInfo] = useState({ name: "", email: "", role: "" });
@@ -85,7 +81,6 @@ const AppWrapper = () => {
           <Route path="/editarhorario/:id" element={<EditarHorario />} />
           <Route path="/agregarhorario/:id" element={<AgregarHorario />} />
           <Route path="/editarparque" element={<EditarParque />} />
-          <Route path="/agregarhorario" element={<AgregarHorario />} />
           <Route path="/agregarfauna" element={<AgregarFauna />} />
           <Route path="/agregarflora" element={<AgregarFlora />} />
           <Route path="/agregaranuncio" element={<CrearAnuncio />} />

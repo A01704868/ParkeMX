@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Alert, Button, Modal  } from 'react-bootstrap';
 import { deleteAnuncio } from "../services/index";
 import "../css/styles.css"
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 
 function Anuncio(props){
@@ -27,11 +29,13 @@ function Anuncio(props){
         <p>
           {props.descripcion}
         </p>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
         <div className="d-flex justify-content-end">
           <Button onClick={handleShow} variant="outline-danger">
             <ion-icon name="trash-outline"></ion-icon>
           </Button>
         </div>
+        </RBACWrapper>
       </Alert>
 
       <Modal show={show} onHide={handleClose}>

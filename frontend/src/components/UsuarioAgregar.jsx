@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const usuarioUrl = "http://localhost:4000/api/users";
 const agregarUsuario = (usuario, onClose) => {
@@ -47,6 +49,7 @@ const UsuarioAgregar = ({ mostrarForma, onClose }) => {
 
 const renderForm = (guardarUsuario, onClose) => {
     return (
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
         <Form onSubmit={guardarUsuario}>
             <Form.Group className="mb-3" controlId="formNombre">
                 <Form.Label>Nombre</Form.Label>
@@ -78,6 +81,7 @@ const renderForm = (guardarUsuario, onClose) => {
                 Cerrar
             </Button>
         </Form>
+        </RBACWrapper>
     );
 }
 

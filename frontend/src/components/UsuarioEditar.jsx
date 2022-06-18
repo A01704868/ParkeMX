@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 const usuarioUrl = "http://localhost:4000/api/users";
 const editarUsuario = (usuario, onClose) => {
@@ -42,6 +44,7 @@ const UsuarioEditar = ({ userData, mostrarForma, onClose }) => {
     }
 
     return (
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
         <Modal show={mostrarForma} onHide={onClose}>
             <Modal.Header>
                 <Modal.Title>Editar Usuario</Modal.Title>
@@ -84,6 +87,7 @@ const UsuarioEditar = ({ userData, mostrarForma, onClose }) => {
                 </Form>
             </Modal.Body>
         </Modal>
+        </RBACWrapper>
     );
 };
 

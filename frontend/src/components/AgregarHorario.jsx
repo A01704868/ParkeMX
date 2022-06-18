@@ -6,6 +6,8 @@ import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { saveHorario } from "../services/index";
 import { useParams } from "react-router-dom";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function AgregarHorario() {
   const { id } = useParams();

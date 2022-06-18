@@ -209,12 +209,6 @@ async function main() {
         ]
     });
 
-    const usuarioSeeder = db.usuario.createMany({
-        data: [
-            { nombre: "Alex D", email: "A01704868@tec.mx", password: "ARRRS", role: "ADMIN"},
-        ]
-    });
-
     
     await parqueSeeder;
     await categoriaSeeder;
@@ -231,7 +225,6 @@ async function main() {
     await actividadParqueSeeder;
     await anuncioSeeder;
     await horarioSeeder;
-    await usuarioSeeder;
     //const users = await db.usuario.findMany();
     //console.log(users);
 }

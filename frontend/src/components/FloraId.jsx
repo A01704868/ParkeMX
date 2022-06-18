@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function FloraId() {
 
@@ -61,14 +63,15 @@ function FloraId() {
         <p className="mb-3">{flora.descripcion}</p>
       </Container>
 
-      <Button
-          className="link"
-          variant="secondary"
-          href={"/editFlora/" + flora.id}
-        >
-          Editar
-        </Button>
-
+      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <Button
+            className="link"
+            variant="secondary"
+            href={"/editFlora/" + flora.id}
+          >
+            Editar
+          </Button>
+        </RBACWrapper>
       <Footer />
     </div>
   );
