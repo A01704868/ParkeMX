@@ -16,6 +16,7 @@ import deletehorarioRouter from './deletehorario-router';
 import addfloraRouter from './addflora-router';
 import addfaunaRouter from './addfauna-router';
 import addanuncioRouter from './addanuncio-router';
+import deleteAnuncioRouter from './deleteanuncios-router';
 
 
 // Init
@@ -38,6 +39,7 @@ apiRouter.use('/', deletehorarioRouter);
 apiRouter.use('/', addfloraRouter);
 apiRouter.use('/', addfaunaRouter);
 apiRouter.use('/', addanuncioRouter);
+apiRouter.use('/', deleteAnuncioRouter);
 
 
 // Export default

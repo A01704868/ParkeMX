@@ -174,7 +174,7 @@ router.get('/activity', async (req, res) => {
 });
 
 router.post('/anuncio', async (req,res) => {
-    const {titulo, descripcion, variante, parqueId} = req.body;
+    const {titulo, descripcion, variante, parqueId} = req.body ?? {};
     const result = await postAnuncio(titulo, descripcion, variante, parseInt(parqueId));
     res.status(OK).json(result);
 });

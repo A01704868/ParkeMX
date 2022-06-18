@@ -25,12 +25,11 @@ function App() {
           <Route path="/agregar" element={<AgregarParque />} />
           <Route path="/agregartarjetaderuta" element={<AgregarCartaRuta />} />
           <Route path="/parque/:id" element={<VistaParque />} />
-          <Route path="/anuncio" element={<CrearAnuncio />} />
           <Route path="/editarparque" element={<EditarParque />} />
           <Route path="/agregarhorario" element={<AgregarHorario />} />
           <Route path="/agregarfauna" element={<AgregarFauna />} />
           <Route path="/agregarflora" element={<AgregarFlora />} />
-          <Route path="/agregaranuncio" element={<AgregarAnuncio />} />
+          <Route path="/agregaranuncio" element={<CrearAnuncio />} />
           <Route path="/flora/:id" element={<FloraId />} />
           <Route path="/fauna/:id" element={<FaunaId />} />
 
