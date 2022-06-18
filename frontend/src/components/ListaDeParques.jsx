@@ -3,6 +3,7 @@ import axios from "axios";
 import BarraNav from "./BarraNav";
 import carousel from "./Carousel";
 import "../css/customStyles.css";
+import "../css/styles.css";
 import {
   Dropdown,
   Card,
@@ -257,11 +258,13 @@ function ListaDeParques() {
 
           }).map(renderCard)}
       </Row>
-      <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <Button type="submit" variant="success" href={"/agregar"} style={{ position: "fixed", top: "95%", width: "20vw", left: "calc(50% - 10vw)" }}>
-          Agregar
-        </Button>
-      </RBACWrapper>
+      <div id="boton">
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+          <Button className="crear" type="submit" variant="success" href={"/agregar"} style={{ position: "fixed", top: "95%", width: "20vw", left: "calc(50% - 10vw)" }}>
+            Agregar
+          </Button>
+        </RBACWrapper>
+      </div>
     </div>
   );
 }

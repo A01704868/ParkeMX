@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./BarraNav";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
+import Usuario from "./Usuario";
 import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
@@ -19,14 +20,15 @@ const render = (status) => {
   return null;
 };
 
-function MyMapComponent({ center, zoom, width, height }) {
+function MyMapComponent({ center, zoom }) {
   const ref = useRef();
 
   useEffect(() => {
-    new window.google.maps.Map(ref.current, {
-      center,
-      zoom,
-    });
+    if (!center || !zoom) {
+      return;
+    }
+
+    new window.google.maps.Map(ref.current, { center, zoom });
   });
 
   return <div ref={ref} id="map" />;
@@ -142,6 +144,7 @@ function VistaParque() {
         longitude={parque.longitud}
       />
       <Contacto style={{ padding: "1rem" }} id={parque.id} />
+      <Usuario style={{ padding: "1rem" }} />
 
       <div className="activities container-wide">
         <h1 className="mb-3"> ACTIVIDADES </h1>

@@ -1,112 +1,162 @@
 .carousel-hero {
-    height: 30rem;
+  height: 30rem;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.banner {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.row-hero {
+  width: 90%;
+  text-align: center;
+  display: flex;
+  margin-top: -3rem;
+  width: 100%;
+}
+
+.car-center {
+  text-align: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-16 {
+  margin-top: 8rem;
+}
+
+.container-wide {
+  width: 90%;
+  max-width: 1420px;
+}
+
+#map {
+  height: 35rem;
+  margin-bottom: 3rem;
+}
+
+.caption {
+  margin-bottom: 10rem;
+}
+
+.caption h3 {
+  font-size: 3rem;
+}
+
+.row-info-card {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.row-activities {
+  display: flex;
+  width: 100%;
+}
+
+.col-custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.activities {
+  padding-top: 6rem;
+  letter-spacing: 4px;
+}
+
+.color-nav {
+  background-color: #b3d9ff;
+}
+
+.stockImage {
+  background-size: 1920px 300px;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+h1 {
+  padding-bottom: 20px;
+}
+
+.drop {
+  padding-bottom: 30px;
+}
+
+.cardImage {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.arrow {
+  border: none;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.arrow:hover {
+  background: #b3d9ff;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
   }
 
-  .carousel-img {
-    width: 100%;
-    height: 100%;
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
   }
 
-  .carousel-indicators {
-    display: none;
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
   }
+}
 
-  .banner {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
+.crear {
+  position: fixed;
+  width: 30vw;
+  left: 35vw;
+  z-index: 2;
+  animation-name: slide-in-bottom !important;
+  animation-duration: 0.75s;
+}
 
-  .row-hero {
-    width: 90%;
-    text-align: center;
-    display: flex;
-    margin-top: -3rem;
-    width: 100%;
-  }
+#boton {
+  width: 49%;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}
 
-  .car-center {
-    text-align: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .mt-16 {
-    margin-top: 8rem;
-  }
-
-  .container-wide {
-    width: 90%;
-    max-width: 1420px;
-  }
-
-  #map {
-    height: 35rem;
-    margin-bottom: 3rem;
-  }
-
-  .caption {
-    margin-bottom: 10rem;
-  }
-
-  .caption h3 {
-    font-size: 3rem;
-  }
-
-  .row-info-card {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  .row-activities {
-    display: flex;
-    width: 100%;
-  }
-
-  .col-custom {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .activities {
-    padding-top: 6rem;
-    letter-spacing: 4px;
-  }
-  .color-nav{
-      background-color: #b3d9ff;
-  }
-
-  .stockImage{
-      background-size: 1920px 300px;
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-  }
-
-  h1{
-      padding-bottom: 20px;
-  }
-
-  .drop{
-      padding-bottom: 30px;
-  }
-
-  .cardImage{
-      height: 300px;
-      width: 100%;
-      object-fit: cover;
-  }
-
-  .arrow {
-      border: none;
-      overflow: hidden;
-      border-radius: 4px;
-    }
-
-  .arrow:hover{
-      background: #b3d9ff;
-  }
+button {
+  width: 49%;
+  font-size: 1rem;
+}

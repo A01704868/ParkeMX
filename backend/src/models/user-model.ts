@@ -43,10 +43,10 @@ export function fromDbUser(user: Usuario): IUser {
         id: user.id,
         email: user.email,
         name: user.nombre,
-        password: user.password,
+        password: "undefined",
         role: user.role === Role.ADMIN
             ? UserRoles.Admin
-            : UserRoles.User 
+            : UserRoles.User
     };
 }
 

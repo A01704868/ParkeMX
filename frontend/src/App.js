@@ -30,7 +30,9 @@ function App() {
         return;
       }
 
-      axios.get(`http://localhost:4000/api/users/email/${email}`)
+      axios.get(`http://localhost:4000/api/users/email/${email}`, {
+        withCredentials: true
+      })
         .then((response) => {
           if (response.data) {
             const { name, email, role } = response.data;

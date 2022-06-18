@@ -22,21 +22,16 @@ const userIsNotAdminErr = 'User does not have admin rights';
 export async function loggedIn(req: Request, res: Response, next: NextFunction) {
     try {
         // Get json-web-token
-        const jwt = req.signedCookies[cookieProps.key];
-        if (!jwt) {
+        if (!req.signedCookies[cookieProps.key]) {
             throw Error("User is not signed in");
         }
 
         // Continue to next handler
         next();
     } catch (err) {
-        if (req.is("application/json")) {
-            return res.status(UNAUTHORIZED).json({
-                error: err.message,
-            });
-        } else {
-            return res.redirect("/");
-        }
+        return res.status(UNAUTHORIZED).json({
+            error: err.message,
+        });
     }
 };
 
@@ -62,6 +57,7 @@ export async function adminMw(req: Request, res: Response, next: NextFunction) {
             res.locals.sessionUser = clientData;
             next();
         } else {
+            console.log("not an admin")
             throw Error(userIsNotAdminErr);
         }
     } catch (err) {

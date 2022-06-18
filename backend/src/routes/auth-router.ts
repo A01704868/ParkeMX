@@ -27,7 +27,7 @@ export const cookieProps = Object.freeze({
         path: (process.env.COOKIE_PATH),
         maxAge: Number(process.env.COOKIE_EXP),
         domain: (process.env.COOKIE_DOMAIN),
-        secure: (process.env.SECURE_COOKIE === 'true'),
+        // secure: (process.env.SECURE_COOKIE === 'true'),
     },
 });
 
@@ -50,8 +50,7 @@ router.post(p.login, async (req: Request, res: Response) => {
     res.cookie(key, jwt, options);
     res.cookie('email', email, {
         maxAge: Number(process.env.COOKIE_EXP),
-        domain: (process.env.COOKIE_DOMAIN),
-        secure: true
+        domain: (process.env.COOKIE_DOMAIN)
     });
 
     // Return
@@ -86,6 +85,7 @@ router.post(p.signon, async (req: Request, res: Response) => {
         domain: (process.env.COOKIE_DOMAIN),
         secure: true
     });
+
     // Return
     return res.status(CREATED).end();
 });
