@@ -194,47 +194,45 @@ function ListaDeParques() {
         }).slice(0, 3).map(carousel)}
       </Carousel>
 
-      <h1>Encuentra Parques filtrando por Actividad</h1>
+      <h1 className="mt-4">Encuentra Parques filtrando por actividad o nombre de parque</h1>
+      <div className="d-flex container justify-content-end custom-search">
+        <div className="search-bar">
+          <InputGroup className="mb-3">
+            <FormControl onChange={(event) => { setSearch(event.target.value) }}
+              placeholder="Busqueda"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <InputGroup.Text id="basic-addon2"><ion-icon name="search-outline" size="large"></ion-icon></InputGroup.Text>
+          </InputGroup>
+        </div>
+        <div className="activity-filter">
+          <Dropdown className="drop" onSelect={(eventKey, event) => { setSearchActivity(eventKey); }}>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              Actividades
+            </Dropdown.Toggle>
 
-      <Container className="pb-4">
-        <Row>
-          <Col>
-            <button type="button" className="arrow" onClick={() => cardOrder()}>
-              <span>
-                <ion-icon name={icon}></ion-icon>
-              </span>
-            </button>
-          </Col>
-          <Col>
-            <Button variant={color} onClick={toggleDistance}>Cual parque esta mas cerca a mi?</Button>
-          </Col>
-          <Col>
+            <Dropdown.Menu>
+              <Dropdown.Item eventKey="0" href="#/action-1">Todos</Dropdown.Item>
+              {activityButton.map(renderDropdown)}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
+      <h1>Ordenar por cercanía o de forma ascendente</h1>
+      <div className="d-flex container justify-content-between custom-search pb-4">
+        <div className="cercania-filter">
+          <Button variant={color} onClick={toggleDistance}>Cual parque esta mas cerca a mi?</Button>
+        </div>
+        <div className="asc-order">
+          <button type="button" className="arrow" onClick={() => cardOrder()}>
+            <span>
+              <ion-icon name={icon}></ion-icon>
+            </span>
+          </button>
+        </div>
+      </div>
 
-            <InputGroup className="mb-3">
-              <FormControl onChange={(event) => { setSearch(event.target.value) }}
-                placeholder="Busqueda"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-              />
-              <InputGroup.Text id="basic-addon2"><ion-icon name="search-outline" size="large"></ion-icon></InputGroup.Text>
-            </InputGroup>
-
-          </Col>
-          <Col>
-            <Dropdown className="drop" onSelect={(eventKey, event) => { setSearchActivity(eventKey); }}>
-              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                Actividades
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item eventKey="0" href="#/action-1">Todos</Dropdown.Item>
-                {activityButton.map(renderDropdown)}
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
-        </Row>
-      </Container>
-      
       <Row className="m-5 g-4">
         {// eslint-disable-next-line
           parques.filter((parque) => {

@@ -65,6 +65,45 @@
     width: 100%;
   }
 
+  .search-bar {
+    width: 30%;
+  }
+
+  .activity-filter {
+    width: 60%;
+  }
+
+  .asc-order {
+    width: 60%;
+  }
+
+  .cercania-filter {
+    width: 80%;
+  }
+
+  @media (min-width: 300px) and (max-width: 920px) {
+    .search-bar {
+      width: 49%;
+    }
+    .activity-filter {
+      width: 100%;
+    }
+    .asc-order {
+      width: 100%;
+    }
+    .cercania-filter {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    .custom-search {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+
+
   .car-center {
     text-align: center;
     width: 90%;
