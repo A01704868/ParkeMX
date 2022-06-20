@@ -229,9 +229,11 @@
 
 .crear {
   position: fixed;
-  width: 30vw;
+  width:30vw;
   left: 35vw;
+  bottom: 3%;
   z-index: 2;
+
   animation-name: slide-in-bottom !important;
   animation-duration: 0.75s;
 }
