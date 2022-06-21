@@ -74,7 +74,7 @@ function BarraNav() {
                 title="Usuarios"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href={"/agregaranuncio"}>
+                <NavDropdown.Item href={"/usuarios"}>
                   Informacion de Usuarios
                 </NavDropdown.Item>
               </NavDropdown>

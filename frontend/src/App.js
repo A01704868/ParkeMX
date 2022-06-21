@@ -15,6 +15,7 @@ import FaunaId from "./components/FaunaId";
 import EditarHorario from "./components/EditarHorario";
 import EditarFlora from "./components/EditarFlora";
 import EditarFauna from "./components/EditarFauna";
+import Usuario from "./components/Usuario";
 import { RBACProvider, useRBACContext } from "react-simple-rbac";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -88,6 +89,7 @@ const AppWrapper = () => {
           <Route path="/fauna/:id" element={<FaunaId />} />
           <Route path="/editFlora/:id" element={<EditarFlora />} />
           <Route path="/editFauna/:id" element={<EditarFauna />} />
+          <Route path="/usuarios" element={<Usuario />} />
         </Routes>
       </BrowserRouter>
     </div>

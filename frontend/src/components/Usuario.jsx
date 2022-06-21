@@ -7,6 +7,8 @@ import UsuarioEditar from "./UsuarioEditar";
 import UsuarioAgregar from "./UsuarioAgregar";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 
 
 const usuarioUrl = "http://localhost:4000/api/users";
@@ -70,7 +72,9 @@ const Usuario = () => {
     return (
         <>
             <div>
-                <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+                <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>\
+                <BarraNav />
+                
                 <h2>Usuario</h2>
                 <Table striped bordered hover size="sm">
                     <thead>
@@ -117,6 +121,7 @@ const Usuario = () => {
                             Agregar Usuario
                         </Button>
                     </div>
+                    <Footer />
                 </RBACWrapper>
             </div>
             <UsuarioAgregar
