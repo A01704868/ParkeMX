@@ -92,7 +92,7 @@ const renderCard = (card) => {
 
 const renderDropdown = (activity) => {
   return (
-    <Dropdown.Item eventKey={activity.id} key={activity.id} href="#/action-1">
+    <Dropdown.Item eventKey={activity.id} key={activity.id}>
       {activity.nombre}
     </Dropdown.Item>
   );
@@ -213,7 +213,7 @@ function ListaDeParques() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item eventKey="0" href="#/action-1">Todos</Dropdown.Item>
+              <Dropdown.Item eventKey="0">Todos</Dropdown.Item>
               {activityButton.map(renderDropdown)}
             </Dropdown.Menu>
           </Dropdown>

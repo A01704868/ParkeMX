@@ -93,7 +93,7 @@ function CrearAnuncio(){
         <br/>
 
         <Form.Select required aria-label="Default select example" onChange={(e) => handle(e)} value={data.parqueId} id="parqueId">
-            <option>Elige un parque a cual mandarle el anuncio</option>
+            <option value="0">Elige un parque a cual mandarle el anuncio</option>
             {parques.map(dynamoOpt)}
         </Form.Select>
 

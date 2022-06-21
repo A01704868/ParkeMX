@@ -61,6 +61,8 @@ function BarraNav() {
                 <NavDropdown.Item href={"/agregaranuncio"}>
                   Agregar Anuncio
                 </NavDropdown.Item>
+                <NavDropdown.Item  href="/agregarfauna">Agregar Fauna</NavDropdown.Item>
+                <NavDropdown.Item href="/agregarflora">Agregar Flora</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

@@ -17,8 +17,11 @@ import addfaunaRouter from './addfauna-router';
 import addanuncioRouter from './addanuncio-router';
 import deleteAnuncioRouter from './deleteanuncios-router';
 import editFloraRouter from './editflora-router';
-
+import floraRouter from './flora-router';
+import floraPark from './florapark-router';
 import editfaunaRouter from './editfauna-router';
+import faunaPark from './faunapark-router';
+import faunaRouter from './fauna-router';
 
 // Init
 const apiRouter = Router();
@@ -43,7 +46,10 @@ apiRouter.use('/', addanuncioRouter);
 apiRouter.use('/', deleteAnuncioRouter);
 apiRouter.use('/', editFloraRouter);
 apiRouter.use('/', editfaunaRouter);
-
+apiRouter.use('/', floraRouter);
+apiRouter.use('/', floraPark);
+apiRouter.use('/', faunaRouter);
+apiRouter.use('/', faunaPark);
 
 // Export default
 export default apiRouter;

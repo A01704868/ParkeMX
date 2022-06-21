@@ -8,6 +8,8 @@ const { OK } = StatusCodes;
 
 router.post('/addanuncio',async (req:Request, res: Response) => {
     const {  anuncio } = req.body ?? {};
+
+    console.log(anuncio);
     
     const anuncios = await postAnuncio(anuncio);
     res.status(OK).json(anuncios);

@@ -8,13 +8,17 @@ import CrearAnuncio from "./components/CrearAnuncio";
 import AgregarCartaRuta from "./components/AgregarCartaRuta";
 import EditarParque from "./components/EditarParque";
 import AgregarHorario from "./components/AgregarHorario";
+import EditarHorario from "./components/EditarHorario";
+//Componentes de flora y fauna
 import AgregarFauna from "./components/AgregarFauna";
 import AgregarFlora from "./components/AgregarFlora";
 import FloraId from "./components/FloraId";
 import FaunaId from "./components/FaunaId";
-import EditarHorario from "./components/EditarHorario";
 import EditarFlora from "./components/EditarFlora";
 import EditarFauna from "./components/EditarFauna";
+import RegistrarFauna from "./components/RegistrarFauna";
+import RegistrarFlora from "./components/RegistrarFlora";
+
 import { RBACProvider, useRBACContext } from "react-simple-rbac";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -81,13 +85,17 @@ const AppWrapper = () => {
           <Route path="/editarhorario/:id" element={<EditarHorario />} />
           <Route path="/agregarhorario/:id" element={<AgregarHorario />} />
           <Route path="/editarparque" element={<EditarParque />} />
-          <Route path="/agregarfauna" element={<AgregarFauna />} />
-          <Route path="/agregarflora" element={<AgregarFlora />} />
           <Route path="/agregaranuncio" element={<CrearAnuncio />} />
+
+          {/* Rutas de Flora y fauna */}
           <Route path="/flora/:id" element={<FloraId />} />
           <Route path="/fauna/:id" element={<FaunaId />} />
+          <Route path="/agregarfauna" element={<AgregarFauna />} />
+          <Route path="/agregarflora" element={<AgregarFlora />} />
           <Route path="/editFlora/:id" element={<EditarFlora />} />
           <Route path="/editFauna/:id" element={<EditarFauna />} />
+          <Route path="/registrarFlora/:id" element={<RegistrarFlora />} />
+          <Route path="/registrarFauna/:id" element={<RegistrarFauna />} />
         </Routes>
       </BrowserRouter>
     </div>

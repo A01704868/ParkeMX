@@ -1,7 +1,6 @@
-import StatusCodes, { CREATED } from 'http-status-codes';
+import StatusCodes from 'http-status-codes';
 import { Router, Request, Response } from 'express';
 import { postCarts } from '@services/addcardrouter-service';
-import { prisma } from '@prisma/client';
 
 // Constants
 const router = Router();

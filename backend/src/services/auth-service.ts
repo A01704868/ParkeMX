@@ -4,8 +4,6 @@ import jwtUtil from '@util/jwt-util';
 import { UnauthorizedError } from '@shared/errors';
 import { getByEmail } from "@services/user-service";
 
-
-
 /**
  * Login()
  * 

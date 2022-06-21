@@ -94,7 +94,7 @@ function AgregarFlora() {
             <Form.Control
               required
               type="string"
-              placeholder="El doctor Alex descubrio esta planta en las Amazonas en 1934 y se la trajo a Mexico"
+              placeholder="Informacion General"
               name="descripcion"
               value={formValues.descripcion}
               onChange={handleChange}

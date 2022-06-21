@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export async function postParks(parque: Parque): Promise<Parque> {
     //Crear un registro
-    console.log('EX: ',parque);
     const { 
         nombre,
         descripcion,

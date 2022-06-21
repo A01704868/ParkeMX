@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export async function postFlora(flora: Flora): Promise<Flora> {
     //Crear un registro
-    console.log('EX: ',flora);
 
     const newFlora: Flora =
      await prisma.flora.create({
@@ -19,14 +18,8 @@ export async function postFlora(flora: Flora): Promise<Flora> {
             
         },
     });
-
-    console.log('PRISMA: ', newFlora);
     return newFlora;
 }
-
-
-    
-
 
 export default {
     postFlora

@@ -197,8 +197,6 @@ function VistaParque() {
           </RBACWrapper>
 
             <Dropdown.Menu>
-              <Dropdown.Item href={"/agregarfauna"}>Fauna</Dropdown.Item>
-              <Dropdown.Item href={"/agregarflora"}>Flora</Dropdown.Item>
               <Dropdown.Item href={"/agregartarjetaderuta/" + id}>
                 Tarjeta de Ruta
               </Dropdown.Item>
@@ -239,12 +237,30 @@ function VistaParque() {
             <Carousel className="car-center">
               {flora.map(floraListImg)}
             </Carousel>
+            <div id="boton">
+              <Button
+                  style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%" }}
+                  href={"/registrarFlora/"+id}
+                  variant="success"
+                  className="crear"
+              >
+                  Asignar Flora al Parque</Button>
+            </div>
           </div>
           <div className="col-6">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center">
               {fauna.map(faunaListImg)}
             </Carousel>
+              <div id="boton">
+                  <Button
+                      style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%" }}
+                      href={"/registrarFauna/"+id}
+                      variant="success"
+                      className="crear"
+                  >
+                      Asignar Fauna al Parque</Button>
+              </div>
           </div>
         </div>
       </div>

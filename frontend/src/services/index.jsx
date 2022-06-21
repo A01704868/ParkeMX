@@ -5,7 +5,6 @@ export async function savePark(parque) {
   console.log("ORE: ", parque);
   try {
     const formData = new FormData();
-    console.log(parque);
 
     formData.append("nombre", parque.nombre);
     formData.append("descripcion", parque.descripcion);
@@ -17,12 +16,8 @@ export async function savePark(parque) {
     formData.append("superficieTerrestre", parque.superficieTerrestre);
     formData.append("superficieMarina", parque.superficieMarina);
 
-    /*let response = await axios.post("http://localhost:4000/api/addparques", {
-      parkData,
-    });*/
-
     let response = axios
-      .post("http://localhost:4000/api/addparques", {
+      .post(`${baseUrl}/addparques`, {
         parque: parque,
       })
       .then(function (response) {
@@ -313,17 +308,17 @@ export async function saveFlora(flora) {
     console.log(event);
   }
 }
+
 export async function saveAnuncio(anuncio) {
   console.log("ORE: ", anuncio);
   try {
     const formData = new FormData();
-    console.log(anuncio.parqueid);
 
     formData.append("descripcion", anuncio.descripcion);
     formData.append("parqueId", anuncio.parqueId);
 
     let response = axios
-      .post("http://localhost:4000/api/addanuncio/", {
+      .post(`${baseUrl}/addanuncio/`, {
         anuncio: anuncio,
       })
       .then(function (response) {
@@ -338,6 +333,48 @@ export async function saveAnuncio(anuncio) {
     //method: "POST",
     //data: parkData,
     //});
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
+export async function saveFloraPark(floraPark) {
+
+  try {
+    let response = axios
+      .post(`${baseUrl}/addFloraPark`, {
+        floraId: floraPark.floraId,
+        parqueId: floraPark.parqueId
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    return response;
+  } catch (event) {
+    console.log(event);
+  }
+}
+
+export async function saveFaunaPark(faunaPark) {
+
+  try {
+    let response = axios
+      .post(`${baseUrl}/addFaunaPark`, {
+        faunaId: faunaPark.faunaId,
+        parqueId: faunaPark.parqueId
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     return response;
   } catch (event) {
     console.log(event);
