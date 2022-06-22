@@ -40,7 +40,7 @@ function App() {
         return;
       }
 
-      axios.get(`http://localhost:4000/api/users/email/${email}`, {
+      axios.get(`http://159.223.174.63:4000/api/users/email/${email}`, {
         withCredentials: true
       })
         .then((response) => {
