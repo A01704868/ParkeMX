@@ -87,7 +87,7 @@ router.put(p.update, adminMw, async (req: Request, res: Response) => {
 router.delete(p.delete, adminMw, async (req: Request, res: Response) => {
     const { id } = req.params;
     // Check param
-    if (!id) {
+    if (id === undefined || id === null) {
         throw new ParamMissingError();
     }
     // Fetch data
