@@ -68,6 +68,7 @@ function BarraNav() {
         </RBACWrapper>
 
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <div className="navbar-expand">
           <Navbar.Collapse id="navbar-dark-example">
             <Nav>
               <NavDropdown
@@ -81,6 +82,7 @@ function BarraNav() {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+          </div>
         </RBACWrapper>
 
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
