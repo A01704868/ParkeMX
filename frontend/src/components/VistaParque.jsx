@@ -217,13 +217,13 @@ function VistaParque() {
       <Contacto style={{ padding: "1rem" }} id={parque.id} />
       <Usuario style={{ padding: "1rem" }} />
 
-      <div className="mt-16 activities">
+      <div className="wide-activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
-          <div className="col-6 pt-5 col-custom">
+          <div className="col-activity">
             <p>{actividades.map(activityList)}</p>
           </div>
-          <div className="col-6 pt-5">
+          <div className="col-activity">
             <Carousel>{activityImg.map(activityImgList)}</Carousel>
           </div>
         </div>
@@ -231,15 +231,15 @@ function VistaParque() {
 
       <div className="mt-16 pb-4">
         <h1 className="mb-3"> FLORA Y FAUNA </h1>
-        <div className="row-info-card">
-          <div className="col-6">
+        <div className="row-activities">
+          <div className="col-activity mb-sm-custom-4">
             <h2 className="mb-3"> FLORA </h2>
-            <Carousel className="car-center">
+            <Carousel className="car-center mb-4">
               {flora.map(floraListImg)}
             </Carousel>
             <div id="boton">
               <Button
-                  style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%" }}
+                  style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%"}}
                   href={"/registrarFlora/"+id}
                   variant="success"
                   className="crear"
@@ -247,9 +247,9 @@ function VistaParque() {
                   Asignar Flora al Parque</Button>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-activity">
             <h2 className="mb-3"> FAUNA </h2>
-            <Carousel className="car-center">
+            <Carousel className="car-center mb-4">
               {fauna.map(faunaListImg)}
             </Carousel>
               <div id="boton">

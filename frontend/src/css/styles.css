@@ -1,6 +1,5 @@
 .carousel-hero {
     height: 30rem;
-    padding-top: 28px;
   }
 
   .carousel-img {
@@ -35,6 +34,7 @@
     width: 100%;
   }
 
+
   .hero-img-flora {
     height: 30rem;
     width: 100%;
@@ -48,13 +48,6 @@
 
   .pb-4 {
     padding-bottom: 2rem;
-  }
-
-  .banner {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
   }
 
   .row-hero {
@@ -80,29 +73,6 @@
   .cercania-filter {
     width: 80%;
   }
-
-  @media (min-width: 300px) and (max-width: 920px) {
-    .search-bar {
-      width: 49%;
-    }
-    .activity-filter {
-      width: 100%;
-    }
-    .asc-order {
-      width: 100%;
-    }
-    .cercania-filter {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-    .custom-search {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-
 
   .car-center {
     text-align: center;
@@ -145,10 +115,6 @@
     justify-content: space-around;
   }
 
-  .row-activities {
-    display: flex;
-    width: 100%;
-  }
 
   .col-custom {
     display: flex;
@@ -246,4 +212,60 @@
 button {
   width: 49%;
   font-size: 1rem;
+}
+
+.row-activities {
+  display: flex;
+  width: 100%;
+}
+
+.wide-activities {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 8rem;
+}
+
+.col-activity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+@media (min-width: 300px) and (max-width: 920px) {
+  .search-bar {
+    width: 49%;
+  }
+  .activity-filter {
+    width: 100%;
+  }
+  .asc-order {
+    width: 100%;
+  }
+  .cercania-filter {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .custom-search {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .row-activities {
+    display: block;
+  }
+
+  .col-activity {
+    display: block;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .mb-sm-custom-4 {
+    margin-bottom: 4rem;
+  }
+
 }

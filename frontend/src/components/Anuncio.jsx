@@ -19,19 +19,19 @@ function Anuncio(props){
       handleClose();
       window.location.reload();
     }
-    
+
 
   if (alert) {
     return (
       <>
-      <Alert show={alert} variant={props.variante} onClose={() => setAlert(false)} dismissible className="banner">
+      <Alert show={alert} variant={props.variante} onClose={() => setAlert(false)} dismissible style={{ position: "absolute", top: "0", left: "0", width: "100%", zIndex: "1" }}>
         <Alert.Heading>{props.titulo}</Alert.Heading>
         <p>
           {props.descripcion}
         </p>
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <div className="d-flex justify-content-end">
-          <Button onClick={handleShow} variant="outline-danger">
+        <div className="d-flex justify-content-center">
+          <Button onClick={handleShow} variant="outline-danger" style={{ width: "10%" }}>
             <ion-icon name="trash-outline"></ion-icon>
           </Button>
         </div>
