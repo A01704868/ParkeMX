@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { UserContext } from "./UsuarioLista"
+import "../css/customStyles.css";
 
 const defaultProps = {
     isOpen: false,
@@ -14,7 +15,7 @@ const defaultProps = {
  */
 const UsuarioBorrar = ({ isOpen, onCancel, onDelete } = defaultProps) => {
     const usuarioUrl = "http://localhost:4000/api/users";
-    const { usuarioEditar, setUsuarioEditar } = useContext(UserContext);
+    const { usuarioEditar } = useContext(UserContext);
     const { id } = usuarioEditar;
 
     const borrarContacto = () => {
@@ -24,11 +25,8 @@ const UsuarioBorrar = ({ isOpen, onCancel, onDelete } = defaultProps) => {
 
         axios
             .delete(`${usuarioUrl}/delete/${id}`, { withCredentials: true })
-            .then((_) => {
-                setUsuarioEditar(undefined);
-                onDelete();
-            })
-            .catch((err) => alert(err));
+            .then(onDelete)
+            .catch(onCancel);
     };
 
     if (!isOpen || id === undefined || id === null) {
@@ -36,7 +34,10 @@ const UsuarioBorrar = ({ isOpen, onCancel, onDelete } = defaultProps) => {
     }
 
     return (
-        <Modal.Dialog style={{ zIndex: 900, boxShadow: "4px 4px 4px grey" }}>
+        <Modal.Dialog
+            className="modalStyle"
+            id="modalBorrar"
+        >
             <Modal.Header>
                 <Modal.Title>Borrar Usuario</Modal.Title>
             </Modal.Header>

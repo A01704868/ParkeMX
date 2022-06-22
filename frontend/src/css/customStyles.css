@@ -13,6 +13,14 @@
     object-fit: cover;
 }
 
+.modalStyle {
+  z-index: 900;
+  box-shadow: 4px 4px 4px grey;
+  position: absolute !important;
+  top: 50vh;
+  left: 33vw;
+}
+
 h1{
     padding-bottom: 20px;
 }
