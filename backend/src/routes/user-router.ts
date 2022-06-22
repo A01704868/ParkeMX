@@ -9,7 +9,7 @@ import { adminMw, loggedIn } from './middleware';
 
 // Constants
 const router = Router();
-const { CREATED, OK, BAD_REQUEST, NOT_FOUND } = StatusCodes;
+const { CREATED, OK, BAD_REQUEST, NOT_FOUND, NO_CONTENT } = StatusCodes;
 
 // Paths
 export const p = {
@@ -77,7 +77,7 @@ router.put(p.update, adminMw, async (req: Request, res: Response) => {
     }
     // Fetch data
     await userService.updateOne(user);
-    return res.status(OK).end();
+    return res.status(NO_CONTENT).end();
 });
 
 

@@ -5,8 +5,11 @@ import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
 import UsuarioEditar from "./UsuarioEditar";
 import UsuarioAgregar from "./UsuarioAgregar";
+import UsuarioBorrar from "./UsuarioBorrar";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import BarraNav from "./BarraNav";
+import Footer from "./Footer";
 
 
 const usuarioUrl = "http://localhost:4000/api/users";
@@ -71,6 +74,8 @@ const Usuario = () => {
         <>
             <div>
                 <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+                <BarraNav />
+                
                 <h2>Usuario</h2>
                 <Table striped bordered hover size="sm">
                     <thead>
@@ -90,12 +95,12 @@ const Usuario = () => {
                                 <td>{usuario.role === 1 ? "Admin" : "User"}</td>
                                 <td>
                                     <Icon.Trash
-                                        color={usuario.role === 0 ? "red" : "grey"}
+                                        color={usuario.id ? "red" : "grey"}
                                         title="Borrar Contacto"
                                         style={{ cursor: usuario.id ? "pointer" : "initial" }}
                                         onClick={usuario.role === 0 ? () => borrarContacto(usuario.id) : null}
                                     />
-                                </td>
+                                </td>   
                                 <td>
                                     <Icon.PencilFill
                                         title="Editar Contacto"
@@ -117,69 +122,26 @@ const Usuario = () => {
                             Agregar Usuario
                         </Button>
                     </div>
+                    <Footer />
                 </RBACWrapper>
             </div>
             <UsuarioAgregar
                 mostrarForma={addIsOpen}
                 onClose={onAddClosed}
             />
-            <DialogoBorrar
+            <UsuarioBorrar
                 id={userToUpdate}
                 isOpen={isDialogOpen}
                 onCancel={() => setIsDialogOpen(false)}
                 onDelete={() => onDelete(userToUpdate)}
             />
             {usuarioData && usuarioData[userToUpdate] && <UsuarioEditar
-                userData={usuarioData[userToUpdate]}
+                // userData={usuarioData[userToUpdate]}
+                userData={null}
                 mostrarForma={editIsOpen}
                 onClose={onEditClosed}
             />}
         </>
-    );
-};
-
-/**
- * Component para borrar un contacto
- * @param {number} id ID del contacto a borrar
- * @param {boolean} isOpen Bandera para abrir o cerrar el diálogo
- * @callback onCancel Funcion que ejecutar al cancelar la acción de borrar
- * @callback onDelete Funcion que ejecutar al borrar el contacto correctamente
- */
-const DialogoBorrar = ({ id, isOpen, onCancel, onDelete }) => {
-    const borrarContacto = () => {
-        if (id === null || id === undefined) {
-            return;
-        }
-
-        axios
-            .delete(`${usuarioUrl}/delete/${id}`, { withCredentials: true })
-            .then((_) => { onDelete && onDelete(); })
-            .catch((err) => alert(err));
-    };
-
-    if (!isOpen || id === undefined || id === null) {
-        return null;
-    }
-
-    return (
-        <Modal.Dialog style={{ zIndex: 900, boxShadow: "4px 4px 4px grey" }}>
-            <Modal.Header>
-                <Modal.Title>Borrar Usuario</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-                <p>Estás seguro que quieres borrar el usuario?</p>
-            </Modal.Body>
-
-            <Modal.Footer style={{ flexWrap: "nowrap" }}>
-                <Button variant="secondary" onClick={() => onCancel && onCancel()}>
-                    Cancelar
-                </Button>
-                <Button variant="danger" onClick={borrarContacto}>
-                    Borrar
-                </Button>
-            </Modal.Footer>
-        </Modal.Dialog>
     );
 };
 

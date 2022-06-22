@@ -1,4 +1,4 @@
-import React, {useState, browser}from "react";
+import React, { useState, browser } from "react";
 import { Container, Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
 import logotipo from "../assets/app-logo.svg";
 import usericon from "../assets/avatar.svg";
@@ -24,13 +24,13 @@ function BarraNav() {
           console.log(error);
         });
 
-        var d = new Date();
-        d.setTime(d.getTime());
-        var expires = "expires="+d.toUTCString();
-        document.cookie = "ExpressGeneratorTs=;domain=localhost;path=/;" + expires;
-        document.cookie = "email=;domain=localhost;path=/;" + expires;
+      var d = new Date();
+      d.setTime(d.getTime());
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = "ExpressGeneratorTs=;domain=localhost;path=/;" + expires;
+      document.cookie = "email=;domain=localhost;path=/;" + expires;
 
-        window.location.reload();
+      window.location.reload();
     } catch (event) {
       console.log(event);
     }
@@ -68,6 +68,22 @@ function BarraNav() {
           </Navbar.Collapse>
         </RBACWrapper>
 
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+          <Navbar.Collapse id="navbar-dark-example">
+            <Nav>
+              <NavDropdown
+                id="nav-dropdown-dark-example"
+                title="Usuarios"
+                menuVariant="dark"
+              >
+                <NavDropdown.Item href={"/usuarios"}>
+                  Informacion de Usuarios
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </RBACWrapper>
+
         <Navbar.Brand onClick={handleShow}>
           <img
             src={usericon}
@@ -79,18 +95,18 @@ function BarraNav() {
         </Navbar.Brand>
 
         <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Estas seguro que quieres cerrar sesion?</Modal.Title>
-        </Modal.Header>
-        <Modal.Footer>
-          <Button variant="primary" onClick={cerrarSesion}>
-            Si
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            No
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>Estas seguro que quieres cerrar sesion?</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="primary" onClick={cerrarSesion}>
+              Si
+            </Button>
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     </Navbar>
   );

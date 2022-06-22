@@ -214,8 +214,7 @@ function VistaParque() {
         latitude={parque.latitud}
         longitude={parque.longitud}
       />
-      <Contacto style={{ padding: "1rem" }} id={parque.id} />
-      <Usuario style={{ padding: "1rem" }} />
+      <Contacto style={{ padding: "1rem" }} id={parque.id} /> 
 
       <div className="wide-activities">
         <h1 className="mb-3"> ACTIVIDADES </h1>
