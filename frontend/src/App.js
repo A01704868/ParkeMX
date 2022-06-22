@@ -12,20 +12,22 @@ import AgregarFauna from "./components/AgregarFauna";
 import AgregarFlora from "./components/AgregarFlora";
 import FloraId from "./components/FloraId";
 import FaunaId from "./components/FaunaId";
-import EditarHorario from "./components/EditarHorario";
+// import EditarHorario from "./components/EditarHorario";
 import EditarFlora from "./components/EditarFlora";
 import EditarFauna from "./components/EditarFauna";
-import Usuario from "./components/Usuario";
+// import Usuario from "./components/Usuario";
+import UsuarioLista from "./components/UsuarioLista";
 import { RBACProvider, useRBACContext } from "react-simple-rbac";
 import Cookies from "js-cookie";
 import axios from "axios";
 
 const rolesMap = { 0: "usuario", 1: "admin" };
 const roles = ['admin', 'usuario'];
-const UserContext = React.createContext();
+const defaultUser = { name: "", email: "", role: "" };
+const UserContext = React.createContext(defaultUser);
 
 function App() {
-  const [userInfo, setUserInfo] = useState({ name: "", email: "", role: "" });
+  const [userInfo, setUserInfo] = useState(defaultUser);
   const [err, setError] = useState(false);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const AppWrapper = () => {
 
   return (
     <div className="App">
-      <BrowserRouter roles={roles}>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<ListaDeParques />} />
           <Route path="/agregar" element={<AgregarParque />} />
@@ -79,7 +81,7 @@ const AppWrapper = () => {
           />
           <Route path="/parque/:id" element={<VistaParque />} />
           <Route path="/editarparque/:id" element={<EditarParque />} />
-          <Route path="/editarhorario/:id" element={<EditarHorario />} />
+          {/* <Route path="/editarhorario/:id" element={<EditarHorario />} /> */}
           <Route path="/agregarhorario/:id" element={<AgregarHorario />} />
           <Route path="/editarparque" element={<EditarParque />} />
           <Route path="/agregarfauna" element={<AgregarFauna />} />
@@ -89,7 +91,7 @@ const AppWrapper = () => {
           <Route path="/fauna/:id" element={<FaunaId />} />
           <Route path="/editFlora/:id" element={<EditarFlora />} />
           <Route path="/editFauna/:id" element={<EditarFauna />} />
-          <Route path="/usuarios" element={<Usuario />} />
+          <Route path="/usuarios" element={<UsuarioLista />} />
         </Routes>
       </BrowserRouter>
     </div>
