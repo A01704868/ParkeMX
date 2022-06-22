@@ -83,6 +83,7 @@ function BarraNav() {
           </Navbar.Collapse>
         </RBACWrapper>
 
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
         <Navbar.Brand onClick={handleShow}>
           <img
             src={usericon}
@@ -92,6 +93,7 @@ function BarraNav() {
             alt="N/A"
           />
         </Navbar.Brand>
+        </RBACWrapper>
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

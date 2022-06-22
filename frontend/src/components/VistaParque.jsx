@@ -236,6 +236,7 @@ function VistaParque() {
             <Carousel className="car-center mb-4">
               {flora.map(floraListImg)}
             </Carousel>
+            <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
             <div id="boton">
               <Button
                   style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%"}}
@@ -245,12 +246,14 @@ function VistaParque() {
               >
                   Asignar Flora al Parque</Button>
             </div>
+            </RBACWrapper>
           </div>
           <div className="col-activity">
             <h2 className="mb-3"> FAUNA </h2>
             <Carousel className="car-center mb-4">
               {fauna.map(faunaListImg)}
             </Carousel>
+              <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
               <div id="boton">
                   <Button
                       style={{ width: "200px", maxWidth: "20vw", position: "relative", left: "52%" }}
@@ -260,6 +263,7 @@ function VistaParque() {
                   >
                       Asignar Fauna al Parque</Button>
               </div>
+              </RBACWrapper>
           </div>
         </div>
       </div>
