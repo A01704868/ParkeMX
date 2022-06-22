@@ -20,7 +20,7 @@ function CrearAnuncio(){
     useEffect(() => {
     
         const getData = () => {
-          let promise1 = axios.get("http://159.223.174.63:4000/api/parques");
+          let promise1 = axios.get("http://localhost:4000/api/parques");
     
           Promise.all([promise1])
             .then((values) => {

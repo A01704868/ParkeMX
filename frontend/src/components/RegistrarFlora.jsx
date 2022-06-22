@@ -55,9 +55,9 @@ function RegistrarFlora(){
     useEffect(() => {
     
         const getData = () => {
-          let promise1 = axios.get("http://159.223.174.63:4000/api/flora/"+id);
+          let promise1 = axios.get("http://localhost:4000/api/flora/"+id);
           let promise2 = axios.get(
-            "http://159.223.174.63:4000/api/parques/parque/" + id
+            "http://localhost:4000/api/parques/parque/" + id
           );
     
           Promise.all([promise1, promise2])

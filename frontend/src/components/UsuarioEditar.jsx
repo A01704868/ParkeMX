@@ -7,7 +7,7 @@ import { AppRoles } from "../App";
 import { UserContext } from "./UsuarioLista";
 import { useEffect } from "react";
 
-const usuarioUrl = "http://159.223.174.63:4000/api/users";
+const usuarioUrl = "http://localhost:4000/api/users";
 const defaultProps = {
     mostrarForma: false,
     onClose: () => { },

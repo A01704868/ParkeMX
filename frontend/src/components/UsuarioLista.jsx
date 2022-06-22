@@ -22,7 +22,7 @@ export const UserContext = React.createContext({
 
 
 export default class UsuarioLista extends React.Component {
-    usuarioUrl = "http://159.223.174.63:4000/api/users";
+    usuarioUrl = "http://localhost:4000/api/users";
 
     constructor (props) {
         super(props);

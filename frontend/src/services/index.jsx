@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://159.223.174.63:4000/api";
+const baseUrl = "http://localhost:4000/api";
 
 export async function savePark(parque) {
   console.log("ORE: ", parque);
@@ -49,7 +49,7 @@ export async function saveCart(cartaruta) {
     formData.append("parqueId", cartaruta.parqueId);
 
     let response = axios
-      .post("http://159.223.174.63:4000/api/addcartaruta/", {
+      .post("http://localhost:4000/api/addcartaruta/", {
         cartaruta: cartaruta,
       })
       .then(function (response) {
@@ -178,7 +178,7 @@ export async function saveHorario(horario) {
     formData.append("parqueId", horario.parqueId);
 
     let response = axios
-      .post("http://159.223.174.63:4000/api/addhorario/", {
+      .post("http://localhost:4000/api/addhorario/", {
         horario: horario,
       })
       .then(function (response) {
@@ -252,7 +252,7 @@ export async function saveFauna(fauna) {
     });*/
 
     let response = axios
-      .post("http://159.223.174.63:4000/api/addfauna", {
+      .post("http://localhost:4000/api/addfauna", {
         fauna: fauna,
       })
       .then(function (response) {
@@ -288,7 +288,7 @@ export async function saveFlora(flora) {
     });*/
 
     let response = axios
-      .post("http://159.223.174.63:4000/api/addflora", {
+      .post("http://localhost:4000/api/addflora", {
         flora: flora,
       })
       .then(function (response) {

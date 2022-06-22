@@ -6,7 +6,7 @@ import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { useState } from "react";
 
-const usuarioUrl = "http://159.223.174.63:4000/api/users";
+const usuarioUrl = "http://localhost:4000/api/users";
 const agregarUsuario = (body, onAdded, onClose) => {
     if (!body) {
         return;
