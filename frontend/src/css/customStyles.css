@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.drop-nav {
+  width: 100%
+}
+
 .stockImage{
     background-size: 1920px 300px;
     width: 100%;
@@ -61,3 +65,13 @@ form{
 
     margin-bottom: 5%
   }
+
+.collapse:not(.show) {
+  display: block;
+}
+
+@media (min-width: 300px) and (max-width: 920px) {
+  
+
+
+}
