@@ -51,10 +51,9 @@ function BarraNav() {
         </Navbar.Brand>
 
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-          <Navbar.Collapse id="navbar-dark-example">
+          <div className="navbar-expand">
             <Nav>
               <NavDropdown
-                id="nav-dropdown-dark-example"
                 title="Opciones"
                 menuVariant="dark"
               >
@@ -65,7 +64,7 @@ function BarraNav() {
                 <NavDropdown.Item href="/agregarflora">Agregar Flora</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-          </Navbar.Collapse>
+          </div>
         </RBACWrapper>
 
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
