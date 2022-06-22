@@ -209,12 +209,6 @@ async function main() {
         ]
     });
 
-    const userSeeder = db.usuario.createMany({
-        data: [
-            { nombre: "Alex", email: "alex@gmail.com", password: "$2b$10$h3aJBrd.KKWcNDs6MrxqV.92Eh5u6LO/wixjJOxULGaa6wnO4FTvu", role: "ADMIN"},
-        ]
-    });
-
     
     await parqueSeeder;
     await categoriaSeeder;
@@ -231,7 +225,6 @@ async function main() {
     await actividadParqueSeeder;
     await anuncioSeeder;
     await horarioSeeder;
-    await userSeeder;
     //const users = await db.usuario.findMany();
     //console.log(users);
 }
