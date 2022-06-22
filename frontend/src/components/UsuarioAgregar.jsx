@@ -4,93 +4,121 @@ import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { useState, useContext } from "react";
+import { UserContext } from "./UsuarioLista";
 
 const usuarioUrl = "http://localhost:4000/api/users";
-const agregarUsuario = (usuario, onClose) => {
-    if (!usuario) {
+const agregarUsuario = (body, onAdded, onClose) => {
+    if (!body) {
         return;
     }
 
-    axios.post(`${usuarioUrl}/add`, usuario, { withCredentials: true })
-        .then(onClose)
+    axios.post(`${usuarioUrl}/add`, body, { withCredentials: true })
+        .then((res) => {
+            if (res.status === 201) {
+                onAdded().then(onClose).catch(onClose);
+            }
+        })
         .catch(onClose);
 }
 
 const defaultProps = {
     mostrarForma: false,
-    onClose: () => {}
+    onUserAdded: () => {},
+    onClose: () => { }
 };
 
-const UsuarioAgregar = ({ mostrarForma, onClose } = defaultProps) => {
-    const guardarUsuario = (event) => {
-        const [nombreField, emailField, passwordField, roleField] = event.target;
-        const nombre = nombreField.value ?? "";
-        const email = emailField.value ?? "";
-        const password = passwordField.value ?? "";
-        const role = roleField.value ?? "";
+const UsuarioAgregar = ({ mostrarForma, onClose, onUserAdded } = defaultProps) => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState(0);
 
-        if (!nombre || !email || !password || !role) {
+    const onDismiss = () => {
+        setName("");
+        setEmail("");
+        setRole(0);
+
+        onClose();
+    };
+
+    const guardarUsuario = (event) => {
+        if (!name || !email || !password || (role !== 0 && role !== 1)) {
             return;
         }
 
-        const usuarioAdded = { usuario: { nombre, email, password, role } };
-        agregarUsuario(usuarioAdded, onClose);
+        const usuarioAdded = { user: { name, email, password, role } };
+        agregarUsuario(usuarioAdded, onUserAdded, onDismiss);
         event.preventDefault();
     };
 
+
     return (
-        <Modal show={mostrarForma} onHide={onClose}>
+        <Modal show={mostrarForma} onHide={onDismiss}>
             <Modal.Header>
                 <Modal.Title>Agregar Usuario</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-                {renderForm(guardarUsuario, onClose)}
+                <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+                    <Form onSubmit={guardarUsuario} style={{ margin: "10%", marginTop: "0%" }}>
+                    <Form.Group className="mb-3" controlId="formNombre">
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control type="name"
+                                onChange={({ target }) => setName(target.value)}
+                                placeholder="Nuevo Nombre"
+                                defaultValue={""}
+                                typeof={typeof ""}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email"
+                                onChange={({ target }) => setEmail(target.value)}
+                                placeholder="ejemplo@gmail.com"
+                                defaultValue={""}
+                                typeof={typeof ""}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password"
+                                onChange={({ target }) => setPassword(target.value)}
+                                placeholder="***********"
+                                defaultValue={""}
+                                typeof={typeof ""}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Rol</Form.Label>
+                            <Form.Control
+                                onChange={({ target }) => setRole(+target.value)}
+                                defaultValue={0}
+                                typeof={typeof 1}
+                                as="select"
+                            >
+                                <option value={0}>USER</option>
+                                <option value={1}>ADMIN</option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <div style={{ display: "flex", gap: "5px" }}>
+                            <Button variant="primary" type="submit" value="submit">
+                                Agregar
+                            </Button>
+                            <Button variant="secondary" onClick={onClose}>
+                                Cerrar
+                            </Button>
+                        </div>
+                    </Form>
+                </RBACWrapper>
             </Modal.Body>
         </Modal>
     );
-
 };
-
-const renderForm = (guardarUsuario, onClose) => {
-    return (
-        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <Form onSubmit={guardarUsuario} style={{margin: "10%", marginTop: "0%"}}>
-            <Form.Group className="mb-3" controlId="formNombre">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control type="name" placeholder="Nuevo Nombre" required />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="ejemplo@gmail.com" required />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control type="text" placeholder="***********" required />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-                <Form.Label>Rol</Form.Label>
-                <Form.Select >
-                    <option>USER</option>
-                    <option>ADMIN</option>
-                </Form.Select>
-            </Form.Group>
-
-            <div style={{ display: "flex", gap: "5px" }}>
-                <Button variant="primary" type="submit" value="submit">
-                    Agregar
-                </Button>
-                <Button variant="secondary" onClick={onClose}>
-                    Cerrar
-                </Button>
-            </div>
-        </Form>
-        </RBACWrapper>
-    );
-}
 
 export default UsuarioAgregar;
 

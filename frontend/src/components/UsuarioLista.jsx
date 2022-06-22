@@ -119,6 +119,7 @@ export default class UsuarioLista extends React.Component {
                     <UsuarioAgregar
                         mostrarForma={mostrarAgregar}
                         onClose={this.toggleAgregar}
+                        onUserAdded={this.cargarListaUsuarios}
                     />
                     <UsuarioBorrar
                         isOpen={mostrarBorrar}
