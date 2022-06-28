@@ -1,4 +1,4 @@
-import React, { useState, browser } from "react";
+import React, { useState } from "react";
 import { Container, Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
 import logotipo from "../assets/app-logo.svg";
 import usericon from "../assets/avatar.svg";
@@ -6,6 +6,7 @@ import "../css/customStyles.css";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import axios from "axios";
+import { urlInjector } from "../services/urlInjector";
 
 function BarraNav() {
 
@@ -15,11 +16,9 @@ function BarraNav() {
   const handleShow = () => setShow(true);
 
   const cerrarSesion = () => {
+    const baseUrl = urlInjector();
     try {
-      let response = axios.get("http://localhost:4000/api/auth/logout")
-        .then(function (response) {
-          console.log(response);
-        })
+      axios.get(`${baseUrl}/auth/logout`)
         .catch(function (error) {
           console.log(error);
         });

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 function EditarFlora(){
     const { id } = useParams();
@@ -19,8 +20,9 @@ function EditarFlora(){
 
     useEffect(() => {
         const getData = async () => {
+          const baseUrl = urlInjector();
           let promise1 = await axios.get(
-            "http://localhost:4000/api/parques/flora/" + id
+            `${baseUrl}/parques/flora/${id}`
           );
     
           Promise.all([promise1])

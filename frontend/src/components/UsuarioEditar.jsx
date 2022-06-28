@@ -6,8 +6,10 @@ import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { UserContext } from "./UsuarioLista";
 import { useEffect } from "react";
+import { urlInjector } from "../services/urlInjector";
 
-const usuarioUrl = "http://localhost:4000/api/users";
+const baseUrl = urlInjector();
+const usuarioUrl = `${baseUrl}/users`;
 const defaultProps = {
     mostrarForma: false,
     onClose: () => { },

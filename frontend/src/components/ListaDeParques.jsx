@@ -21,6 +21,7 @@ import { deletePark } from "../services/index";
 import { deleteHorario } from "../services/index";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 const reverse = (arr1) => {
   const aux = [];
@@ -52,7 +53,6 @@ const renderAbrir = (horario) => {
 };
 
 const renderCard = (card) => {
-  //const url = "http://localhost:4000/api/parques/img/" + card.id;
 
   return (
     <Col key={card.id} style={{ display: "flex", justifyContent: "center" }}>
@@ -116,7 +116,6 @@ function ListaDeParques() {
   useEffect(() => {
 
     function getPosition(position) {
-      //const URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+position.coords.latitude + ',' + position.coords.longitude + '&destinations=' + 20.53484996215969 + ',' + -100.3577293854862 + '&key=AIzaSyBa_nu7n2b5Gs_J2YPiSSCKnKD-ZsdD0YA';
 
       setLatitud(position.coords.latitude);
       setLongitud(position.coords.longitude);
@@ -129,9 +128,10 @@ function ListaDeParques() {
     }
 
     const getData = () => {
-      let promise1 = axios.get("http://localhost:4000/api/parques");
+      const baseUrl = urlInjector();
+      let promise1 = axios.get(`${baseUrl}/parques`);
 
-      let promise2 = axios.get("http://localhost:4000/api/parques/activity");
+      let promise2 = axios.get(`${baseUrl}/parques/activity`);
 
       Promise.all([promise1, promise2])
         .then(values => { setParques(values[0].data); setActivityButton(values[1].data); })
@@ -282,10 +282,3 @@ function ListaDeParques() {
 }
 
 export default ListaDeParques;
-
-//ver el hook de useContext
-//usar react-router-dom v6
-//investigar lo de los providers
-//no usar redux
-
-//atomic design

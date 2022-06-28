@@ -2,6 +2,7 @@ import { Alert, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { urlInjector } from "../services/urlInjector";
 
 const Weather = ({ longitude, latitude }) => {
   const [weatherData, setWeatherData] = useState({
@@ -19,7 +20,8 @@ const Weather = ({ longitude, latitude }) => {
         return;
       }
 
-      const weatherUrl = "http://localhost:4000/api/weather/coordinates/";
+      const baseUrl = urlInjector();
+      const weatherUrl = `${baseUrl}/weather/coordinates/`;
       const response = axios.post(weatherUrl, { latitude, longitude });
 
       response

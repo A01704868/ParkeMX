@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 function faunaListImg(fauna) {
   return (
@@ -26,7 +27,8 @@ function FaunaId() {
 
   useEffect(() => {
     const getData = () => {
-      let promise1 = axios.get("http://localhost:4000/api/parques/fauna/" + id);
+      const baseUrl = urlInjector();
+      let promise1 = axios.get(`${baseUrl}/parques/fauna/${id}`);
 
       Promise.all([promise1])
         .then((values) => {

@@ -3,7 +3,6 @@ import Navbar from "./BarraNav";
 import Footer from "./Footer";
 import Weather from "./Weather";
 import Contacto from "./Contacto";
-import Usuario from "./Usuario";
 import "../css/styles.css";
 import Anuncio from "./Anuncio";
 import { useParams } from "react-router-dom";
@@ -19,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 const render = (status) => {
   if (status === Status.LOADING) return <h3>{status} ..</h3>;
@@ -93,24 +93,25 @@ function VistaParque() {
 
   useEffect(() => {
     const getData = () => {
+      const baseUrl = urlInjector();
       let promise1 = axios.get(
-        "http://localhost:4000/api/parques/parque/" + id
+        `${baseUrl}/parques/parque/${id}`
       );
 
       let promise2 = axios.get(
-        "http://localhost:4000/api/parques/pActivities/" + id
+        `${baseUrl}/parques/pActivities/${id}`
       );
 
       let promise3 = axios.get(
-        "http://localhost:4000/api/parques/activityImg/" + id
+        `${baseUrl}/parques/activityImg/${id}`
       );
 
       let promise4 = axios.get(
-        "http://localhost:4000/api/parques/parkFauna/" + id
+        `${baseUrl}/parques/parkFauna/${id}`
       );
 
       let promise5 = axios.get(
-        "http://localhost:4000/api/parques/parkFlora/" + id
+        `${baseUrl}/parques/parkFlora/${id}`
       );
 
       Promise.all([promise1, promise2, promise3, promise4, promise5])

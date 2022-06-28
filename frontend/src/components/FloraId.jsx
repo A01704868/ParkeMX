@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 function FloraId() {
 
@@ -19,8 +20,9 @@ function FloraId() {
 
   useEffect(() => {
     const getData = () => {
+      const baseUrl = urlInjector();
       let promise1 = axios.get(
-        "http://localhost:4000/api/parques/flora/" + id
+        `${baseUrl}/parques/flora/${id}`
       );
 
       Promise.all([promise1])

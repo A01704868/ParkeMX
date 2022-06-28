@@ -8,7 +8,7 @@ import CrearAnuncio from "./components/CrearAnuncio";
 import AgregarCartaRuta from "./components/AgregarCartaRuta";
 import EditarParque from "./components/EditarParque";
 import AgregarHorario from "./components/AgregarHorario";
-import EditarHorario from "./components/EditarHorario";
+//import EditarHorario from "./components/EditarHorario";
 //Componentes de flora y fauna
 import AgregarFauna from "./components/AgregarFauna";
 import AgregarFlora from "./components/AgregarFlora";
@@ -25,7 +25,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const rolesMap = { 0: "usuario", 1: "admin" };
-const roles = ['admin', 'usuario'];
+//const roles = ['admin', 'usuario'];
 const defaultUser = { name: "", email: "", role: "" };
 const UserContext = React.createContext(defaultUser);
 

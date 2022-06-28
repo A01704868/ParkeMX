@@ -2,7 +2,6 @@ import axios from "axios";
 const baseUrl = "http://localhost:4000/api";
 
 export async function savePark(parque) {
-  console.log("ORE: ", parque);
   try {
     const formData = new FormData();
 
@@ -20,9 +19,6 @@ export async function savePark(parque) {
       .post(`${baseUrl}/addparques`, {
         parque: parque,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -39,7 +35,6 @@ export async function savePark(parque) {
 }
 
 export async function saveCart(cartaruta) {
-  console.log("ORE: ", cartaruta);
   try {
     const formData = new FormData();
     console.log(cartaruta.parqueid);
@@ -49,11 +44,8 @@ export async function saveCart(cartaruta) {
     formData.append("parqueId", cartaruta.parqueId);
 
     let response = axios
-      .post("http://localhost:4000/api/addcartaruta/", {
+      .post(`${baseUrl}/addcartaruta/`, {
         cartaruta: cartaruta,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -76,14 +68,11 @@ export async function deletePark(parkId) {
       .delete(`${baseUrl}/deleteparque/${parkId}`, {
         id: parkId,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
 
-    //return response;
+    return response;
   } catch (event) {
     console.log(event);
   }
@@ -101,9 +90,6 @@ export async function updateFauna(fauna) {
         titulo: fauna.titulo,
         descripcion: fauna.descripcion,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -116,7 +102,6 @@ export async function updateFauna(fauna) {
 
 export async function updatePark(park) {
   try {
-    console.log("ID: ", park.id);
     let response = axios
       .put(`${baseUrl}/editParque/${park.id}`, {
         id: park.id,
@@ -129,9 +114,6 @@ export async function updatePark(park) {
         fechaDecreto: park.fechaDecreto,
         superficieTerrestre: park.superficieTerrestre,
         superficieMarina: park.superficieMarina,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -153,9 +135,6 @@ export async function updateFlora(flora) {
         titulo: flora.titulo,
         descripcion: flora.descripcion,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -167,10 +146,8 @@ export async function updateFlora(flora) {
 }
 
 export async function saveHorario(horario) {
-  console.log("ORE: ", horario);
   try {
     const formData = new FormData();
-    console.log(horario.parqueid);
 
     formData.append("dias", horario.dias);
     formData.append("horaAbrir", horario.horaAbrir);
@@ -178,11 +155,8 @@ export async function saveHorario(horario) {
     formData.append("parqueId", horario.parqueId);
 
     let response = axios
-      .post("http://localhost:4000/api/addhorario/", {
+      .post(`${baseUrl}/addhorario/`, {
         horario: horario,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -205,9 +179,6 @@ export async function deleteHorario(horarioId) {
       .delete(`${baseUrl}/deletehorario/${horarioId}`, {
         id: horarioId,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -224,9 +195,6 @@ export async function deleteAnuncio(anuncioId) {
       .delete(`${baseUrl}/deleteanuncio/${anuncioId}`, {
         id: anuncioId,
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -238,25 +206,19 @@ export async function deleteAnuncio(anuncioId) {
 }
 
 export async function saveFauna(fauna) {
-  console.log("ORE: ", fauna);
   try {
     const formData = new FormData();
-    console.log(fauna);
 
     formData.append("nombre", fauna.nombre);
     formData.append("descripcion", fauna.descripcion);
     formData.append("imagen", fauna.image);
-    console.log("Buscando: ", fauna);
     /*let response = await axios.post("http://localhost:4000/api/addparques", {
       parkData,
     });*/
 
     let response = axios
-      .post("http://localhost:4000/api/addfauna", {
+      .post(`${baseUrl}/addfauna`, {
         fauna: fauna,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -274,25 +236,19 @@ export async function saveFauna(fauna) {
 }
 
 export async function saveFlora(flora) {
-  console.log("ORE: ", flora);
   try {
     const formData = new FormData();
-    console.log(flora);
 
     formData.append("nombre", flora.nombre);
     formData.append("descripcion", flora.descripcion);
     formData.append("imagen", flora.image);
-    console.log("Buscando: ", flora);
     /*let response = await axios.post("http://localhost:4000/api/addparques", {
       parkData,
     });*/
 
     let response = axios
-      .post("http://localhost:4000/api/addflora", {
+      .post(`${baseUrl}/addflora`, {
         flora: flora,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -310,7 +266,6 @@ export async function saveFlora(flora) {
 }
 
 export async function saveAnuncio(anuncio) {
-  console.log("ORE: ", anuncio);
   try {
     const formData = new FormData();
 
@@ -320,9 +275,6 @@ export async function saveAnuncio(anuncio) {
     let response = axios
       .post(`${baseUrl}/addanuncio/`, {
         anuncio: anuncio,
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -347,9 +299,6 @@ export async function saveFloraPark(floraPark) {
         floraId: floraPark.floraId,
         parqueId: floraPark.parqueId
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
         console.log(error);
       });
@@ -367,9 +316,6 @@ export async function saveFaunaPark(faunaPark) {
       .post(`${baseUrl}/addFaunaPark`, {
         faunaId: faunaPark.faunaId,
         parqueId: faunaPark.parqueId
-      })
-      .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 function EditarFauna() {
   const { id } = useParams();
@@ -19,8 +20,9 @@ function EditarFauna() {
 
   useEffect(() => {
     const getData = async () => {
+      const baseUrl = urlInjector();
       let promise1 = await axios.get(
-        "http://localhost:4000/api/parques/fauna/" + id
+        `${baseUrl}/parques/fauna/${id}`
       );
 
       Promise.all([promise1])
@@ -31,7 +33,7 @@ function EditarFauna() {
         .catch((e) => console.log(e));
     };
 
-    const data = getData();
+    getData();
   }, [id]);
 
   const handleSubmit = (event) => {

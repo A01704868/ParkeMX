@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { UserContext } from "./UsuarioLista"
 import "../css/customStyles.css";
+import { urlInjector } from "../services/urlInjector";
 
 const defaultProps = {
     isOpen: false,
@@ -14,7 +15,8 @@ const defaultProps = {
  * Componente para borrar un contacto
  */
 const UsuarioBorrar = ({ isOpen, onCancel, onDelete } = defaultProps) => {
-    const usuarioUrl = "http://localhost:4000/api/users";
+    const baseUrl = urlInjector();
+    const usuarioUrl = `${baseUrl}/users`;
     const { usuarioEditar } = useContext(UserContext);
     const { id } = usuarioEditar;
 

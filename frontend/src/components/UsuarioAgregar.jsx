@@ -5,8 +5,10 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { useState } from "react";
+import { urlInjector } from "../services/urlInjector";
 
-const usuarioUrl = "http://localhost:4000/api/users";
+const baseUrl = urlInjector();
+const usuarioUrl = `${baseUrl}/users`;
 const agregarUsuario = (body, onAdded, onClose) => {
     if (!body) {
         return;

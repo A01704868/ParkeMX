@@ -7,8 +7,10 @@ import ContactoEditar from "./ContactoEditar";
 import ContactoAgregar from "./ContactoAgregar";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
-const contactoUrl = "http://localhost:4000/api/encargado";
+const baseUrl = urlInjector();
+const contactoUrl = `${baseUrl}/encargado`;
 
 const Contacto = ({ id }) => {
   const [contactoData, setContactoData] = useState({

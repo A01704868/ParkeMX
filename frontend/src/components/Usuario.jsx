@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
-import { Table, Modal, Button } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
 import UsuarioEditar from "./UsuarioEditar";
@@ -10,9 +10,10 @@ import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
+import { urlInjector } from "../services/urlInjector";
 
-
-const usuarioUrl = "http://localhost:4000/api/users";
+const baseUrl = urlInjector();
+const usuarioUrl = `${baseUrl}/users`;
 
 const Usuario = () => {
     const [usuarioData, setUsuarioData] = useState([]);

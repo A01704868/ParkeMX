@@ -6,6 +6,7 @@ import { saveFaunaPark } from "../services/index";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import axios from "axios";
+import { urlInjector } from "../services/urlInjector";
 
 function faunaOpt(fauna){
     return (
@@ -55,10 +56,11 @@ function RegistrarFlora(){
     useEffect(() => {
     
         const getData = () => {
-          let promise1 = axios.get("http://localhost:4000/api/fauna/"+id);
+          const baseUrl = urlInjector();
+          let promise1 = axios.get(`${baseUrl}/fauna/${id}`);
           
           let promise2 = axios.get(
-            "http://localhost:4000/api/parques/parque/" + id
+            `${baseUrl}/parques/parque/${id}`
           );
     
           Promise.all([promise1, promise2])

@@ -6,6 +6,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate  } from 'react-router-dom';
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
 function dynamoOpt(parque){
     return (
@@ -20,7 +21,8 @@ function CrearAnuncio(){
     useEffect(() => {
     
         const getData = () => {
-          let promise1 = axios.get("http://localhost:4000/api/parques");
+            const baseUrl = urlInjector();
+          let promise1 = axios.get(`${baseUrl}/parques`);
     
           Promise.all([promise1])
             .then((values) => {

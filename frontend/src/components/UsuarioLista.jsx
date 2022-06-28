@@ -9,6 +9,7 @@ import UsuarioEditar from "./UsuarioEditar";
 import UsuarioBorrar from "./UsuarioBorrar";
 import { RBACWrapper } from "react-simple-rbac";
 import * as Icon from "react-bootstrap-icons";
+import { urlInjector } from "../services/urlInjector";
 
 const usuarioDefault = { id: -1, name: "", email: "", role: 0 };
 const listaDefault = [usuarioDefault];
@@ -22,7 +23,7 @@ export const UserContext = React.createContext({
 
 
 export default class UsuarioLista extends React.Component {
-    usuarioUrl = "http://localhost:4000/api/users";
+    usuarioUrl = urlInjector() + "/users";
 
     constructor (props) {
         super(props);

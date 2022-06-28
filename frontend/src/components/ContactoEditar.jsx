@@ -4,8 +4,10 @@ import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { urlInjector } from "../services/urlInjector";
 
-const contactoUrl = "http://localhost:4000/api/encargado";
+const baseUrl = urlInjector();
+const contactoUrl = `${baseUrl}/encargado`;
 const editarContacto = (encargado, onClose) => {
   if (!encargado) {
     return;
