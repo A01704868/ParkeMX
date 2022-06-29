@@ -84,7 +84,7 @@ function BarraNav() {
           </div>
         </RBACWrapper>
 
-        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Button href="http://localhost:4000" className="col-md-2" variant="dark">Iniciar Sesión</Button>}>
         <Navbar.Brand onClick={handleShow}>
           <img
             src={usericon}

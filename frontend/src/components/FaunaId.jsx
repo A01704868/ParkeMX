@@ -5,20 +5,21 @@ import "../css/styles.css";
 //import { useParams } from "react-router-dom";
 //import { Card, Button, Carousel, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Carousel, Container, Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { urlInjector } from "../services/urlInjector";
 
+/*
 function faunaListImg(fauna) {
   return (
     <Carousel.Item>
       <img className="d-block w-100 img-flora" src={fauna.imagen}></img>
     </Carousel.Item>
   );
-}
+}*/
 
 function FaunaId() {
   const { id } = useParams();
@@ -37,13 +38,13 @@ function FaunaId() {
         .catch((e) => console.log(e));
     };
     getData();
-  }, []);
+  }, [id]);
 
   return (
     <div>
       <Navbar />
       <div className="full-width mt-4">
-        <img className="hero-img-flora img-fauna pb-4" src={fauna.imagen} />
+        <img className="hero-img-flora img-fauna pb-4" src={fauna.imagen} alt='Error al cargar la imagen'/>
         <div>
           <h1>{fauna.nombre}</h1>
         </div>

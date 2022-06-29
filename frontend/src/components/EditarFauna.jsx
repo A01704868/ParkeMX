@@ -14,6 +14,7 @@ import { urlInjector } from "../services/urlInjector";
 function EditarFauna() {
   const { id } = useParams();
 
+  // eslint-disable-next-line
   const [fauna, setFauna] = useState([]);
   let [formValues, setFormValues] = useState([]);
   const [validated, setValidated] = useState(false);

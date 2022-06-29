@@ -270,8 +270,8 @@ function ListaDeParques() {
       </Row>
       <div id="boton">
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-          <Button className="crear" type="submit" variant="success" href={"/agregar"} style={{ position: "fixed", top: "90%", width: "20vw", left: "calc(50% - 10vw)" }}>
-            Agregar
+          <Button className="crear" type="submit" variant="success" href={"/agregar"} style={{ position: "fixed", width: "20vw", left: "calc(50% - 10vw)" }}>
+            Agregar Parque
           </Button>
         </RBACWrapper>
       </div>

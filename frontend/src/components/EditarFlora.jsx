@@ -14,6 +14,7 @@ import { urlInjector } from "../services/urlInjector";
 function EditarFlora(){
     const { id } = useParams();
 
+    // eslint-disable-next-line
     const [flora, setFlora] = useState([]);
     let [formValues, setFormValues] = useState([]);
     const [validated, setValidated] = useState(false);
@@ -33,7 +34,7 @@ function EditarFlora(){
             .catch((e) => console.log(e));
         };
     
-        const data = getData();
+        getData();
       }, [id]);
 
       const handleSubmit = (event) => {

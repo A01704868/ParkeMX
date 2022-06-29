@@ -14,6 +14,7 @@ import { urlInjector } from "../services/urlInjector";
 function EditarParque() {
   const { id } = useParams();
 
+  // eslint-disable-next-line
   const [parque, setParque] = useState({});
   let [formValues, setFormValues] = useState({});
 

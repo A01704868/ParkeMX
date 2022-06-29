@@ -23,6 +23,7 @@ import UsuarioLista from "./components/UsuarioLista";
 import { RBACProvider, useRBACContext } from "react-simple-rbac";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { urlInjector } from "./services/urlInjector";
 
 const rolesMap = { 0: "usuario", 1: "admin" };
 //const roles = ['admin', 'usuario'];
@@ -40,7 +41,8 @@ function App() {
         return;
       }
 
-      axios.get(`http://localhost:4000/api/users/email/${email}`, {
+      const baseUrl = urlInjector();
+      axios.get(`${baseUrl}/users/email/${email}`, {
         withCredentials: true
       })
         .then((response) => {

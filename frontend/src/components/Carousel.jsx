@@ -1,11 +1,8 @@
 import React from "react";
 import "../css/customStyles.css";
 import { Carousel } from "react-bootstrap";
-import { urlInjector } from "../services/urlInjector";
 
 const carousel = (show) => {
-  const baseUrl = urlInjector();
-  const url = `${baseUrl}/parques/img/${show.id}`;
 
   return (
     <Carousel.Item key={show.id}>
