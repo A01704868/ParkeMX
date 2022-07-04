@@ -80,10 +80,7 @@ const AppWrapper = () => {
         <Routes>
           <Route path="/" element={<ListaDeParques />} />
           <Route path="/agregar" element={<AgregarParque />} />
-          <Route
-            path="/agregartarjetaderuta/:id"
-            element={<AgregarCartaRuta />}
-          />
+          <Route path="/agregartarjetaderuta/:id" element={<AgregarCartaRuta />}/>
           <Route path="/parque/:id" element={<VistaParque />} />
           <Route path="/editarparque/:id" element={<EditarParque />} />
           {/* <Route path="/editarhorario/:id" element={<EditarHorario />} /> */}

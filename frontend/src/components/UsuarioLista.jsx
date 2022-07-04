@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Alert } from "react-bootstrap";
 import { AppRoles } from "../App";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
@@ -107,7 +107,7 @@ export default class UsuarioLista extends React.Component {
         return (
             <UserContext.Provider value={this.state}>
                 <>
-                    <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
+                    <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
                         <>
                             <BarraNav />
                             <h2>Usuario</h2>

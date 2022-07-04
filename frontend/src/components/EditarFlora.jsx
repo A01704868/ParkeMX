@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
@@ -63,68 +63,68 @@ function EditarFlora(){
 
     return(
         <div>
-          <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-      <BarraNav />
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <h1 class="h1-form">Editar Flora</h1>
-        <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Nombre del Flora</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="Bugambilia"
-              name="nombre"
-              value={formValues.nombre}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>URL de la Imagen</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="Ubicado en ..."
-              name="imagen"
-              value={formValues.imagen}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-        <Row className="row justify-content-between">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Titulo</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="Informacion Importante"
-              name="titulo"
-              value={formValues.titulo}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>Descripcion</Form.Label>
-            <Form.Control
-              required
-              type="string"
-              placeholder="Informacion General"
-              name="descripcion"
-              value={formValues.descripcion}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Listo!</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
+          <BarraNav />
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <h1 class="h1-form">Editar Flora</h1>
+            <Row className="row justify-content-between">
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Nombre del Flora</Form.Label>
+                <Form.Control
+                  required
+                  type="string"
+                  placeholder="Bugambilia"
+                  name="nombre"
+                  value={formValues.nombre}
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>URL de la Imagen</Form.Label>
+                <Form.Control
+                  required
+                  type="string"
+                  placeholder="Ubicado en ..."
+                  name="imagen"
+                  value={formValues.imagen}
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="row justify-content-between">
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Titulo</Form.Label>
+                <Form.Control
+                  required
+                  type="string"
+                  placeholder="Informacion Importante"
+                  name="titulo"
+                  value={formValues.titulo}
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Descripcion</Form.Label>
+                <Form.Control
+                  required
+                  type="string"
+                  placeholder="Informacion General"
+                  name="descripcion"
+                  value={formValues.descripcion}
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback>Listo!</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
 
-        <Button type="submit" className="mb-4">
-          Guardar
-        </Button>
-      </Form>
-      <Footer />
+            <Button type="submit" className="mb-4">
+              Guardar
+            </Button>
+          </Form>
+          <Footer />
       </RBACWrapper>
     </div>
     );

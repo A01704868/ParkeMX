@@ -94,10 +94,10 @@ router.post(p.signon, async (req: Request, res: Response) => {
 /**
  * Logout the user.
  */
-router.get(p.logout, (_: Request, res: Response) => {
-    const { key, options } = cookieProps;
-    res.clearCookie(key, options);
-    res.clearCookie('email', options);
+router.post(p.logout, (_: Request, res: Response) => {
+    const { key } = cookieProps;
+    res.clearCookie(key);
+    res.clearCookie('email');
     return res.status(OK).end();
 });
 

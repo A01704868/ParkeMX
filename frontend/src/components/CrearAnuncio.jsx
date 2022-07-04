@@ -2,7 +2,7 @@ import axios from "axios";
 import BarraNav from './BarraNav';
 import Footer from './Footer';
 import React, {useState, useEffect} from "react";
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate  } from 'react-router-dom';
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
@@ -70,41 +70,41 @@ function CrearAnuncio(){
     }
     return (
         <>
-        <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <BarraNav />
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
+            <BarraNav />
 
-        <h1 class="h1-form">Agregar Anuncio</h1>
-        <Form onSubmit={(e)=>submit(e)}>
-        <Form.Group className="mb-3">
-            <Form.Label>Titulo</Form.Label>
-            <Form.Control required onChange={(e) => handle(e)} value={data.titulo} id="titulo" type="text" placeholder="Titulo del Anuncio" />
-        </Form.Group>
+            <h1 class="h1-form">Agregar Anuncio</h1>
+            <Form onSubmit={(e)=>submit(e)}>
+            <Form.Group className="mb-3">
+                <Form.Label>Titulo</Form.Label>
+                <Form.Control required onChange={(e) => handle(e)} value={data.titulo} id="titulo" type="text" placeholder="Titulo del Anuncio" />
+            </Form.Group>
 
-        <Form.Group className="mb-3">
-            <Form.Label>Descripcion</Form.Label>
-            <Form.Control required as="textarea" rows={3} onChange={(e) => handle(e)} value={data.descripcion} id="descripcion" type="text" placeholder="Descripcion detallada" />
-        </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Descripcion</Form.Label>
+                <Form.Control required as="textarea" rows={3} onChange={(e) => handle(e)} value={data.descripcion} id="descripcion" type="text" placeholder="Descripcion detallada" />
+            </Form.Group>
 
-        <Form.Select required aria-label="Default select example" onChange={(e) => handle(e)} value={data.variante} id="variante">
-            <option>Elige opcion de anuncio</option>
-            <option value="success">Notificacion</option>
-            <option value="danger">Alerta</option>
-            <option value="warning">Advertencia</option>
-        </Form.Select>
+            <Form.Select required aria-label="Default select example" onChange={(e) => handle(e)} value={data.variante} id="variante">
+                <option>Elige opcion de anuncio</option>
+                <option value="success">Notificacion</option>
+                <option value="danger">Alerta</option>
+                <option value="warning">Advertencia</option>
+            </Form.Select>
 
-        <br/>
+            <br/>
 
-        <Form.Select required aria-label="Default select example" onChange={(e) => handle(e)} value={data.parqueId} id="parqueId">
-            <option value="0">Elige un parque a cual mandarle el anuncio</option>
-            {parques.map(dynamoOpt)}
-        </Form.Select>
+            <Form.Select required aria-label="Default select example" onChange={(e) => handle(e)} value={data.parqueId} id="parqueId">
+                <option value="0">Elige un parque a cual mandarle el anuncio</option>
+                {parques.map(dynamoOpt)}
+            </Form.Select>
 
 
-        <Button variant="primary" type="submit" className="mb-4">
-            Submit
-        </Button>
-        </Form>
-        <Footer/>
+            <Button variant="primary" type="submit" className="mb-4">
+                Submit
+            </Button>
+            </Form>
+            <Footer/>
         </RBACWrapper>
         </>
     );

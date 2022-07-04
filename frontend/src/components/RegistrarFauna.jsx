@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import { Form, Row, Button, Modal } from "react-bootstrap";
+import { Form, Row, Button, Modal, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { saveFaunaPark } from "../services/index";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import axios from "axios";
 import { urlInjector } from "../services/urlInjector";
+import { RBACWrapper } from "react-simple-rbac";
+import { AppRoles } from "../App";
 
 function faunaOpt(fauna){
     return (
@@ -83,30 +85,32 @@ function RegistrarFlora(){
 
     return(
         <>
-        <BarraNav />
-        <Form noValidate onSubmit={handleSubmit}>
-        <h1 class="h1-form">Registrar Fauna al Parque:</h1>
-        <h2 class="h1-form">{parque.nombre}</h2>
-        <Row className="row justify-content-between">
-          <Form.Group md="4" controlId="validationCustom01">
-            <Form.Select required aria-label="Default select example" name="faunaId" value={formValues.faunaId} onChange={handleChange}>
-            <option value="0">Elige el Animal a registrar</option>
-            {fauna.map(faunaOpt)}
-            </Form.Select>
-          </Form.Group>
-        </Row>
+        <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
+          <BarraNav />
+          <Form noValidate onSubmit={handleSubmit}>
+          <h1 class="h1-form">Registrar Fauna al Parque:</h1>
+          <h2 class="h1-form">{parque.nombre}</h2>
+          <Row className="row justify-content-between">
+            <Form.Group md="4" controlId="validationCustom01">
+              <Form.Select required aria-label="Default select example" name="faunaId" value={formValues.faunaId} onChange={handleChange}>
+              <option value="0">Elige el Animal a registrar</option>
+              {fauna.map(faunaOpt)}
+              </Form.Select>
+            </Form.Group>
+          </Row>
 
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>No se puede agregar este valor</Modal.Title>
-        </Modal.Header>
-      </Modal>
+          <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>No se puede agregar este valor</Modal.Title>
+          </Modal.Header>
+        </Modal>
 
-        <Button type="submit" className="mb-4">
-          Registrar
-        </Button>
-        </Form>
-        <Footer />
+          <Button type="submit" className="mb-4">
+            Registrar
+          </Button>
+          </Form>
+          <Footer />
+        </RBACWrapper>
         </>
     );
 

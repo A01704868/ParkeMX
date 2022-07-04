@@ -17,22 +17,11 @@ function BarraNav() {
 
   const cerrarSesion = () => {
     const baseUrl = urlInjector();
-    try {
-      axios.get(`${baseUrl}/auth/logout`)
+    axios.post(`${baseUrl}/auth/logout`, { }, { withCredentials: true })
+      .then( () => {window.location.reload();})
         .catch(function (error) {
           console.log(error);
         });
-
-      var d = new Date();
-      d.setTime(d.getTime());
-      var expires = "expires=" + d.toUTCString();
-      document.cookie = "ExpressGeneratorTs=;domain=localhost;path=/;" + expires;
-      document.cookie = "email=;domain=localhost;path=/;" + expires;
-
-      window.location.reload();
-    } catch (event) {
-      console.log(event);
-    }
   }
 
 
