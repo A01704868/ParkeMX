@@ -48,7 +48,8 @@ function CrearAnuncio(){
     async function submit(e){
         e.preventDefault();
         try{
-            const response = await axios.post('http://159.223.174.63:4000/api/parques/anuncio', {
+            const baseUrl = urlInjector();
+            const response = await axios.post(`${baseUrl}/parques/anuncio`, {
                 titulo: data.titulo,
                 descripcion: data.descripcion,
                 variante: data.variante,
@@ -66,14 +67,13 @@ function CrearAnuncio(){
         const newData={...data};
         newData[e.target.id] = e.target.value;
         setData(newData);
-        console.log(newData);
     }
     return (
         <>
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
             <BarraNav />
 
-            <h1 class="h1-form">Agregar Anuncio</h1>
+            <h1 className="h1-form">Agregar Anuncio</h1>
             <Form onSubmit={(e)=>submit(e)}>
             <Form.Group className="mb-3">
                 <Form.Label>Titulo</Form.Label>

@@ -17,8 +17,6 @@ router.delete('/deleteparque/:id',async (req:Request, res:Response) => {
     if (!id) {
         throw new ParamMissingError();
     }
-    console.log(req);
-    
 
     const deleteParque = await deleteParks (id);
     return res.status(OK).json(deleteParque);

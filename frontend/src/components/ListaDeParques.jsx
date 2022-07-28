@@ -5,23 +5,13 @@ import Footer from "./Footer";
 import carousel from "./Carousel";
 import "../css/customStyles.css";
 import "../css/styles.css";
-import {
-  Dropdown,
-  Card,
-  Row,
-  Col,
-  Carousel,
-  Button,
-  Container,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Dropdown, Card, Row, Col, Carousel, Button, Container, InputGroup, FormControl } from "react-bootstrap";
 
-import { deletePark } from "../services/index";
-import { deleteHorario } from "../services/index";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { urlInjector } from "../services/urlInjector";
+import CardDelete from "./CardDelete";
+import HorarioDelete from "./HorarioDelete";
 
 const reverse = (arr1) => {
   const aux = [];
@@ -40,13 +30,7 @@ const renderAbrir = (horario) => {
         {horario.horaAbrir} - {horario.horaCerrar} - {horario.dias}
       </Card.Text>
       <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
-        <Button
-          className="link"
-          variant="warning"
-          onClick={() => deleteHorario(horario.id)}
-        >
-          Eliminar Horario
-        </Button>
+        <HorarioDelete id={horario.id} />
       </RBACWrapper>
     </Container>
   );
@@ -77,16 +61,11 @@ const renderCard = (card) => {
           >
             Editar
           </Button>
-          <Button
-            className="link"
-            variant="danger"
-            onClick={() => deletePark(card.id)}
-          >
-            Eliminar
-          </Button>
+          <CardDelete id={card.id}/>
         </RBACWrapper>
       </Card>
     </Col>
+    
   );
 };
 
@@ -114,18 +93,6 @@ function ListaDeParques() {
   //investigate reducer in react manual
 
   useEffect(() => {
-
-    function getPosition(position) {
-
-      setLatitud(position.coords.latitude);
-      setLongitud(position.coords.longitude);
-    }
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getPosition)
-    } else {
-      console.log("geolocation not available");
-    }
 
     const getData = () => {
       const baseUrl = urlInjector();
@@ -167,7 +134,19 @@ function ListaDeParques() {
     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
   }
 
+  function getPosition(position) {
+
+    setLatitud(position.coords.latitude);
+    setLongitud(position.coords.longitude);
+  }
+
   function toggleDistance() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition)
+    } else {
+      console.log("geolocation not available");
+    }
+    
     if (calcDistance === true) {
       setCalcDistance(false);
       color = 'info';
@@ -222,7 +201,7 @@ function ListaDeParques() {
       <h1>Ordenar por cercanía o de forma ascendente</h1>
       <div className="d-flex container justify-content-between custom-search pb-4">
         <div className="cercania-filter">
-          <Button variant={color} onClick={toggleDistance}>Cual parque esta mas cerca a mi?</Button>
+          <Button variant={color} onClick={() => toggleDistance()}>Cual parque esta mas cerca a mi?</Button>
         </div>
         <div className="asc-order">
           <button type="button" className="arrow" onClick={() => cardOrder()}>

@@ -78,7 +78,7 @@ export async function deletePark(parkId) {
     console.log(event);
   }
 
-  document.location.href="/";
+  window.location.reload(false);
 }
 
 export async function updateFauna(fauna) {

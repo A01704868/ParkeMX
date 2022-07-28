@@ -66,7 +66,7 @@ function EditarFlora(){
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
           <BarraNav />
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <h1 class="h1-form">Editar Flora</h1>
+            <h1 className="h1-form">Editar Flora</h1>
             <Row className="row justify-content-between">
               <Form.Group as={Col} md="4" controlId="validationCustom01">
                 <Form.Label>Nombre del Flora</Form.Label>

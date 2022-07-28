@@ -33,7 +33,7 @@ function FloraId() {
     };
     getData();
   }, [id]);
-  console.log(flora)
+  
 
   return(
     <div>

@@ -221,7 +221,7 @@ function VistaParque() {
         <h1 className="mb-3"> ACTIVIDADES </h1>
         <div className="row-activities">
           <div className="col-activity">
-            <p>{actividades.map(activityList)}</p>
+            {actividades.map(activityList)}
           </div>
           <div className="col-activity">
             <Carousel>{activityImg.map(activityImgList)}</Carousel>

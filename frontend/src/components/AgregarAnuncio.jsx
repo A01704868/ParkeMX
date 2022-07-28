@@ -42,7 +42,7 @@ function AgregarAnuncio() {
       <RBACWrapper requiredRoles={[AppRoles.ADMIN]}>
           <BarraNav />
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <h1 class="h1-form">Agregar Anuncio</h1>
+            <h1 className="h1-form">Agregar Anuncio</h1>
             <Row className="row justify-content-between">
               <Form.Group as={Col} md="4" controlId="validationCustom01">
                 <Form.Label>Descripcion</Form.Label>
