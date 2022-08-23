@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import BarraNav from "./BarraNav";
@@ -17,6 +17,8 @@ function EditarParque() {
   // eslint-disable-next-line
   const [parque, setParque] = useState({});
   let [formValues, setFormValues] = useState({});
+
+  const [modal, showModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -59,16 +61,18 @@ function EditarParque() {
 
     if(validated){
       updatePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
-      document.location.href="/";
+      showModal(true);
     }
-
-    
   };
   //Axios
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const continuar = () => {
+    showModal(false);
+  }
 
   return (
     <div>
@@ -201,6 +205,17 @@ function EditarParque() {
         </Form>
         <Footer />
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>La información del parque se actualizo exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

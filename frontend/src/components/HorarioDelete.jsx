@@ -12,6 +12,7 @@ function HorarioDelete(props){
 
   const deleteModal = () => {
     deleteHorario(props.id);
+    window.location.reload(false);
   }
 
   return(

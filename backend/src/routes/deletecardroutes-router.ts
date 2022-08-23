@@ -9,7 +9,7 @@ const { OK } = StatusCodes;
 
 router.delete('/deletecartaruta/:id',async (req:Request, res:Response) => {
     
-    console.log("REQ: ",req);
+    //console.log("REQ: ",req);
     let id = parseInt(req.body.id);
 
     if (!id) {

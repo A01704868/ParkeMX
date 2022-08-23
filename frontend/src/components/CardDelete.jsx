@@ -4,16 +4,26 @@ import "../css/styles.css";
 import {Button, Modal} from "react-bootstrap";
 import { deletePark } from "../services/index";
 
+
 function CardDelete(props){
 
   const [show, setShow] = useState(false);
+  
+  const [modal2, showModal2] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const deleteModal = () => {
     deletePark(props.id);
-    window.location.reload(true);
+    handleClose();
+    showModal2(true);
+  }
+
+  const continuar = () => {
+    //return <Navigate to="/" />
+    //se usa window.location.reload(false) porque el modal ya esta en la ruta "/"
+    window.location.reload(false);
   }
   
     return(
@@ -36,6 +46,17 @@ function CardDelete(props){
           </Button>
           <Button variant="secondary" onClick={() => handleClose()}>
             No
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={modal2}>
+        <Modal.Header>
+          <Modal.Title>El parque se borro exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
           </Button>
         </Modal.Footer>
       </Modal>

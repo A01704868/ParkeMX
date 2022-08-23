@@ -18,7 +18,7 @@ function BarraNav() {
   const cerrarSesion = () => {
     const baseUrl = urlInjector();
     axios.post(`${baseUrl}/auth/logout`, { }, { withCredentials: true })
-      .then( () => {window.location.reload();})
+      .then( () => {window.location.reload()})
         .catch(function (error) {
           console.log(error);
         });

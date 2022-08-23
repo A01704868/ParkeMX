@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import BarraNav from "./BarraNav";
@@ -11,6 +11,7 @@ import { AppRoles } from "../App";
 function AgregarFlora() {
   //Validar
   const [validated, setValidated] = useState(false);
+  const [modal, showModal] = useState(false);
   //Axios
   const [formValues, setFormValues] = useState({
     nombre: "",
@@ -35,7 +36,7 @@ function AgregarFlora() {
 
     if(validated){
       saveFlora({ ...formValues });
-      document.location.href="/";
+      showModal(true);
     }
   };
   //Axios
@@ -44,12 +45,17 @@ function AgregarFlora() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const continuar = () => {
+    showModal(false);
+    window.location.reload(false);
+  }
+
   return (
     <div>
       <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
         <BarraNav />
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <h1 className="h1-form">Agregar Nuevo Planta</h1>
+          <h1 className="h1-form">Agregar Nueva Planta</h1>
           <Row className="row justify-content-between">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Nombre de la Planta</Form.Label>
@@ -107,6 +113,17 @@ function AgregarFlora() {
         </Form>
         <Footer/>
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>Nueva flora agregada exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

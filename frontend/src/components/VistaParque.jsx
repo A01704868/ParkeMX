@@ -6,13 +6,7 @@ import Contacto from "./Contacto";
 import "../css/styles.css";
 import Anuncio from "./Anuncio";
 import { useParams } from "react-router-dom";
-import {
-  Card,
-  Button,
-  Carousel,
-  Container,
-  Dropdown,
-} from "react-bootstrap";
+import { Card, Button, Carousel, Container, Dropdown } from "react-bootstrap";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -50,7 +44,7 @@ function activityList(actividad) {
 
 function activityImgList(imagen) {
   return (
-    <Carousel.Item>
+    <Carousel.Item key={imagen.actividadId}>
       <img className="d-block w-100" src={imagen.imagen} alt="Error al cargar img"/>
     </Carousel.Item>
   );
@@ -59,7 +53,7 @@ function activityImgList(imagen) {
 function faunaListImg(fauna) {
   const url = "/fauna/" + fauna.id;
   return (
-    <Carousel.Item>
+    <Carousel.Item key={fauna.id}>
       <a href={url}>
         <img className="d-block w-100 img-flora" src={fauna.imagen} alt="Error al cargar img"></img>
       </a>
@@ -83,9 +77,7 @@ function VistaParque() {
 
   const [parque, setParque] = useState({});
   const [anuncios, setAnuncios] = useState([]);
-  const [abrir, setAbrir] = useState("");
-  const [cerrar, setCerrar] = useState("");
-  const [dias, setDias] = useState("");
+  const [horario, setHorario] = useState([]);
   const [actividades, setActivity] = useState([]);
   const [activityImg, setImgActivity] = useState([]);
   const [fauna, setFauna] = useState([]);
@@ -118,9 +110,7 @@ function VistaParque() {
         .then((values) => {
           setParque(values[0].data);
           setAnuncios(values[0].data.anuncios);
-          setAbrir(values[0].data.horario[0].horaAbrir);
-          setCerrar(values[0].data.horario[0].horaCerrar);
-          setDias(values[0].data.horario[0].dias);
+          setHorario(values[0].data.horario);
           setActivity(values[1].data);
           setImgActivity(values[2].data);
           setFauna(values[3].data);
@@ -130,13 +120,23 @@ function VistaParque() {
     };
 
     getData();
+
   }, [id]);
   //const url = "http://localhost:4000/api/parques/img/" + parque.id;
-
   const center = { lat: parque.latitud, lng: parque.longitud };
-  const zoom = 15;
+  const zoom = 14;
   const height = 600;
   const visitar = "https://www.google.com/maps/place/" + parque.direccion;
+  
+  const renderHorario = (horario) => {
+    
+    return (
+      <div style={{ display: "flex", justifyContent: "space-between" }} key={horario.id}>
+      <Card.Text>{horario.dias}</Card.Text>
+        <Card.Text>{horario.horaAbrir} - {horario.horaCerrar}</Card.Text>
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -144,6 +144,7 @@ function VistaParque() {
       {anuncios.map((e) => (
         <Anuncio
           id={e.id}
+          key={e.id}
           descripcion={e.descripcion}
           titulo={e.titulo}
           variante={e.variante}
@@ -173,10 +174,7 @@ function VistaParque() {
           <Card.Body className="row-info-card">
             <div className="col-3">
               <Card.Title>HORARIO</Card.Title>
-              <Card.Text>{dias}</Card.Text>
-              <Card.Text>
-                {abrir} - {cerrar}
-              </Card.Text>
+              {horario.map(renderHorario)}
             </div>
             <div className="col-3">
               <Card.Title>UBICACIÓN</Card.Title>
@@ -198,9 +196,6 @@ function VistaParque() {
           </RBACWrapper>
 
             <Dropdown.Menu>
-              <Dropdown.Item href={"/agregartarjetaderuta/" + id}>
-                Tarjeta de Ruta
-              </Dropdown.Item>
               <Dropdown.Item href={"/agregarhorario/" + id}>
                 Agregar Horario
               </Dropdown.Item>

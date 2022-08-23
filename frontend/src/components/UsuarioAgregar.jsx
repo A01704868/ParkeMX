@@ -50,7 +50,7 @@ const UsuarioAgregar = ({ mostrarForma, onClose, onUserAdded } = defaultProps) =
 
         const usuarioAdded = { user: { name, email, password, role } };
         agregarUsuario(usuarioAdded, onUserAdded, onDismiss);
-        event.preventDefault();
+        //event.preventDefault();
     };
 
 

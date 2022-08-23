@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
@@ -18,6 +18,7 @@ function EditarFauna() {
   const [fauna, setFauna] = useState([]);
   let [formValues, setFormValues] = useState([]);
   const [validated, setValidated] = useState(false);
+  const [modal, showModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -52,7 +53,7 @@ function EditarFauna() {
 
     if(validated){
       updateFauna({ ...formValues });
-      document.location.href="/";
+      showModal(true);
     }
   };
 
@@ -60,6 +61,10 @@ function EditarFauna() {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const continuar = () => {
+    showModal(false);
+  }
 
   return (
     <div>
@@ -126,6 +131,17 @@ function EditarFauna() {
         </Form>
         <Footer />
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>Información de Fauna editada exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

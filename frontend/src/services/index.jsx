@@ -38,7 +38,6 @@ export async function savePark(parque) {
 export async function saveCart(cartaruta) {
   try {
     const formData = new FormData();
-    console.log(cartaruta.parqueid);
 
     formData.append("nombre", cartaruta.nombre);
     formData.append("descripcion", cartaruta.descripcion);
@@ -78,7 +77,7 @@ export async function deletePark(parkId) {
     console.log(event);
   }
 
-  window.location.reload(false);
+  //window.location.reload(false);
 }
 
 export async function updateFauna(fauna) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import BarraNav from "./BarraNav";
@@ -11,6 +11,7 @@ import { AppRoles } from "../App";
 function AgregarFauna() {
   //Validar
   const [validated, setValidated] = useState(false);
+  const [modal, showModal] = useState(false);
   //Axios
   const [formValues, setFormValues] = useState({
     nombre: "",
@@ -35,7 +36,7 @@ function AgregarFauna() {
 
     if(validated){
       saveFauna({ ...formValues });
-      document.location.href="/";
+      showModal(true);
     }
 
   };
@@ -44,6 +45,11 @@ function AgregarFauna() {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const continuar = () => {
+    showModal(false);
+    window.location.reload(false);
+  }
 
   return (
     <div>
@@ -108,6 +114,17 @@ function AgregarFauna() {
         </Form>
         <Footer/>
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>Nuevo animal agregado exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -8,9 +8,9 @@ const router = Router();
 const { OK } = StatusCodes;
 
 router.post('/addhorario',async (req:Request, res: Response) => {
-    console.log('VALOR:',req.body);
+    //console.log('VALOR:',req.body);
     const { horario } = req.body ?? {};
-    console.log('NEXT:',horario);
+    //console.log('NEXT:',horario);
     
     const horarios = await postHorario(horario);
     res.status(OK).json(horarios);

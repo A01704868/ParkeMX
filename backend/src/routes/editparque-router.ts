@@ -11,14 +11,14 @@ router.put('/editParque/:id', async (req:Request, res:Response) => {
     //let parque = req.body;
 
     const parque  = req.body ?? {};
-    console.log('NEXT: ', req.body);
-    console.log('PARQUE: ', parque);
+    //console.log('NEXT: ', req.body);
+    //console.log('PARQUE: ', parque);
     parque 
 
     if(!parque.id) {
         throw new ParamMissingError();
     }
-    console.log(parque);
+    //console.log(parque);
 
 
     const updateParque = await editParks(parque);

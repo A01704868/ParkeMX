@@ -8,9 +8,9 @@ const router = Router();
 const { OK } = StatusCodes;
 
 router.post('/addfauna', async (req: Request, res: Response) => {
-    console.log('Fauna: ', req.body);
+    //console.log('Fauna: ', req.body);
     const { fauna } = req.body ?? {};
-    console.log('NEXT: ', fauna);
+    //console.log('NEXT: ', fauna);
 
     const faunas = await postFauna(fauna);
     res.status(OK).json(faunas);

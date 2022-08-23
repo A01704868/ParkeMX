@@ -2,21 +2,24 @@ import axios from "axios";
 import BarraNav from './BarraNav';
 import Footer from './Footer';
 import React, {useState, useEffect} from "react";
-import { Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate  } from 'react-router-dom';
+import { Form, Button, Alert, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 import { urlInjector } from "../services/urlInjector";
 
 function dynamoOpt(parque){
     return (
-        <option value={parque.id}>{parque.nombre}</option>
+        <option key={parque.id} value={parque.id}>{parque.nombre}</option>
     );
 }
 
 function CrearAnuncio(){
 
     const [parques, setParques] = useState([]);
+
+    const navigate = useNavigate();
+    const [modal, showModal] = useState(false);
 
     useEffect(() => {
     
@@ -43,24 +46,20 @@ function CrearAnuncio(){
         parqueId: ""
     });
 
-    const navigate = useNavigate();
-
     async function submit(e){
         e.preventDefault();
         try{
             const baseUrl = urlInjector();
-            const response = await axios.post(`${baseUrl}/parques/anuncio`, {
+            await axios.post(`${baseUrl}/parques/anuncio`, {
                 titulo: data.titulo,
                 descripcion: data.descripcion,
                 variante: data.variante,
                 parqueId: data.parqueId
             });
-            console.log(response.data);
+            showModal(true);
         }catch(error){
             console.log(error.response);
         }
-
-        navigate('/');
     }
 
     function handle(e){
@@ -68,6 +67,11 @@ function CrearAnuncio(){
         newData[e.target.id] = e.target.value;
         setData(newData);
     }
+
+    const continuar = () => {
+        showModal(false);
+        navigate('/parque/'+data.parqueId);
+      }
     return (
         <>
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
@@ -106,6 +110,18 @@ function CrearAnuncio(){
             </Form>
             <Footer/>
         </RBACWrapper>
+
+
+        <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>El anuncio se creo exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </>
     );
 }

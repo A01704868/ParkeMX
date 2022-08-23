@@ -70,7 +70,7 @@ const UsuarioEditar = ({ mostrarForma, onClose, onUpdate } = defaultProps) => {
             role: rol
         };
 
-        event.preventDefault();
+        //event.preventDefault();
         editarUsuario({ user })
             .then(wasUpdated => {
                 if (wasUpdated) {
@@ -81,7 +81,6 @@ const UsuarioEditar = ({ mostrarForma, onClose, onUpdate } = defaultProps) => {
             .catch(_ => {
                 onDismiss();
             });
-
     };
 
     if (!usuarioEditar) {

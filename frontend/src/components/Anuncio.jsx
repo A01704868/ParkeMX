@@ -16,8 +16,7 @@ function Anuncio(props){
 
     function handleOnclick(id){
       deleteAnuncio(id);
-      handleClose();
-      window.location.reload();
+      window.location.reload(false);
     }
 
 

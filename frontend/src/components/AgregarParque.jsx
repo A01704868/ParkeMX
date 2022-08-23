@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import BarraNav from "./BarraNav";
@@ -7,21 +7,24 @@ import Footer from "./Footer";
 import { savePark } from "../services/index";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
+import { useNavigate } from 'react-router-dom';
 
 function AgregarParque() {
   //Validar
   const [validated, setValidated] = useState(false);
+  const [modal, showModal] = useState(false);
+  const navigate = useNavigate();
   //Axios
   const [formValues, setFormValues] = useState({
-    nombre: null,
-    descripcion: null,
-    imagen: null,
-    direccion: null,
-    latitud: null,
-    longitud: null,
-    fechaDecreto: null,
-    superficieTerrestre: null,
-    superficieMarina: null,
+    nombre: "",
+    descripcion: "",
+    imagen: "",
+    direccion: "",
+    latitud: "",
+    longitud: "",
+    fechaDecreto: "",
+    superficieTerrestre: "",
+    superficieMarina: "",
   });
 
   //Validar
@@ -38,7 +41,7 @@ function AgregarParque() {
 
     if(validated){
       savePark({ ...formValues /*, image: inputFileRef.current.files[0]*/ });
-      document.location.href="/";
+      showModal(true);
     }
   };
   //Axios
@@ -46,6 +49,11 @@ function AgregarParque() {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const continuar = () => {
+    showModal(false);
+    navigate('/');
+  }
 
   return (
     <div>
@@ -178,6 +186,17 @@ function AgregarParque() {
         </Form>
         <Footer />
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>El parque se creo exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

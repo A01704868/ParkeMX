@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Form, Row, Button, Modal, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { saveFaunaPark } from "../services/index";
@@ -16,7 +16,6 @@ function faunaOpt(fauna){
     );
 }
 
-
 function RegistrarFlora(){
 
     const { id } = useParams();
@@ -27,6 +26,9 @@ function RegistrarFlora(){
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
+    const [modal2, showModal2] = useState(false);
     
     //Validar
   const [validated, setValidated] = useState(false);
@@ -51,7 +53,7 @@ function RegistrarFlora(){
 
     if(validated){
         saveFaunaPark({ ...formValues });
-        document.location.href="/parque/"+id;
+        showModal2(true);
     }
   };
 
@@ -83,6 +85,10 @@ function RegistrarFlora(){
         setFormValues({ ...formValues, [name]: value });
     };
 
+    const continuar = () => {
+      navigate('/parque/'+id);
+    }
+
     return(
         <>
         <RBACWrapper requiredRoles={[AppRoles.ADMIN]} fallback={<Alert variant='danger'>No tienes el permiso de estar aqui. Regresa a la <Alert.Link href="/">pagina principal.</Alert.Link></Alert>}>
@@ -111,6 +117,17 @@ function RegistrarFlora(){
           </Form>
           <Footer />
         </RBACWrapper>
+
+        <Modal show={modal2}>
+        <Modal.Header>
+          <Modal.Title>Fauna agregada al parque exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </>
     );
 

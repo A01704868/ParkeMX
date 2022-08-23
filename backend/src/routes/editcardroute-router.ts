@@ -13,7 +13,7 @@ router.put('/editcartaruta', async (req:Request, res:Response) => {
     if(!cartaRuta.id) {
         throw new ParamMissingError();
     }
-    console.log(cartaRuta);
+    //console.log(cartaRuta);
 
 
     const updateCarta = await editCarts(cartaRuta);

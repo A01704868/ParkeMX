@@ -11,14 +11,13 @@ router.put('/editHorario/:id', async (req:Request, res:Response) => {
     //let parque = req.body;
 
     const horario  = req.body ?? {};
-    console.log('NEXT: ', req.body);
-    console.log('HORARIO: ', horario);
-    horario 
+    //console.log('NEXT: ', req.body);
+    //console.log('HORARIO: ', horario); 
 
     if(!horario.id) {
         throw new ParamMissingError();
     }
-    console.log(horario);
+    //console.log(horario);
 
 
     const updateHorario = await editHorarios(horario);

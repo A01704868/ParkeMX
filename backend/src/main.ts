@@ -17,12 +17,14 @@ async function GetAllUsers () {
 async function AddTestUsers () {
     return await prisma.usuario.createMany({
         data: [
-            { email: "eduardo-larios@outlook.com", nombre: "Eduardo Larios", password: bcrypt.hashSync("hunter2", 10) },
+            { email: "eduardo-larios@outlook.com", nombre: "Eduardo Larios", password: bcrypt.hashSync("hunter2", 10), role: Role.ADMIN },
             { email: "sofia-soto@gmail.com", nombre: "Sofia Soto", password: bcrypt.hashSync("Sofia1999.", 10) },
             { email: "alex@gmail.com", nombre: "Alexander Delgado", password: bcrypt.hashSync("qwerty", 10), role: Role.ADMIN },
         ]
     })
 }
+
+AddTestUsers();
 
 (async () => {
     const result = await prisma.usuario.updateMany({

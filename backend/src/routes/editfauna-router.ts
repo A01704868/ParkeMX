@@ -15,7 +15,7 @@ router.put('/editFauna/:id', async (req:Request, res:Response) => {
     if(!fauna.id) {
         throw new ParamMissingError();
     }
-    console.log(fauna);
+    //console.log(fauna);
 
 
     const updateFauna = await editFauna(fauna);

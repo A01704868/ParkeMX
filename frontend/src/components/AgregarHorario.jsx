@@ -1,17 +1,19 @@
 import React from "react";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import BarraNav from "./BarraNav";
 import Footer from "./Footer";
 import { saveHorario } from "../services/index";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { RBACWrapper } from "react-simple-rbac";
 import { AppRoles } from "../App";
 
 function AgregarHorario() {
   const { id } = useParams();
   const [validated, setValidated] = useState(false);
+  const [modal, showModal] = useState(false);
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     dias: "",
     horaAbrir: "",
@@ -31,7 +33,7 @@ function AgregarHorario() {
 
     if(validated){
       saveHorario({ ...formValues });
-      document.location.href="/";
+      showModal(true);
     }
     
   };
@@ -39,6 +41,11 @@ function AgregarHorario() {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const continuar = () => {
+    showModal(false);
+    navigate('/parque/'+id);
+  }
 
   return (
     <div>
@@ -93,6 +100,17 @@ function AgregarHorario() {
         </Form>
         <Footer />
       </RBACWrapper>
+
+      <Modal show={modal}>
+        <Modal.Header>
+          <Modal.Title>Nuevo horario agregado exitosamente</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="success" onClick={() => continuar()}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

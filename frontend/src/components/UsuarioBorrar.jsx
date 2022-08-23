@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
+import { Navigate  } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
 import { UserContext } from "./UsuarioLista"
 import "../css/customStyles.css";
@@ -29,6 +30,7 @@ const UsuarioBorrar = ({ isOpen, onCancel, onDelete } = defaultProps) => {
             .delete(`${usuarioUrl}/delete/${id}`, { withCredentials: true })
             .then(onDelete)
             .catch(onCancel);
+        return <Navigate to="/usuarios" />
     };
 
     if (!isOpen || id === undefined || id === null) {
