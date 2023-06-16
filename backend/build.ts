@@ -2,9 +2,9 @@
  * Remove old files, copy front-end ones.
  */
 
-import fs from 'fs-extra';
+import * as fs from 'fs-extra';
 import logger from 'jet-logger';
-import childProcess from 'child_process';
+import * as childProcess from 'child_process';
 
 
 
