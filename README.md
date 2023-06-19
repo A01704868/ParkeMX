@@ -1,8 +1,9 @@
 # Desarrollo Web con Node y ReactJS
-En esta rama del proyecto ParkeMX explico todas las contribuciones de Alex (A01704868) en el proyecto.
-<p>El proyecto fue hecho con una architectura de microservicios donde cada caracteristica de la pagina se desarrolla de manera independiente de las demas. El frontend y el backend se corren en sistemas separados con el backend mandandole información al frontend. El frontend esta hecho con ReactJS mientras que el backend esta hecho con Node pero con Typescript en lugar de Javascript. La ventaja siendo que Typescript es un lenguaje tipado y hacer mas facil saber con que tipo de dato se esta trabajando.</p>
-<p>El proyecto se trabajo usando un esquema de desarrollo llamado Agile que se enfoca en el desarrollo de funcionalidad en pedazos pequeños. Se usaron historias de usuario para analisar y dividir la funcionalidad en estos pedazos.</p>
+En esta rama del proyecto ParkeMX explicó todas las contribuciones de Alex (A01704868) en el proyecto.
+<p>El proyecto fue hecho con una arquitectura de micro-servicios donde cada característica de la página se desarrolla de manera independiente de las demás. El frontend y el backend se corren en sistemas separados con el backend mandandole información al frontend. El frontend está hecho con ReactJS mientras que el backend está hecho con Node pero con Typescript en lugar de Javascript. La ventaja siendo que Typescript es una lengua tipada y hacer más fácil saber con que tipo de dato se está trabajando.</p>
+<p>El proyecto se trabajó usando un esquema de desarrollo llamado Agile que se enfoca en el desarrollo de funcionalidad en pedazos pequeños. Se usaron historias de usuario para analizar y dividir la funcionalidad en estos pedazos.</p>
 </br>
+
 # El Slider
 Hice el slider que agarra parques aleatorios de la base de datos y las mete en un slider para su promoción.
 ![image](https://github.com/A01704868/ParkeMX/assets/78516893/2b105624-69ae-41db-8fbb-84a75e21e69c)
